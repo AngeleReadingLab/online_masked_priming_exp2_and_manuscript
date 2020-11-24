@@ -3,7 +3,7 @@
   <Settings>
     <Param name="Audio latency priority" updates="None" val="0" valType="str"/>
     <Param name="Audio lib" updates="None" val="ptb" valType="str"/>
-    <Param name="Completed URL" updates="None" val="https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_2u9aoZeq7rIBSpn?STATUS=completed" valType="str"/>
+    <Param name="Completed URL" updates="None" val="https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_4UTkhSmaQNjgz7D?STATUS=completed" valType="str"/>
     <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
@@ -11,7 +11,7 @@
     <Param name="Force stereo" updates="None" val="False" valType="bool"/>
     <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
     <Param name="HTML path" updates="None" val="html" valType="str"/>
-    <Param name="Incomplete URL" updates="None" val="https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_2u9aoZeq7rIBSpn" valType="str"/>
+    <Param name="Incomplete URL" updates="None" val="https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_4UTkhSmaQNjgz7D" valType="str"/>
     <Param name="JS libs" updates="None" val="packaged" valType="str"/>
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
     <Param name="Resources" updates="None" val="['..\\instructions.xlsx', '..\\instructions_after_practice.xlsx', '..\\keyboard-example.gif', '..\\touchscreen-example.gif', '..\\trials_list_practice.xlsx', '..\\trials_list0.xlsx', '..\\trials_list1.xlsx', '..\\trials_list2.xlsx', '..\\trials_list3.xlsx']" valType="fileList"/>

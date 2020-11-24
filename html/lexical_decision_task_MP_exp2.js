@@ -91,7 +91,7 @@ function updateInfo() {
 
   // add info from the URL:
   util.addInfoFromUrl(expInfo);
-  psychoJS.setRedirectUrls('https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_2u9aoZeq7rIBSpn?STATUS=completed', 'https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_2u9aoZeq7rIBSpn');
+  psychoJS.setRedirectUrls('https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_4UTkhSmaQNjgz7D?STATUS=completed', 'https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_4UTkhSmaQNjgz7D');
 
   return Scheduler.Event.NEXT;
 }
