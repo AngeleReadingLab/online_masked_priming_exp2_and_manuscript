@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2020.2.4">
+<PsychoPy2experiment encoding="utf-8" version="2020.2.5">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="0" valType="str"/>
     <Param name="Audio lib" updates="None" val="ptb" valType="str"/>
@@ -14,7 +14,7 @@
     <Param name="Incomplete URL" updates="None" val="https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_2u9aoZeq7rIBSpn" valType="str"/>
     <Param name="JS libs" updates="None" val="packaged" valType="str"/>
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
-    <Param name="Resources" updates="None" val="[]" valType="fileList"/>
+    <Param name="Resources" updates="None" val="['..\\instructions.xlsx', '..\\instructions_after_practice.xlsx', '..\\keyboard-example.gif', '..\\touchscreen-example.gif', '..\\trials_list_practice.xlsx', '..\\trials_list0.xlsx', '..\\trials_list1.xlsx', '..\\trials_list2.xlsx', '..\\trials_list3.xlsx']" valType="fileList"/>
     <Param name="Save csv file" updates="None" val="False" valType="bool"/>
     <Param name="Save excel file" updates="None" val="False" valType="bool"/>
     <Param name="Save log file" updates="None" val="True" valType="bool"/>
@@ -29,7 +29,7 @@
     <Param name="blendMode" updates="None" val="add" valType="str"/>
     <Param name="color" updates="None" val="$[1.000,1.000,1.000]" valType="str"/>
     <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
-    <Param name="expName" updates="None" val="lexical_decision_task_MP" valType="str"/>
+    <Param name="expName" updates="None" val="lexical_decision_task_MP_exp2" valType="str"/>
     <Param name="exportHTML" updates="None" val="on Save" valType="str"/>
     <Param name="logging level" updates="None" val="exp" valType="code"/>
   </Settings>
