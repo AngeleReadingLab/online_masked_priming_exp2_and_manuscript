@@ -95,7 +95,6 @@ var instr_done_touch;
 var thisExp;
 var win;
 var event;
-var round;
 var randint;
 var instructions_image;
 var TrialClock;
@@ -187,9 +186,9 @@ function experimentInit() {
   event=psychoJS.eventManager;
   
   
-  round = function(num, n=0) {    
-      return +(Math.round(num + ("e+" + n))  + ("e-" + n));
-  }
+  //round = function(num, n=0) {    
+  //    return +(Math.round(num + ("e+" + n))  + ("e-" + n));
+  //}
   
   
   randint = function(min, maxplusone) {
@@ -399,9 +398,9 @@ function experimentInit() {
   event=psychoJS.eventManager;
   
   
-  round = function(num, n=0) {    
-      return +(Math.round(num + ("e+" + n))  + ("e-" + n));
-  }
+  //round = function(num, n=0) {    
+  //    return +(Math.round(num + ("e+" + n))  + ("e-" + n));
+  //}
   
   
   randint = function(min, maxplusone) {
