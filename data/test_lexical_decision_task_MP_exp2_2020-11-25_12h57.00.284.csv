@@ -1,0 +1,38 @@
+counterbalancing_condition,instr_done_keyboard.keys,instr_done_keyboard.rt,instr_done_touch.x,instr_done_touch.y,instr_done_touch.leftButton,instr_done_touch.midButton,instr_done_touch.rightButton,instruction_pages.thisRepN,instruction_pages.thisTrialN,instruction_pages.thisN,instruction_pages.thisIndex,instruction_pages.ran,pageN,phase,instruct_text,has_image,instruct_image,participant,date,expName,psychopyVersion,OS,frameRate,response.keys,response.corr,touch_resp.x,touch_resp.y,touch_resp.leftButton,touch_resp.midButton,touch_resp.rightButton,touch_resp.time,touch_resp.clicked_name,rt,corr,practice_trials.thisRepN,practice_trials.thisTrialN,practice_trials.thisN,practice_trials.thisIndex,practice_trials.ran,TrialID,StimulusType,Condition,PrimeDuration,Prime,Target,corrAns,response.rt
+3,space,6.801105,0.420370409,0.048148135,0,0,0,0,0,0,0,1,1,instructions,"INSTRUCTIONS
+At the start of each trial, look at the hash marks (######) in the center of the screen. After a moment, a string of letters will appear. Your task is to indicate if the letter string forms a word or not (i.e., if it is a nonword). For example, AUTHOR is a word while AUTHON is a nonword.
+
+Press the space bar or touch the button below to continue.",0,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,
+,space,1.49967,0.420370409,0.048148135,0,0,0,0,1,1,1,1,2,instructions,"If your device has a keyboard, press the 'Z' key for nonwords and the 'M' key for words.
+
+
+
+
+
+Press the space bar or touch the button below to continue.",1,keyboard-example.gif,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,
+,space,1.72582,0.420370409,0.048148135,0,0,0,0,2,2,2,1,3,instructions,"If you are using a touchscreen only device, use the buttons on the screen. Do not use the mouse.
+
+
+
+
+
+Press the space bar or touch the button below to continue.",1,touchscreen-example.gif,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,
+,space,2.416,0.420370409,0.048148135,0,0,0,0,3,3,3,1,4,instructions,"It is very important that you respond as quickly and accurately as possible, as each letter string will only be on the screen for two seconds. If you do not respond within this time, the message 'Too slow!' will be displayed and the experiment will progress to the next letter string. The first 20 trials will be practice trials and you will receive feedback on your answers. 
+
+Press the space bar or touch the button below to start the practice trials.",0,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,,-1,0,0,0,7,1,1008,WORD,UN,16,hurdle,VOLUME,m,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,,-1,0,1,1,3,1,1004,WORD,"ID",16,matrix,MATRIX,m,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,,-1,0,2,2,14,1,1015,NW,UN,16,miaber,THRALE,z,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,,-1,0,3,3,10,1,1011,NW,"ID",16,inlade,INLADE,z,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,z,1,,,,,,,,1.56609,1,0,4,4,12,1,1013,NW,UN,33,adveil,SPRINY,z,1.56609
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,z,0,,,,,,,,0.532,0,0,5,5,2,1,1003,WORD,"ID",16,almond,ALMOND,m,0.532
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,z,0,,,,,,,,0.920885,0,0,6,6,1,1,1002,WORD,"ID",33,adjust,ADJUST,m,0.920885
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,0.920885,-1,0,7,7,4,1,1005,WORD,UN,33,abound,SQUEAK,m,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,0.920885,-1,0,8,8,8,1,1009,NW,"ID",33,aslert,ASLERT,z,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,0.920885,-1,0,9,9,5,1,1006,WORD,UN,33,frenzy,OBTAIN,m,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,0.920885,-1,0,10,10,0,1,1001,WORD,"ID",33,utopia,UTOPIA,m,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,0.920885,-1,0,11,11,9,1,1010,NW,"ID",33,fariny,FARINY,z,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,,0,,,,,,,,0.920885,-1,0,12,12,15,1,1016,NW,UN,16,mushed,WHAISE,z,
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,z,1,,,,,,,,0.75127,1,0,13,13,13,1,1014,NW,UN,33,winfer,ROUPET,z,0.75127
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,z,1,,,,,,,,0.54285,1,0,14,14,11,1,1012,NW,"ID",16,rashet,RASHET,z,0.54285
+,,,,,,,,,,,,,,,,,,test,2020-11-25_12h57.00.284,lexical_decision_task_MP_exp2,2020.2.5,Win32,60,z,0,,,,,,,,0.468915,0,0,15,15,6,1,1007,WORD,UN,16,tropic,ZOMBIE,m,0.468915
