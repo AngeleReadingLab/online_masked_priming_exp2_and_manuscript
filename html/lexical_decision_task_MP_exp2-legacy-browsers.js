@@ -44,10 +44,10 @@ const end_of_practice_trials_pagesLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(end_of_practice_trials_pagesLoopBegin, end_of_practice_trials_pagesLoopScheduler);
 flowScheduler.add(end_of_practice_trials_pagesLoopScheduler);
 flowScheduler.add(end_of_practice_trials_pagesLoopEnd);
-const trialsLoopScheduler = new Scheduler(psychoJS);
-flowScheduler.add(trialsLoopBegin, trialsLoopScheduler);
-flowScheduler.add(trialsLoopScheduler);
-flowScheduler.add(trialsLoopEnd);
+const experiment_trialsLoopScheduler = new Scheduler(psychoJS);
+flowScheduler.add(experiment_trialsLoopBegin, experiment_trialsLoopScheduler);
+flowScheduler.add(experiment_trialsLoopScheduler);
+flowScheduler.add(experiment_trialsLoopEnd);
 flowScheduler.add(EndRoutineBegin());
 flowScheduler.add(EndRoutineEachFrame());
 flowScheduler.add(EndRoutineEnd());
@@ -738,42 +738,42 @@ function end_of_practice_trials_pagesLoopEnd() {
 }
 
 
-var trials;
-function trialsLoopBegin(trialsLoopScheduler) {
+var experiment_trials;
+function experiment_trialsLoopBegin(experiment_trialsLoopScheduler) {
   // set up handler to look after randomisation of conditions etc
-  trials = new TrialHandler({
+  experiment_trials = new TrialHandler({
     psychoJS: psychoJS,
     nReps: 1, method: TrialHandler.Method.RANDOM,
     extraInfo: expInfo, originPath: undefined,
     trialList: trial_list_file,
-    seed: undefined, name: 'trials'
+    seed: undefined, name: 'experiment_trials'
   });
-  psychoJS.experiment.addLoop(trials); // add the loop to the experiment
-  currentLoop = trials;  // we're now the current loop
+  psychoJS.experiment.addLoop(experiment_trials); // add the loop to the experiment
+  currentLoop = experiment_trials;  // we're now the current loop
 
   // Schedule all the trials in the trialList:
-  trials.forEach(function() {
-    const snapshot = trials.getSnapshot();
+  experiment_trials.forEach(function() {
+    const snapshot = experiment_trials.getSnapshot();
 
-    trialsLoopScheduler.add(importConditions(snapshot));
-    trialsLoopScheduler.add(presentTrialRoutineBegin(snapshot));
-    trialsLoopScheduler.add(presentTrialRoutineEachFrame(snapshot));
-    trialsLoopScheduler.add(presentTrialRoutineEnd(snapshot));
-    trialsLoopScheduler.add(feedbackRoutineBegin(snapshot));
-    trialsLoopScheduler.add(feedbackRoutineEachFrame(snapshot));
-    trialsLoopScheduler.add(feedbackRoutineEnd(snapshot));
-    trialsLoopScheduler.add(BreakRoutineBegin(snapshot));
-    trialsLoopScheduler.add(BreakRoutineEachFrame(snapshot));
-    trialsLoopScheduler.add(BreakRoutineEnd(snapshot));
-    trialsLoopScheduler.add(endLoopIteration(trialsLoopScheduler, snapshot));
+    experiment_trialsLoopScheduler.add(importConditions(snapshot));
+    experiment_trialsLoopScheduler.add(presentTrialRoutineBegin(snapshot));
+    experiment_trialsLoopScheduler.add(presentTrialRoutineEachFrame(snapshot));
+    experiment_trialsLoopScheduler.add(presentTrialRoutineEnd(snapshot));
+    experiment_trialsLoopScheduler.add(feedbackRoutineBegin(snapshot));
+    experiment_trialsLoopScheduler.add(feedbackRoutineEachFrame(snapshot));
+    experiment_trialsLoopScheduler.add(feedbackRoutineEnd(snapshot));
+    experiment_trialsLoopScheduler.add(BreakRoutineBegin(snapshot));
+    experiment_trialsLoopScheduler.add(BreakRoutineEachFrame(snapshot));
+    experiment_trialsLoopScheduler.add(BreakRoutineEnd(snapshot));
+    experiment_trialsLoopScheduler.add(endLoopIteration(experiment_trialsLoopScheduler, snapshot));
   });
 
   return Scheduler.Event.NEXT;
 }
 
 
-function trialsLoopEnd() {
-  psychoJS.experiment.removeLoop(trials);
+function experiment_trialsLoopEnd() {
+  psychoJS.experiment.removeLoop(experiment_trials);
 
   return Scheduler.Event.NEXT;
 }
@@ -1514,10 +1514,11 @@ function BreakRoutineBegin(snapshot) {
     BreakClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    break_msg_top = (("BREAK\n\nYou have now completed " + round(((trials.thisTrialN / trials.nTotal) * 100)).toString()) + "% of the experiment. ");
+    break_msg_top = (("BREAK\n\nYou have now completed " + round(((experiment_trials.thisTrialN / trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
-    show_break = trials.nRemaining % break_every == 0
-    console.log(trials.ThisTrialN)
+    show_break = experiment_trials.nRemaining % break_every == 0
+    console.log(experiment_trials.ThisTrialN)
+    console.log(experiment_trials.nRemaining)
     console.log(show_break)
     break_text.setText(break_msg);
     // setup some python lists for storing info about the break_done_touch
