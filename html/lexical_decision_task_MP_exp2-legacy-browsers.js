@@ -1521,9 +1521,9 @@ function BreakRoutineBegin(snapshot) {
     break_msg_top = (("BREAK\n\nYou have now completed " + round(((trials_presented_so_far / experiment_trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
     show_break = trials_presented_so_far % break_every == 0
-    console.log(trials_presented_so_far)
-    console.log(experiment_trials.nRemaining)
-    console.log(show_break)
+    //console.log(trials_presented_so_far)
+    //console.log(experiment_trials.nRemaining)
+    //console.log(show_break)
     
     
     break_text.setText(break_msg);
