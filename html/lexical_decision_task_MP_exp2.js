@@ -576,7 +576,7 @@ function experimentInit() {
   
   // Initialize components for Routine "Break"
   BreakClock = new util.Clock();
-  break_every = 2;
+  break_every = 11;
   break_msg_top = "";
   break_msg_middle = "Please take a short break.\n";
   break_msg_bottom = "When you are done, please press the space bar or touch the \"Continue\" button below to continue the experiment.";
@@ -1521,6 +1521,8 @@ function BreakRoutineBegin(snapshot) {
     break_msg_top = (("BREAK\n\nYou have now completed " + round(((trials.thisTrialN / trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
     show_break = trials.thisTrialN % break_every == 0
+    console.log(trials.ThisTrialN)
+    console.log(show_break)
     break_text.setText(break_msg);
     // setup some python lists for storing info about the break_done_touch
     break_done_touch.clicked_name = [];
