@@ -1557,7 +1557,7 @@ function BreakRoutineEachFrame(snapshot) {
     // exit the break routine immediately if we are not on a break trial
     // break trials occur every break_every trials (see Begin Experiment)
     
-    if ((trials.thisTrialN+1) % break_every != 0){
+    if ((trials.thisN+1) % break_every != 0){
         continueRoutine = false;
     }
     

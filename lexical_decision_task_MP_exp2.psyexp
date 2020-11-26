@@ -706,7 +706,7 @@
         <Param name="Begin Routine" updates="constant" val="break_msg_top = &quot;BREAK\n\nYou have now completed &quot; + str(round(trials.thisTrialN/trials.nTotal*100)) + &quot;% of the experiment. &quot;&amp;#10;&amp;#10;break_msg = break_msg_top + break_msg_middle + break_msg_bottom" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="JS" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Each JS Frame" updates="constant" val="// exit the break routine immediately if we are not on a break trial&amp;#10;// break trials occur every break_every trials (see Begin Experiment)&amp;#10;&amp;#10;if ((trials.thisTrialN+1) % break_every != 0){&amp;#10;    continueRoutine = false;&amp;#10;}" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="// exit the break routine immediately if we are not on a break trial&amp;#10;// break trials occur every break_every trials (see Begin Experiment)&amp;#10;&amp;#10;if ((trials.thisN+1) % break_every != 0){&amp;#10;    continueRoutine = false;&amp;#10;}" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
