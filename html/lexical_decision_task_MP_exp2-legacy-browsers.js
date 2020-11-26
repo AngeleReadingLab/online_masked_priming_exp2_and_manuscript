@@ -97,7 +97,7 @@ var win;
 var event;
 var randint;
 var instructions_image;
-var TrialClock;
+var presentTrialClock;
 var fixation_mask;
 var prime_text;
 var target;
@@ -204,8 +204,8 @@ function experimentInit() {
     flipHoriz : false, flipVert : false,
     texRes : 128, interpolate : true, depth : -6.0 
   });
-  // Initialize components for Routine "Trial"
-  TrialClock = new util.Clock();
+  // Initialize components for Routine "presentTrial"
+  presentTrialClock = new util.Clock();
   fixation_mask = new visual.TextStim({
     win: psychoJS.window,
     name: 'fixation_mask',
@@ -416,8 +416,8 @@ function experimentInit() {
     flipHoriz : false, flipVert : false,
     texRes : 128, interpolate : true, depth : -6.0 
   });
-  // Initialize components for Routine "Trial"
-  TrialClock = new util.Clock();
+  // Initialize components for Routine "presentTrial"
+  presentTrialClock = new util.Clock();
   fixation_mask = new visual.TextStim({
     win: psychoJS.window,
     name: 'fixation_mask',
@@ -565,7 +565,7 @@ function experimentInit() {
   
   // Initialize components for Routine "Break"
   BreakClock = new util.Clock();
-  break_every = 11;
+  break_every = 2;
   break_msg_top = "";
   break_msg_middle = "Please take a short break.\n";
   break_msg_bottom = "When you are done, please press the space bar or touch the \"Continue\" button below to continue the experiment.";
@@ -683,9 +683,9 @@ function practice_trialsLoopBegin(practice_trialsLoopScheduler) {
     const snapshot = practice_trials.getSnapshot();
 
     practice_trialsLoopScheduler.add(importConditions(snapshot));
-    practice_trialsLoopScheduler.add(TrialRoutineBegin(snapshot));
-    practice_trialsLoopScheduler.add(TrialRoutineEachFrame(snapshot));
-    practice_trialsLoopScheduler.add(TrialRoutineEnd(snapshot));
+    practice_trialsLoopScheduler.add(presentTrialRoutineBegin(snapshot));
+    practice_trialsLoopScheduler.add(presentTrialRoutineEachFrame(snapshot));
+    practice_trialsLoopScheduler.add(presentTrialRoutineEnd(snapshot));
     practice_trialsLoopScheduler.add(feedbackRoutineBegin(snapshot));
     practice_trialsLoopScheduler.add(feedbackRoutineEachFrame(snapshot));
     practice_trialsLoopScheduler.add(feedbackRoutineEnd(snapshot));
@@ -756,9 +756,9 @@ function trialsLoopBegin(trialsLoopScheduler) {
     const snapshot = trials.getSnapshot();
 
     trialsLoopScheduler.add(importConditions(snapshot));
-    trialsLoopScheduler.add(TrialRoutineBegin(snapshot));
-    trialsLoopScheduler.add(TrialRoutineEachFrame(snapshot));
-    trialsLoopScheduler.add(TrialRoutineEnd(snapshot));
+    trialsLoopScheduler.add(presentTrialRoutineBegin(snapshot));
+    trialsLoopScheduler.add(presentTrialRoutineEachFrame(snapshot));
+    trialsLoopScheduler.add(presentTrialRoutineEnd(snapshot));
     trialsLoopScheduler.add(feedbackRoutineBegin(snapshot));
     trialsLoopScheduler.add(feedbackRoutineEachFrame(snapshot));
     trialsLoopScheduler.add(feedbackRoutineEnd(snapshot));
@@ -990,12 +990,12 @@ var prime_duration_s;
 var target_onset;
 var button_duration;
 var corr;
-var TrialComponents;
-function TrialRoutineBegin(snapshot) {
+var presentTrialComponents;
+function presentTrialRoutineBegin(snapshot) {
   return function () {
-    //------Prepare to start Routine 'Trial'-------
+    //------Prepare to start Routine 'presentTrial'-------
     t = 0;
-    TrialClock.reset(); // clock
+    presentTrialClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
     prime_text.setText(Prime);
@@ -1020,18 +1020,18 @@ function TrialRoutineBegin(snapshot) {
     corr = (- 1);
     
     // keep track of which components have finished
-    TrialComponents = [];
-    TrialComponents.push(fixation_mask);
-    TrialComponents.push(prime_text);
-    TrialComponents.push(target);
-    TrialComponents.push(response);
-    TrialComponents.push(button_left);
-    TrialComponents.push(button_right);
-    TrialComponents.push(trial_label_right);
-    TrialComponents.push(touch_resp);
-    TrialComponents.push(trial_label_left_new);
+    presentTrialComponents = [];
+    presentTrialComponents.push(fixation_mask);
+    presentTrialComponents.push(prime_text);
+    presentTrialComponents.push(target);
+    presentTrialComponents.push(response);
+    presentTrialComponents.push(button_left);
+    presentTrialComponents.push(button_right);
+    presentTrialComponents.push(trial_label_right);
+    presentTrialComponents.push(touch_resp);
+    presentTrialComponents.push(trial_label_left_new);
     
-    TrialComponents.forEach( function(thisComponent) {
+    presentTrialComponents.forEach( function(thisComponent) {
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
        });
@@ -1044,12 +1044,12 @@ function TrialRoutineBegin(snapshot) {
 
 
 var frameRemains;
-function TrialRoutineEachFrame(snapshot) {
+function presentTrialRoutineEachFrame(snapshot) {
   return function () {
-    //------Loop for each frame of Routine 'Trial'-------
+    //------Loop for each frame of Routine 'presentTrial'-------
     let continueRoutine = true; // until we're told otherwise
     // get current time
-    t = TrialClock.getTime();
+    t = presentTrialClock.getTime();
     frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
     // update/draw components on each frame
     
@@ -1236,7 +1236,7 @@ function TrialRoutineEachFrame(snapshot) {
     }
     
     continueRoutine = false;  // reverts to True if at least one component still running
-    TrialComponents.forEach( function(thisComponent) {
+    presentTrialComponents.forEach( function(thisComponent) {
       if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
         continueRoutine = true;
       }
@@ -1254,10 +1254,10 @@ function TrialRoutineEachFrame(snapshot) {
 
 var _pj;
 var rt;
-function TrialRoutineEnd(snapshot) {
+function presentTrialRoutineEnd(snapshot) {
   return function () {
-    //------Ending Routine 'Trial'-------
-    TrialComponents.forEach( function(thisComponent) {
+    //------Ending Routine 'presentTrial'-------
+    presentTrialComponents.forEach( function(thisComponent) {
       if (typeof thisComponent.setAutoDraw === 'function') {
         thisComponent.setAutoDraw(false);
       }
@@ -1324,7 +1324,7 @@ function TrialRoutineEnd(snapshot) {
     thisExp.addData("rt", rt);
     thisExp.addData("corr", corr);
     
-    // the Routine "Trial" was not non-slip safe, so reset the non-slip timer
+    // the Routine "presentTrial" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset();
     
     return Scheduler.Event.NEXT;
@@ -1516,7 +1516,7 @@ function BreakRoutineBegin(snapshot) {
     // update component parameters for each repeat
     break_msg_top = (("BREAK\n\nYou have now completed " + round(((trials.thisTrialN / trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
-    show_break = trials.thisTrialN % break_every == 0
+    show_break = trials.nRemaining % break_every == 0
     console.log(trials.ThisTrialN)
     console.log(show_break)
     break_text.setText(break_msg);
