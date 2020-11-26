@@ -566,7 +566,7 @@ function experimentInit() {
   
   // Initialize components for Routine "Break"
   BreakClock = new util.Clock();
-  break_every = 120;
+  break_every = 121;
   break_msg_top = "";
   break_msg_middle = "Please take a short break.\n";
   break_msg_bottom = "When you are done, please press the space bar or touch the \"Continue\" button below to continue the experiment.";
