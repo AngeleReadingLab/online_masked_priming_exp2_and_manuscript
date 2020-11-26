@@ -140,6 +140,7 @@ var break_msg_top;
 var break_msg_middle;
 var break_msg_bottom;
 var break_msg;
+var trials_presented_so_far;
 var break_text;
 var break_done_touch;
 var break_done_keyboard;
@@ -582,6 +583,7 @@ function experimentInit() {
   break_msg_bottom = "When you are done, please press the space bar or touch the \"Continue\" button below to continue the experiment.";
   break_msg = "";
   
+  trials_presented_so_far = 0
   break_text = new visual.TextStim({
     win: psychoJS.window,
     name: 'break_text',
@@ -1518,12 +1520,16 @@ function BreakRoutineBegin(snapshot) {
     BreakClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    break_msg_top = (("BREAK\n\nYou have now completed " + round(((experiment_trials.thisTrialN / experiment_trials.nTotal) * 100)).toString()) + "% of the experiment. ");
+    trials_presented_so_far++
+    
+    break_msg_top = (("BREAK\n\nYou have now completed " + round(((trials_presented_so_far / experiment_trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
-    show_break = experiment_trials.nRemaining % break_every == 0
-    console.log(experiment_trials.thisTrialN)
+    show_break = trials_presented_so_far % break_every == 0
+    console.log(trials_presented_so_far)
     console.log(experiment_trials.nRemaining)
     console.log(show_break)
+    
+    
     break_text.setText(break_msg);
     // setup some python lists for storing info about the break_done_touch
     break_done_touch.clicked_name = [];
