@@ -1514,7 +1514,7 @@ function BreakRoutineBegin(snapshot) {
     BreakClock.reset(); // clock
     frameN = -1;
     // update component parameters for each repeat
-    break_msg_top = (("BREAK\n\nYou have now completed " + round(((experiment_trials.thisTrialN / trials.nTotal) * 100)).toString()) + "% of the experiment. ");
+    break_msg_top = (("BREAK\n\nYou have now completed " + round(((experiment_trials.thisTrialN / experiment_trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
     show_break = experiment_trials.nRemaining % break_every == 0
     console.log(experiment_trials.ThisTrialN)
