@@ -1508,6 +1508,7 @@ function feedbackRoutineEnd(snapshot) {
 }
 
 
+var show_break;
 var _break_done_keyboard_allKeys;
 var BreakComponents;
 function BreakRoutineBegin(snapshot) {
@@ -1519,7 +1520,7 @@ function BreakRoutineBegin(snapshot) {
     // update component parameters for each repeat
     break_msg_top = (("BREAK\n\nYou have now completed " + round(((trials.thisTrialN / trials.nTotal) * 100)).toString()) + "% of the experiment. ");
     break_msg = ((break_msg_top + break_msg_middle) + break_msg_bottom);
-    
+    show_break = trials.thisTrialN % break_every == 0
     break_text.setText(break_msg);
     // setup some python lists for storing info about the break_done_touch
     break_done_touch.clicked_name = [];
@@ -1557,7 +1558,7 @@ function BreakRoutineEachFrame(snapshot) {
     // exit the break routine immediately if we are not on a break trial
     // break trials occur every break_every trials (see Begin Experiment)
     
-    if ((trials.thisN+1) % break_every != 0){
+    if (!show_break){
         continueRoutine = false;
     }
     
