@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2020.2.5">
+<PsychoPy2experiment encoding="utf-8" version="2020.2.8">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="0" valType="str"/>
     <Param name="Audio lib" updates="None" val="ptb" valType="str"/>
@@ -14,7 +14,7 @@
     <Param name="Incomplete URL" updates="None" val="https://bournemouthpsych.eu.qualtrics.com/jfe/form/SV_4UTkhSmaQNjgz7D" valType="str"/>
     <Param name="JS libs" updates="None" val="packaged" valType="str"/>
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
-    <Param name="Resources" updates="None" val="['..\\instructions.xlsx', '..\\instructions_after_practice.xlsx', '..\\keyboard-example.gif', '..\\touchscreen-example.gif', '..\\trials_list_practice.xlsx', '..\\trials_list0.xlsx', '..\\trials_list1.xlsx', '..\\trials_list2.xlsx', '..\\trials_list3.xlsx']" valType="fileList"/>
+    <Param name="Resources" updates="None" val="['../instructions.xlsx', '../instructions_after_practice.xlsx', '../keyboard-example.gif', '../touchscreen-example.gif', '../trials_list_practice.xlsx', '../trials_list0.xlsx', '../trials_list1.xlsx', '../trials_list2.xlsx', '../trials_list3.xlsx']" valType="fileList"/>
     <Param name="Save csv file" updates="None" val="False" valType="bool"/>
     <Param name="Save excel file" updates="None" val="False" valType="bool"/>
     <Param name="Save log file" updates="None" val="True" valType="bool"/>
@@ -738,11 +738,11 @@
       <CodeComponent name="settings_and_cond">
         <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Experiment" updates="constant" val="dpi_scaling = 1&amp;#10;&amp;#10;font_scale = 1.5&amp;#10;&amp;#10;fixation_height = .1&amp;#10;&amp;#10;text_height = .1&amp;#10;&amp;#10;arrow_keys_height = .05&amp;#10;&amp;#10;# counterbalancing_condition = int(expInfo['participant']) % 4&amp;#10;# this doesn't work since the participant ID is alphanumeric&amp;#10;counterbalancing_condition = randint(0,3)&amp;#10;&amp;#10;thisExp.addData('counterbalancing_condition',  counterbalancing_condition)&amp;#10;&amp;#10;# this will ensure that participants see the trials from the following files&amp;#10;# &amp;#10;&amp;#10;trial_list_file = &quot;trials_list&quot; + str(counterbalancing_condition) + &quot;.xlsx&quot;&amp;#10;&amp;#10;# this is the duration of the mask to be displayed before the prime&amp;#10;mask_duration = .5&amp;#10;&amp;#10;trial_timeout = 2" valType="extendedCode"/>
-        <Param name="Begin JS Experiment" updates="constant" val="dpi_scaling = 1;&amp;#10;font_scale = 1.5;&amp;#10;fixation_height = 0.1;&amp;#10;text_height = 0.1;&amp;#10;arrow_keys_height = 0.05;&amp;#10;counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);&amp;#10;thisExp.addData(&quot;counterbalancing_condition&quot;, counterbalancing_condition);&amp;#10;trial_list_file = ((&quot;trials_list&quot; + counterbalancing_condition.toString()) + &quot;.xlsx&quot;);&amp;#10;mask_duration = 0.5;&amp;#10;trial_timeout = 2;&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="dpi_scaling = 1&amp;#10;&amp;#10;font_scale = 1.5&amp;#10;&amp;#10;fixation_height = .1&amp;#10;&amp;#10;text_height = .1&amp;#10;&amp;#10;arrow_keys_height = .05&amp;#10;&amp;#10;# counterbalancing_condition = int(expInfo['participant']) % 4&amp;#10;# this doesn't work since the participant ID is alphanumeric&amp;#10;# counterbalancing_condition = randint(0,3)&amp;#10;&amp;#10;counterbalancing_condition = 3&amp;#10;&amp;#10;thisExp.addData('counterbalancing_condition',  counterbalancing_condition)&amp;#10;&amp;#10;# this will ensure that participants see the trials from the following files&amp;#10;# &amp;#10;&amp;#10;trial_list_file = &quot;trials_list&quot; + str(counterbalancing_condition) + &quot;.xlsx&quot;&amp;#10;&amp;#10;# this is the duration of the mask to be displayed before the prime&amp;#10;mask_duration = .5&amp;#10;&amp;#10;trial_timeout = 2" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="dpi_scaling = 1;&amp;#10;font_scale = 1.5;&amp;#10;fixation_height = 0.1;&amp;#10;text_height = 0.1;&amp;#10;arrow_keys_height = 0.05;&amp;#10;// counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);&amp;#10;counterbalancing_condition = 3;&amp;#10;thisExp.addData(&quot;counterbalancing_condition&quot;, counterbalancing_condition);&amp;#10;trial_list_file = ((&quot;trials_list&quot; + counterbalancing_condition.toString()) + &quot;.xlsx&quot;);&amp;#10;mask_duration = 0.5;&amp;#10;trial_timeout = 2;&amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="prime_duration_s = (PrimeDuration / 1000);&amp;#10;target_onset = (mask_duration + prime_duration_s);&amp;#10;button_duration = (target_onset + trial_timeout);&amp;#10;" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="# Prime duration is in ms, should be in s&amp;#10;prime_duration_s = PrimeDuration/1000&amp;#10;&amp;#10;# the target should appear after the mask duration and the prime duration&amp;#10;target_onset = mask_duration + prime_duration_s&amp;#10;&amp;#10;# buttons should show at all times, so their duration is the duration until the target appears + the trial timeout&amp;#10;button_duration = target_onset + trial_timeout" valType="extendedCode"/>
-        <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
+        <Param name="Code Type" updates="None" val="Both" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>

@@ -30,6 +30,7 @@ psychoJS.openWindow({
 let expName = 'lexical_decision_task_MP_exp2';  // from the Builder filename that created this script
 let expInfo = {'participant': '999'};
 
+// Start code blocks for 'Before Experiment'
 // schedule the experiment:
 psychoJS.schedule(psychoJS.gui.DlgFromDict({
   dictionary: expInfo,
@@ -79,7 +80,7 @@ var frameDur;
 function updateInfo() {
   expInfo['date'] = util.MonotonicClock.getDateStr();  // add a simple timestamp
   expInfo['expName'] = expName;
-  expInfo['psychopyVersion'] = '2020.2.5';
+  expInfo['psychopyVersion'] = '2020.2.8';
   expInfo['OS'] = window.navigator.platform;
 
   // store frame rate of monitor if we can measure it successfully
@@ -258,7 +259,8 @@ function experimentInit() {
   fixation_height = 0.1;
   text_height = 0.1;
   arrow_keys_height = 0.05;
-  counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);
+  // counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);
+  counterbalancing_condition = 3;
   thisExp.addData("counterbalancing_condition", counterbalancing_condition);
   trial_list_file = (("trials_list" + counterbalancing_condition.toString()) + ".xlsx");
   mask_duration = 0.5;
@@ -470,7 +472,8 @@ function experimentInit() {
   fixation_height = 0.1;
   text_height = 0.1;
   arrow_keys_height = 0.05;
-  counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);
+  // counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);
+  counterbalancing_condition = 3;
   thisExp.addData("counterbalancing_condition", counterbalancing_condition);
   trial_list_file = (("trials_list" + counterbalancing_condition.toString()) + ".xlsx");
   mask_duration = 0.5;

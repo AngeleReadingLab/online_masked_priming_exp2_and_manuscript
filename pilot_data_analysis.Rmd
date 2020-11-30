@@ -13,28 +13,43 @@ library(cowplot)
 library(stargazer)
 source("RainCloudPlots.R")
 
+# explore counterbalancing condition
+counterbalancing <- fs::dir_ls(path = "./data", glob = "*.csv") %>%
+  map_dfr(read_csv, .id = "source", n_max = 1, col_type = cols(
+  .default = col_character(), rt = col_double(), corr = col_integer(), TrialID = col_integer()))
+
+
+
+
 csv_data <- fs::dir_ls(path = "./data", glob = "*.csv") %>%
   map_dfr(read_csv, .id = "source", col_type = cols(
   .default = col_character(), rt = col_double(), corr = col_integer(), TrialID = col_integer())) %>% 
   filter(!is.na(TrialID) & TrialID < 1000) %>%
   select(source, participant, date, OS, frameRate, rt, corr, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target)
 
+csv_data$device <- ifelse(csv_data$OS %in% c("Linux armv7l", "Linux armv8l"), "android", "computer")
+
 # get participants with correct responses
 
-accuracy_by_participant <- csv_data %>% group_by(source) %>% summarise(acc = mean(corr == 1), N = n())
+accuracy_by_participant <- csv_data %>% group_by(source) %>% summarise(acc = mean(corr == 1), N = n()) %>% left_join(counterbalancing, by = "source")
+
 
   
 participants_to_include <- accuracy_by_participant %>% filter(N == 480 & acc > .8)   
+
+participants_to_exclude <- accuracy_by_participant %>% filter(N != 480 | acc <= .8)   
 
 
 participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}")
 paste0(participant_list_for_prolific, sep = "\n") %>% writeClipboard() # works on windows
 
+
+
 # for now, we only have two participants with accuracy > .8 and a full data set
 
 data_to_include <- csv_data %>% filter(source %in% participants_to_include$source) %>% mutate(StimulusType = StimulusType %>% factor, Condition = Condition %>% factor, PrimeDuration = PrimeDuration %>% factor, rt = rt * 1000)
 
-write_csv(data_to_include, path = "current_data.csv")
+write_csv(data_to_include, file = "current_data.csv")
 
 data_summary_rt <- data_to_include %>% group_by(StimulusType, Condition, PrimeDuration) %>% summarise(M = mean(rt), SD = sd(rt), N = n())
 
@@ -49,6 +64,22 @@ plot_raincloud(data_to_include %>% filter(corr == 1 & rt < 1500), x_column = "Co
                                       #size = 0.2,
                                       color = "black") +
   facet_grid(cols = vars(PrimeDuration), rows = vars(StimulusType), labeller = label_context)
+
+
+```
+
+Experimental plot by device
+
+```{r plot_by_device}
+plot_raincloud(data_to_include %>% filter(corr == 1 & rt < 1500), x_column = "Condition", y_column = "rt", x_label = "Condition", y_label = "RT in ms (correct responses)", main_title = "RT by condition and word type") + 
+  # put labels on the mean for easier comparison
+  stat_summary(fun.data = function(x) {data.frame(label = format(mean(x), digits = 2), y = mean(x))}, 
+                                      geom = "text",
+                                      #width = 1,
+                                      position = position_nudge(x = 0.5, y = 0),
+                                      #size = 0.2,
+                                      color = "black") +
+  facet_grid(cols = vars(PrimeDuration), rows = vars(StimulusType, device), labeller = label_context)
 
 
 
@@ -67,6 +98,12 @@ lmm_acc <- glmer(data = data_to_include %>% filter(corr != -1 & StimulusType == 
 summary(lmm_acc)
 
 ```
+```{r experiment1_and_2_comparison}
+exp1 <- read_csv("Exp 1 data.csv")
+
+
+```
+
 
 Creepy: visualize participant locations from Qualtrics
 ```{r participant_map}
