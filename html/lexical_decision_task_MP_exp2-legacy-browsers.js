@@ -249,7 +249,7 @@ function experimentInit() {
   text_height = 0.1;
   arrow_keys_height = 0.05;
   // counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);
-  counterbalancing_condition = 3;
+  counterbalancing_condition = 0;
   thisExp.addData("counterbalancing_condition", counterbalancing_condition);
   trial_list_file = (("trials_list" + counterbalancing_condition.toString()) + ".xlsx");
   mask_duration = 0.5;
@@ -462,7 +462,7 @@ function experimentInit() {
   text_height = 0.1;
   arrow_keys_height = 0.05;
   // counterbalancing_condition = (Math.floor((Math.random() * ((3 - 0) + 1))) + 0);
-  counterbalancing_condition = 3;
+  counterbalancing_condition = 0;
   thisExp.addData("counterbalancing_condition", counterbalancing_condition);
   trial_list_file = (("trials_list" + counterbalancing_condition.toString()) + ".xlsx");
   mask_duration = 0.5;
