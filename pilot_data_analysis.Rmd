@@ -39,11 +39,14 @@ participants_to_include <- accuracy_by_participant %>% filter(N == 480 & acc > .
 
 participants_to_exclude <- accuracy_by_participant %>% filter(N != 480 | acc <= .8)   
 
+#participants_to_exclude[,1:3]
 
-participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}")
+participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
+
+
 paste0(participant_list_for_prolific, sep = "\n") %>% writeClipboard() # works on windows
 
-
+exclude_list_for_prolific <- str_extract(string = participants_to_exclude$source, pattern = "[a-z0-9]{24}") %>% paste0(collapse = "\n")
 
 # for now, we only have two participants with accuracy > .8 and a full data set
 
