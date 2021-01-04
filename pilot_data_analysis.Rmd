@@ -110,10 +110,10 @@ exp1 <- read_csv("Exp 1 data.csv")
 
 Creepy: visualize participant locations from Qualtrics
 ```{r participant_map}
-library(sp)
-library(leaflet)
-
-participant_data <- read_csv("participant_data.csv")
-coordinates(participant_data) <- c("Location Longitude","Location Latitude")
-leaflet(participant_data) %>% addMarkers(label = .$`Confirm Prolific ID`) %>% addTiles()
+# library(sp)
+# library(leaflet)
+# 
+# participant_data <- read_csv("participant_data.csv")
+# coordinates(participant_data) <- c("Location Longitude","Location Latitude")
+# leaflet(participant_data) %>% addMarkers(label = .$`Confirm Prolific ID`) %>% addTiles()
 ```
