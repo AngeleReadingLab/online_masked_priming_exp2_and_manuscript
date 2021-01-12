@@ -159,6 +159,9 @@ Two or three sentences to provide a \textbf{broader perspective}, readily compre
 \begin{document}
 \maketitle
 
+Masked priming (Forster \& Davis, 1984) is one of the most important paradigms in the study of visual word recognition. Priming refers to the observation that the response to a target stimulus (e.g.~responding that \enquote{DOCTOR} is a word in a lexical decision task or pronouncing the same stimulus in a naming task) is faster, more accurate, or both when it was preceded by a related stimulus (e.g.~\enquote{nurse}) compared to an unrelated stimulus (e.g.~\enquote{horse}). In masked priming, the prime stimulus (\enquote{nurse} or \enquote{horse}) is presented very briefly (for less than 60 ms) and is itself preceded by a mask (e.g.~\enquote{\#\#\#\#\#}) which is presented fora much longer duration (typically 500 ms). This forward mask ensures that participants are usually unaware of the prime (Forster \& Davis, 1984).
+The masked priming paradigm has been used in a large number of studies over the last decades (for a review, see e.g.~Kinoshita \& Lupker, 2004; Van den Bussche, Van den Noortgate, \& Reynvoet, 2009), but so far, virtually all of these studies have been done in a laboratory setting, often using the DMDX software by Forster and Forster (2003). Given that, as of the time of this writing, researchers in a large part of the world are unable to perform psychology experiments in a laboratory due to the COVID-19 pandemic, with not much clarity about when laboratories will be able to reopen completely, it is an important consideration whether it may be possible to collect masked priming data remotely using online experiments. Even after the current exceptional situation, online data collection has many advantages, such as easy access to a much more diverse population than would be accessible at the typical university research laboratory, independence from laboratory space constraints, and, often, lower costs as participants only need to be compensated for their time on the experiment, not time spent commuting, waiting for the experiment to start, etc. Researchers in decision making and economics have been using online paradigms for several decades now (e.g.~Birnbaum \& Birnbaum, 2000; Paolacci, Chandler, \& Ipeirotis, 2010), but cognitive and experimental psychology have been much slower in taking up online paradigms, often due to concerns about the validity of the results. Such concerns are not limited to cognitive studies (Aust, Diedenhofen, Ullrich, \& Musch, 2013), but they are exacerbated by the reliance on precise presentation times. In masked priming, it is critical for the onset of the mask, the prime, and the target to occur at the intended times. In particular, presenting the prime for too long will counteract the effect of the mask, making the prime consciously visible to the participant. There have been attempts to address these concerns. For example, a Web version of DMDX (webDMDX) was developed which showed promising results in a trial experiment (Witzel, Cornelius, Witzel, Forster, \& Forster, 2013). However, webDMDX was a self-contained Windows executable file that participants had to download and run rather than a \enquote{true} online experiment that could be run inside of a browser. A downside of this is that participants often are (and should be) understandably skeptical about downloading and running files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer.
+
 Gomez, Perea, and Ratcliff (2013) performed an experiment
 
 \hypertarget{methods}{%
@@ -199,11 +202,35 @@ We used R (Version 4.0.3; R Core Team, 2020) and the R-package \emph{papaja} (Ve
 \leavevmode\hypertarget{ref-R-papaja}{}%
 Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
 
+\leavevmode\hypertarget{ref-austSeriousnessChecksAre2013}{}%
+Aust, F., Diedenhofen, B., Ullrich, S., \& Musch, J. (2013). Seriousness checks are useful to improve data validity in online research. \emph{Behavior Research Methods}, \emph{45}(2), 527--535. \url{https://doi.org/10.3758/s13428-012-0265-2}
+
+\leavevmode\hypertarget{ref-birnbaumPsychologicalExperimentsInternet2000a}{}%
+Birnbaum, M. H., \& Birnbaum, M. O. (2000). \emph{Psychological Experiments on the Internet}. Elsevier. Retrieved from \url{http://books.google.com?id=sw4NHyThFFkC}
+
+\leavevmode\hypertarget{ref-forsterRepetitionPrimingFrequency1984}{}%
+Forster, K. I., \& Davis, C. (1984). Repetition priming and frequency attenuation in lexical access. \emph{Journal of Experimental Psychology: Learning, Memory, and Cognition}, \emph{10}(4), 680--698. \url{https://doi.org/10.1037/0278-7393.10.4.680}
+
+\leavevmode\hypertarget{ref-forsterDMDXWindowsDisplay2003}{}%
+Forster, K. I., \& Forster, J. C. (2003). DMDX: A Windows display program with millisecond accuracy. \emph{Behavior Research Methods, Instruments, \& Computers}, \emph{35}(1), 116--124.
+
 \leavevmode\hypertarget{ref-gomezDiffusionModelAccount2013}{}%
 Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account of masked versus unmasked priming: Are they qualitatively different? \emph{Journal of Experimental Psychology: Human Perception and Performance}, \emph{39}(6), 1731--1740. \url{https://doi.org/10.1037/a0032333}
 
+\leavevmode\hypertarget{ref-kinoshitaMaskedPrimingState2004}{}%
+Kinoshita, S., \& Lupker, S. J. (2004). \emph{Masked Priming: The State of the Art}. Psychology Press. Retrieved from \url{http://books.google.com?id=VH55AgAAQBAJ}
+
+\leavevmode\hypertarget{ref-paolacciRunningExperimentsAmazon2010}{}%
+Paolacci, G., Chandler, J., \& Ipeirotis, P. G. (2010). \emph{Running Experiments on Amazon Mechanical Turk} (SSRN Scholarly Paper No. ID 1626226). Rochester, NY: Social Science Research Network. Retrieved from \url{https://papers.ssrn.com/abstract=1626226}
+
 \leavevmode\hypertarget{ref-R-base}{}%
 R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
+
+\leavevmode\hypertarget{ref-vandenbusscheMechanismsMaskedPriming2009}{}%
+Van den Bussche, E., Van den Noortgate, W., \& Reynvoet, B. (2009). Mechanisms of masked priming: A meta-analysis. \emph{Psychological Bulletin}, \emph{135}(3), 452--477. \url{https://doi.org/10.1037/a0015329}
+
+\leavevmode\hypertarget{ref-witzelTestingViabilityWebDMDX2013}{}%
+Witzel, J., Cornelius, S., Witzel, N., Forster, K. I., \& Forster, J. C. (2013). Testing the viability of webDMDX for masked priming experiments. \emph{The Mental Lexicon}, \emph{8}(3), 421--449. \url{https://doi.org/10.1075/ml.8.3.07wit}
 
 \endgroup
 
