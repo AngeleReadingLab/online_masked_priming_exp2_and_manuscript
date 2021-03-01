@@ -6,12 +6,13 @@
   english,
   man]{apa6}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -39,11 +40,11 @@
 \hypersetup{
   pdftitle={Effects of masked prime duration in an online lexical decision task},
   pdflang={en-EN},
-  pdfkeywords={keywords},
+  pdfkeywords={Masked priming, Lexical decision task, Online experiments, PsychoPy, Prime duration},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -117,16 +118,13 @@ Enter author note here.
 
 
 Correspondence concerning this article should be addressed to Bernhard Angele, Department of Psychology, Faculty of Science and Technology, Talbot Campus, Fern Barrow, Poole BH12 5BB, UK. E-mail: bangele@bournemouth.ac.uk}
-\keywords{keywords\newline\indent Word count: X}
+\keywords{Masked priming, Lexical decision task, Online experiments, PsychoPy, Prime duration\newline\indent Word count: X}
 \DeclareDelayedFloatFlavor{ThreePartTable}{table}
 \DeclareDelayedFloatFlavor{lltable}{table}
 \DeclareDelayedFloatFlavor*{longtable}{table}
 \makeatletter
 \renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
 \makeatother
-\usepackage{lineno}
-
-\linenumbers
 \usepackage{csquotes}
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
@@ -135,32 +133,56 @@ Correspondence concerning this article should be addressed to Bernhard Angele, D
 \else
   \usepackage[shorthands=off,main=english]{babel}
 \fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \title{Effects of masked prime duration in an online lexical decision task}
 
 \date{}
 
 \abstract{
-Masked priming is one of the most important paradigms in the study of visual word recognition and representation.
-
-Two to three sentences of \textbf{more detailed background}, comprehensible to scientists in related disciplines.
-
-One sentence clearly stating the \textbf{general problem} being addressed by this particular study.
-
-One sentence summarizing the main result (with the words ``\textbf{here we show}'' or their equivalent).
-
-Two or three sentences explaining what the \textbf{main result} reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
-
-One or two sentences to put the results into a more \textbf{general context}.
-
-Two or three sentences to provide a \textbf{broader perspective}, readily comprehensible to a scientist in any discipline.
+Masked priming is one of the most important paradigms in the study of visual word recognition, but it is usually thought to require a laboratory setup with a known monitor and keyboard. To investigate if this technique can be used in an online setting, we conducted two online masked priming lexical decision task experiments using PsychoPy/PsychoJS (Peirce et al., 2019). In particular, we wanted to compare our online results to the data collected by Gomez, Perea, and Ratcliff (2013), who compared masked and unmasked priming. Furthermore, we also tested the role of prime exposure duration effectively in an online experiment (33 vs.~50 ms in Experiment 1 and 16 vs.~33 ms in Experiment 2).
+We found that our online data are indeed very similar to the masked priming data reported by Gomez, Perea, and Ratcliff (2013). Additionally, we found a clear effect of prime duration, with the priming effect (measured in terms of response time and accuracy) being stronger at 50 ms than 33 ms and no priming effect at 16 ms prime duration.
+From these results, we can conclude that modern online browser-based experimental psychophysics packages (e.g., Psychopy) can present stimuli and collect responses on standard consumer devices with enough precision. In sum, these findings provide us with confidence that masked priming can be used online, thus allowing us to reach populations that are hard to test in a laboratory.
 }
 
 \begin{document}
 \maketitle
 
-Masked priming (Forster \& Davis, 1984) is one of the most important paradigms in the study of visual word recognition. Priming refers to the observation that the response to a target stimulus (e.g.~responding that \enquote{DOCTOR} is a word in a lexical decision task or pronouncing the same stimulus in a naming task) is faster, more accurate, or both when it was preceded by a related stimulus (e.g.~\enquote{nurse}) compared to an unrelated stimulus (e.g.~\enquote{horse}). In masked priming, the prime stimulus (\enquote{nurse} or \enquote{horse}) is presented very briefly (for less than 60 ms) and is itself preceded by a mask (e.g.~\enquote{\#\#\#\#\#}) which is presented fora much longer duration (typically 500 ms). This forward mask ensures that participants are usually unaware of the prime (Forster \& Davis, 1984).
-The masked priming paradigm has been used in a large number of studies over the last decades (for a review, see e.g.~Kinoshita \& Lupker, 2004; Van den Bussche, Van den Noortgate, \& Reynvoet, 2009), but so far, virtually all of these studies have been done in a laboratory setting, often using the DMDX software by Forster and Forster (2003). Given that, as of the time of this writing, researchers in a large part of the world are unable to perform psychology experiments in a laboratory due to the COVID-19 pandemic, with not much clarity about when laboratories will be able to reopen completely, it is an important consideration whether it may be possible to collect masked priming data remotely using online experiments. Even after the current exceptional situation, online data collection has many advantages, such as easy access to a much more diverse population than would be accessible at the typical university research laboratory, independence from laboratory space constraints, and, often, lower costs as participants only need to be compensated for their time on the experiment, not time spent commuting, waiting for the experiment to start, etc. Researchers in decision making and economics have been using online paradigms for several decades now (e.g.~Birnbaum \& Birnbaum, 2000; Paolacci, Chandler, \& Ipeirotis, 2010), but cognitive and experimental psychology have been much slower in taking up online paradigms, often due to concerns about the validity of the results. Such concerns are not limited to cognitive studies (Aust, Diedenhofen, Ullrich, \& Musch, 2013), but they are exacerbated by the reliance on precise presentation times. In masked priming, it is critical for the onset of the mask, the prime, and the target to occur at the intended times. In particular, presenting the prime for too long will counteract the effect of the mask, making the prime consciously visible to the participant. There have been attempts to address these concerns. For example, a Web version of DMDX (webDMDX) was developed which showed promising results in a trial experiment (Witzel, Cornelius, Witzel, Forster, \& Forster, 2013). However, webDMDX was a self-contained Windows executable file that participants had to download and run rather than a \enquote{true} online experiment that could be run inside of a browser. A downside of this is that participants often are (and should be) understandably skeptical about downloading and running files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer.
+Masked priming (Forster \& Davis, 1984) is one of the most important paradigms in the study of visual word recognition. Priming refers to the observation that the response to a target stimulus (e.g.~responding that ``DOCTOR'' is a word in a lexical decision task or pronouncing the same stimulus in a naming task) is faster, more accurate, or both when it was preceded by a related stimulus (e.g.~``nurse'') compared to an unrelated stimulus (e.g.~``horse''). In masked priming, the prime stimulus (``nurse'' or ``horse'') is presented very briefly (for less than 60 ms) and is itself preceded by a mask (e.g.~``\#\#\#\#\#'') which is presented fora much longer duration (typically 500 ms). This forward mask ensures that participants are usually unaware of the prime (Forster \& Davis, 1984). The masked priming paradigm has been used in a large number of studies over the last decades (for a review, see e.g. Kinoshita \& Lupker, 2004; Van den Bussche, Van den Noortgate, \& Reynvoet, 2009), but so far, virtually all of these studies have been done in a laboratory setting, often using the DMDX software by Forster and Forster (2003).
+
+Given that, as of the time of this writing, researchers in a large part of the world are unable to perform psychology experiments in a laboratory due to the COVID-19 pandemic, with not much clarity about when laboratories will be able to reopen completely, it is an important consideration whether it may be possible to collect masked priming data remotely using online experiments. Even after the current exceptional situation, online data collection has many advantages, such as easy access to a much more diverse population than would be accessible at the typical university research laboratory, independence from laboratory space constraints, and, often, lower costs as participants only need to be compensated for their time on the experiment, not time spent commuting, waiting for the experiment to start, etc. Researchers in decision making and economics have been using online paradigms for several decades now (e.g. Birnbaum \& Birnbaum, 2000; Paolacci, Chandler, \& Ipeirotis, 2010), but cognitive and experimental psychology have been much slower in taking up online paradigms, often due to concerns about the validity of the results. Such concerns are not limited to cognitive studies (Aust, Diedenhofen, Ullrich, \& Musch, 2013), but they are exacerbated by the reliance on precise presentation times. In masked priming, it is critical for the onset of the mask, the prime, and the target to occur at the intended times. In particular, presenting the prime for too long will counteract the effect of the mask, making the prime consciously visible to the participant. There have been attempts to address these concerns. For example, a Web version of DMDX (webDMDX) was developed which showed promising results in a trial experiment (Witzel, Cornelius, Witzel, Forster, \& Forster, 2013).
+
+However, webDMDX was a self-contained Windows executable file that participants had to download and run rather than a ``true'' online experiment that could be run inside of a browser. A downside of this is that participants often are (and should be) understandably skeptical about downloading and running files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer. As a consequence, the use of webDMDX has been rather limited so far. Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets (Reimers \& Stewart, 2015). There is now a variety of software packages taking advantage of the new capabilites to present experimental stimuli and collect data, both commercial, e.g.~Gorilla (A. L. Anwyl-Irvine, Massonnié, Flitton, Kirkham, \& Evershed, 2020) or Testable (Rezlescu, Danaila, Miron, \& Amariei, 2020) and open-source, e.g.~jsPsych (de Leeuw, 2015) or PsychoJS (the Javascript version of Psychopy 3, Peirce et al., 2019).
+
+Of course, despite the technological advances, there are still concerns about timing and measurement precision. While the Javascript-based experiments run on the participants' devices and thereby avoid any lag due to connection issues (all stimulus data are usually downloaded before the start of the experiment to avoid delays), experimenters have little control over which devices the experiment is run on beyond the option of explicitly preventing the experiment to run on specific device types such as mobile devices. Experimenters have no control at all over what other applications are running on the device, screen size and resolution, viewing distance, properties of the keyboard/touchscreen, etc., as all of these are determined by the device or the participants' preferences. As Reimers and Stewart (2015) point out, there are two ways of testing whether timing and response issues are problematic: (1) comparing a Web-based experiment directly with an established lab-based version by measuring presentation timings (using a photodiode) and response timings on various device configurations and (2) attempting to replicate existing lab-based findings using a Web-based paradigm. If the results of the Web-based study are comparable to previous lab-based results, this suggests that whatever the deviations in stimulus and response timing are, they are not severe enough to affect the overall findings in the paradigm in question.
+
+The first approach has the advantage that differences in presentation timings can be objectively recorded and evaluated. A very thorough recent example of this approach is the ``timing mega-study'' by Bridges, Pitiot, MacAskill, and Peirce (2020), who compared the timing in experiments run in lab-based setups with the timing in online packages run in different browsers. The very similar study by A. Anwyl-Irvine, Dalmaijer, Hodges, and Evershed (2020) compares only online packages and browsers with regard to timing. Overall, Bridges, Pitiot, MacAskill, and Peirce (2020) found that online packages were capable of presenting visual stimuli with ``reasonable'' precision, although the lab-based packages were slightly better in this regard.
+
+However, it
+
+In o
 
 Gomez, Perea, and Ratcliff (2013) performed an experiment
 
@@ -181,7 +203,7 @@ We report how we determined our sample size, all data exclusions (if any), all m
 \hypertarget{data-analysis}{%
 \subsection{Data analysis}\label{data-analysis}}
 
-We used R (Version 4.0.3; R Core Team, 2020) and the R-package \emph{papaja} (Version 0.1.0.9942; Aust \& Barth, 2020) for all our analyses.
+We used R {[}Version 4.0.3; R Core Team (2020){]} and the R-package \emph{papaja} {[}Version 0.1.0.9942; Aust and Barth (2020){]} for all our analyses.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -199,38 +221,62 @@ We used R (Version 4.0.3; R Core Team, 2020) and the R-package \emph{papaja} (Ve
 \setlength{\leftskip}{0.5in}
 
 \hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-anwyl-irvine2020a}{}%
+Anwyl-Irvine, A., Dalmaijer, E. S., Hodges, N., \& Evershed, J. K. (2020). Realistic precision and accuracy of online experiment platforms, web browsers, and devices. \emph{Behavior Research Methods}. \url{https://doi.org/10.3758/s13428-020-01501-5}
+
+\leavevmode\hypertarget{ref-anwyl-irvine2020}{}%
+Anwyl-Irvine, A. L., Massonnié, J., Flitton, A., Kirkham, N., \& Evershed, J. K. (2020). Gorilla in our midst: An online behavioral experiment builder. \emph{Behavior Research Methods}, \emph{52}(1), 388--407. \url{https://doi.org/10.3758/s13428-019-01237-x}
+
 \leavevmode\hypertarget{ref-R-papaja}{}%
-Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Create} {APA} manuscripts with {R Markdown}}. Retrieved from \url{https://github.com/crsh/papaja}
 
 \leavevmode\hypertarget{ref-austSeriousnessChecksAre2013}{}%
 Aust, F., Diedenhofen, B., Ullrich, S., \& Musch, J. (2013). Seriousness checks are useful to improve data validity in online research. \emph{Behavior Research Methods}, \emph{45}(2), 527--535. \url{https://doi.org/10.3758/s13428-012-0265-2}
 
 \leavevmode\hypertarget{ref-birnbaumPsychologicalExperimentsInternet2000a}{}%
-Birnbaum, M. H., \& Birnbaum, M. O. (2000). \emph{Psychological Experiments on the Internet}. Elsevier. Retrieved from \url{http://books.google.com?id=sw4NHyThFFkC}
+Birnbaum, M. H., \& Birnbaum, M. O. (2000). \emph{Psychological {Experiments} on the {Internet}}. {Elsevier}. Retrieved from \url{http://books.google.com?id=sw4NHyThFFkC}
+
+\leavevmode\hypertarget{ref-bridges2020}{}%
+Bridges, D., Pitiot, A., MacAskill, M. R., \& Peirce, J. W. (2020). The timing mega-study: comparing a range of experiment generators, both lab-based and online. \emph{PeerJ}, \emph{8}, e9414. \url{https://doi.org/10.7717/peerj.9414}
+
+\leavevmode\hypertarget{ref-deleeuw2015}{}%
+de Leeuw, J. R. (2015). jsPsych: A JavaScript library for creating behavioral experiments in a Web browser. \emph{Behavior Research Methods}, \emph{47}(1), 1--12. \url{https://doi.org/10.3758/s13428-014-0458-y}
 
 \leavevmode\hypertarget{ref-forsterRepetitionPrimingFrequency1984}{}%
 Forster, K. I., \& Davis, C. (1984). Repetition priming and frequency attenuation in lexical access. \emph{Journal of Experimental Psychology: Learning, Memory, and Cognition}, \emph{10}(4), 680--698. \url{https://doi.org/10.1037/0278-7393.10.4.680}
 
 \leavevmode\hypertarget{ref-forsterDMDXWindowsDisplay2003}{}%
-Forster, K. I., \& Forster, J. C. (2003). DMDX: A Windows display program with millisecond accuracy. \emph{Behavior Research Methods, Instruments, \& Computers}, \emph{35}(1), 116--124.
+Forster, K. I., \& Forster, J. C. (2003). {DMDX}: {A Windows} display program with millisecond accuracy. \emph{Behavior Research Methods, Instruments, \& Computers}, \emph{35}(1), 116--124.
 
 \leavevmode\hypertarget{ref-gomezDiffusionModelAccount2013}{}%
-Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account of masked versus unmasked priming: Are they qualitatively different? \emph{Journal of Experimental Psychology: Human Perception and Performance}, \emph{39}(6), 1731--1740. \url{https://doi.org/10.1037/a0032333}
+Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account of masked versus unmasked priming: {Are} they qualitatively different? \emph{Journal of Experimental Psychology: Human Perception and Performance}, \emph{39}(6), 1731--1740. \url{https://doi.org/10.1037/a0032333}
 
 \leavevmode\hypertarget{ref-kinoshitaMaskedPrimingState2004}{}%
-Kinoshita, S., \& Lupker, S. J. (2004). \emph{Masked Priming: The State of the Art}. Psychology Press. Retrieved from \url{http://books.google.com?id=VH55AgAAQBAJ}
+Kinoshita, S., \& Lupker, S. J. (2004). \emph{Masked {Priming}: {The State} of the {Art}}. {Psychology Press}. Retrieved from \url{http://books.google.com?id=VH55AgAAQBAJ}
 
 \leavevmode\hypertarget{ref-paolacciRunningExperimentsAmazon2010}{}%
-Paolacci, G., Chandler, J., \& Ipeirotis, P. G. (2010). \emph{Running Experiments on Amazon Mechanical Turk} (SSRN Scholarly Paper No. ID 1626226). Rochester, NY: Social Science Research Network. Retrieved from \url{https://papers.ssrn.com/abstract=1626226}
+Paolacci, G., Chandler, J., \& Ipeirotis, P. G. (2010). \emph{Running {Experiments} on {Amazon Mechanical Turk}} (SSRN Scholarly Paper No. ID 1626226). {Rochester, NY}: {Social Science Research Network}. Retrieved from \url{https://papers.ssrn.com/abstract=1626226}
+
+\leavevmode\hypertarget{ref-peirce2019}{}%
+Peirce, J., Gray, J. R., Simpson, S., MacAskill, M., Höchenberger, R., Sogo, H., \ldots{} Lindeløv, J. K. (2019). PsychoPy2: Experiments in behavior made easy. \emph{Behavior Research Methods}, \emph{51}(1), 195--203. \url{https://doi.org/10.3758/s13428-018-01193-y}
 
 \leavevmode\hypertarget{ref-R-base}{}%
 R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
 
+\leavevmode\hypertarget{ref-reimersPresentationResponseTiming2015}{}%
+Reimers, S., \& Stewart, N. (2015). Presentation and response timing accuracy in {Adobe Flash} and {HTML5}/{JavaScript Web} experiments. \emph{Behavior Research Methods}, \emph{47}(2), 309--327. \url{https://doi.org/10.3758/s13428-014-0471-1}
+
+\leavevmode\hypertarget{ref-rezlescu2020}{}%
+Rezlescu, C., Danaila, I., Miron, A., \& Amariei, C. (2020). Chapter 13 - More time for science: Using Testable to create and share behavioral experiments faster, recruit better participants, and engage students in hands-on research. In B. L. Parkin (Ed.) (Vol. 253, pp. 243--262). Elsevier. \url{https://doi.org/10.1016/bs.pbr.2020.06.005}
+
 \leavevmode\hypertarget{ref-vandenbusscheMechanismsMaskedPriming2009}{}%
-Van den Bussche, E., Van den Noortgate, W., \& Reynvoet, B. (2009). Mechanisms of masked priming: A meta-analysis. \emph{Psychological Bulletin}, \emph{135}(3), 452--477. \url{https://doi.org/10.1037/a0015329}
+Van den Bussche, E., Van den Noortgate, W., \& Reynvoet, B. (2009). Mechanisms of masked priming: {A} meta-analysis. \emph{Psychological Bulletin}, \emph{135}(3), 452--477. \url{https://doi.org/10.1037/a0015329}
 
 \leavevmode\hypertarget{ref-witzelTestingViabilityWebDMDX2013}{}%
-Witzel, J., Cornelius, S., Witzel, N., Forster, K. I., \& Forster, J. C. (2013). Testing the viability of webDMDX for masked priming experiments. \emph{The Mental Lexicon}, \emph{8}(3), 421--449. \url{https://doi.org/10.1075/ml.8.3.07wit}
+Witzel, J., Cornelius, S., Witzel, N., Forster, K. I., \& Forster, J. C. (2013). Testing the viability of {webDMDX} for masked priming experiments. \emph{The Mental Lexicon}, \emph{8}(3), 421--449. \url{https://doi.org/10.1075/ml.8.3.07wit}
+
+\end{CSLReferences}
 
 \endgroup
 
