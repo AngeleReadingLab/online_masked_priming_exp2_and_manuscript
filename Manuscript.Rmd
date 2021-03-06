@@ -74,13 +74,37 @@ Of course, despite the technological advances, there are still concerns about ti
 
 The first approach has the advantage that differences in presentation timings can be objectively recorded and evaluated. A very thorough recent example of this approach is the "timing mega-study" by @bridges2020, who compared the timing in experiments run in lab-based setups with the timing in online packages run in different browsers. The very similar study by @anwyl-irvine2020a compares only online packages and browsers with regard to timing. Overall, @bridges2020 found that online packages were capable of presenting visual stimuli with "reasonable" precision, although the lab-based packages were slightly better in this regard.
 
-However, it
+This first approach is important in order to establish that a certain level of precision and accuracy can be achieved at all. If this is not possible, there is no point in moving forward to the second approach and replicating specific paradigms. However, it is of course impossible to test every possible device and configuration that participants might use. On the other hand, some of the differences in precision and accuracy between setups that can be observed using a photodiode may be too small to have an influence on actual participant performance. Therefore, we consider replication of previous lab-based effects a more important test of online paradigms than photodiode measurements. Based on the results by @bridges2020 and @anwyl-irvine2020a, we are satisfied that modern Javascript-based stimulus presentation systems are capable of sufficiently fast and precise stimulus presentation. In order to establish whether masked priming studies can be successfully run sonline, the next step is now to follow the second approach and implement the masked priming paradigm in one of the online experiment packages tested by @bridges2020 and @anwyl-irvine2020a. After evaluating their results, we decided on Psychopy/PsychoJS [@peirce2019] as it combines relative ease of use with high precision and accuracy across the great majority of platforms.
 
-In o
+In the present study, we were particularly interested in manipulating the duration of the prime, as this is what determines whether the stimulus is consciously perceived or not (i.e., if it is masked). @gomezDiffusionModelAccount2013 performed an experiment in which they presented a prime either for 56 ms preceded by a mask or for 200 ms without a mask. They found qualitative differences between masked and unmasked priming, which they explained using the diffusion model [@ratcliff2004]: For masked priming, the priming effects for identical compared to unrelated primes were the same across all quantiles of the response time distribution. In the diffusion model, this corresponds to a shift in a change in the $T_{er}$ parameter, which corresponds to encoding processed. However, for unmasked priming, the identity priming effects were stronger in the upper quantiles of the RT distribution than in the lower quantiles. In the diffusion model, this corresponds to a shift in both the $T_{er}$ parameter and the drift rate, the parameter corresponding to the quality of information. This qualitative pattern can help us interpret our results as well.
 
-@gomezDiffusionModelAccount2013 performed an experiment
+Additionally, if the prime duration can be manipulated very precisely, we may able to see effects of small differences in prime durations. @ziegler2000 found that priming effects were smaller for lower prime durations and interpreted this as evidence for different levels of facilitation (due to phonological overlap) and inhibition (due to visual differences between prime and target).
 
-# Methods
+In order to test this, we presented masked primes of different durations in an online experiment and measured response times and accuracy.
+
+If it is possible to present masked primes reliably in an online experiment, our results should be similar to those observed by @gomezDiffusionModelAccount2013 in their masked priming condition for word trials:
+
+1: The priming effects should be approximately the same across quantiles in the reaction time distributions. 2: In terms of the Diffusion model, allowing
+
+a) the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
+
+b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition).
+
+If it is not possible to achieve consistent presentation times in an online experiment, and the primes are effectively presented for longer durations than intended, we should see a pattern that resembles that observed by Gomez et al. (2013) for unmasked primes:
+
+1': The priming effects would increase in the higher quantiles in the reaction time distributions.
+
+2': In terms of the Diffusion model, both
+
+a) allowing the drift rate parameter for words to vary as a function of the priming condition should improve the model compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition, and
+
+b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition.
+
+Finally, there is the (unlikely) possibility that there are no priming effects at all due to inconsistent stimulus presentation (for example, the frames with the prime are not displayed at all due to timing issues with the participant's device). In this case, we would expect to observe no difference in reaction time between the identical and the unrelated control priming condition for word stimuli.
+
+If the online experiment succeeds in not only presenting the primes fast enough to create masked priming effects, but also in manipulating the prime duration precisely enough that this affects reaction times and accuracy, we expect to find smaller effects for shorter prime presentations, analogous to @ziegler2000.
+
+# Method
 
 We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
 
