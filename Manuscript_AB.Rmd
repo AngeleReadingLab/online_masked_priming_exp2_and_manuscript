@@ -1,0 +1,138 @@
+---
+title             : "Effects of masked prime duration in an online lexical decision task"
+shorttitle        : "Online lexical decision task"
+
+author: 
+  - name          : "Bernhard Angele"
+    affiliation   : "1,2"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Department of Psychology, Faculty of Science and Technology, Talbot Campus, Fern Barrow, Poole BH12 5BB, UK"
+    email         : "bangele@bournemouth.ac.uk"
+  - name          : "Ana Baciero"
+    affiliation   : "2,3"
+  - name          : "Pablo Gomez"
+    affiliation   : "3,4"
+  - name          : "Manuel Perea Lara"
+    affiliation   : "2,3"
+
+affiliation:
+  - id            : "1"
+    institution   : "Bournemouth University"
+  - id            : "2"
+    institution   : Universitat de Valencia, Valencia, Spain
+  - id            : "3"
+    institution   : "Nebrija University, Madrid, Spain"
+  - id            : "4"
+    institution   : "California State University San Bernardino, Palm Desert Campus"
+
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+  Enter author note here.
+
+abstract: |
+  Masked priming is one of the most important paradigms in the study of visual word recognition, but it is usually thought to require a laboratory setup with a known monitor and keyboard. To investigate if this technique can be used in an online setting, we conducted two online masked priming lexical decision task experiments using PsychoPy/PsychoJS [@peirce2019]. In particular, we wanted to compare our online results to the data collected by @gomezDiffusionModelAccount2013, who compared masked and unmasked priming. Furthermore, we also tested the role of prime exposure duration effectively in an online experiment (33 vs. 50 ms in Experiment 1 and 16 vs. 33 ms in Experiment 2).
+  We found that our online data are indeed very similar to the masked priming data reported by @gomezDiffusionModelAccount2013. Additionally, we found a clear effect of prime duration, with the priming effect (measured in terms of response time and accuracy) being stronger at 50 ms than 33 ms and no priming effect at 16 ms prime duration.
+  From these results, we can conclude that modern online browser-based experimental psychophysics packages (e.g., Psychopy) can present stimuli and collect responses on standard consumer devices with enough precision. In sum, these findings provide us with confidence that masked priming can be used online, thus allowing us to reach populations that are hard to test in a laboratory.
+  
+keywords          : "Masked priming, Lexical decision task, Online experiments, PsychoPy, Prime duration"
+wordcount         : "X"
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+bibliography: ["references.bib", "r-references.bib"]
+---
+
+```{r setup, include = FALSE}
+library("papaja")
+r_refs("r-references.bib")
+
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+Masked priming [@forsterRepetitionPrimingFrequency1984] is one of the most important paradigms in the study of visual word recognition. Priming refers to the observation that the response to a target stimulus (e.g., responding that "DOCTOR" is a word in a lexical decision task or pronouncing the same stimulus in a naming task) is faster, more accurate, or both when it was preceded by a related stimulus (e.g., "nurse") compared to an unrelated stimulus (e.g., "horse"). In masked priming, the prime stimulus ("nurse" or "horse") is presented very briefly (for less than 60 ms) and is itself preceded by a mask (e.g., "\#\#\#\#\#") which is presented fora much longer duration (typically 500 ms). This forward mask ensures that participants are usually unaware of the prime [@forsterRepetitionPrimingFrequency1984]. The masked priming paradigm has been used in a large number of studies over the last decades [for a review, see e.g., @kinoshitaMaskedPrimingState2004; @vandenbusscheMechanismsMaskedPriming2009], but so far, virtually all of these studies have been done in a laboratory setting, often using the DMDX software by @forsterDMDXWindowsDisplay2003.
+
+Given that, as of the time of this writing, researchers in a large part of the world are unable to perform psychology experiments in a laboratory due to the COVID-19 pandemic, with not much clarity about when laboratories will be able to reopen completely, it is an important consideration whether it may be possible to collect masked priming data remotely using online experiments. Even after the current exceptional situation, online data collection has many advantages, such as easy access to a much more diverse population than would be accessible at the typical university research laboratory, independence from laboratory space constraints, and, often, lower costs as participants only need to be compensated for their time on the experiment, not time spent commuting, waiting for the experiment to start, etc. Researchers in decision making and economics have been using online paradigms for several decades now [e.g., @birnbaumPsychologicalExperimentsInternet2000a; @paolacciRunningExperimentsAmazon2010], but cognitive and experimental psychology have been much slower in taking up online paradigms, often due to concerns about the validity of the results. Such concerns are not limited to cognitive studies [@austSeriousnessChecksAre2013], but they are exacerbated by the reliance on precise presentation times. In masked priming, it is critical for the onset of the mask, the prime, and the target to occur at the intended times. In particular, presenting the prime for too long will counteract the effect of the mask, making the prime consciously visible to the participant. 
+
+There have been attempts to address these concerns. For example, a Web version of DMDX (webDMDX) was developed which showed promising results in a trial experiment [@witzelTestingViabilityWebDMDX2013]. However, webDMDX was a self-contained Windows executable file that participants had to download and run rather than a "true" online experiment that could be run inside of a browser. A downside of this is that participants often are (and should be) understandably skeptical about downloading and running files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer. As a consequence, the use of webDMDX has been rather limited so far. Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets [@reimersPresentationResponseTiming2015]. There is now a variety of software packages taking advantage of the new capabilities to present experimental stimuli and collect data, both commercial, e.g., Gorilla [@anwyl-irvine2020] or Testable [@rezlescu2020] and open-source, e.g., jsPsych [@deleeuw2015] or PsychoJS [the Javascript version of Psychopy 3, @peirce2019].
+
+Of course, despite the technological advances, there are still concerns about timing and measurement precision. While the Javascript-based experiments run on the participants' devices and thereby avoid any lag due to connection issues (all stimulus data are usually downloaded before the start of the experiment to avoid delays), experimenters have little control over which devices the experiment is run on beyond the option of explicitly preventing the experiment to run on specific device types such as mobile devices. Moreover, experimenters have no control at all over what other applications are running on the device, screen size and resolution, viewing distance, properties of the keyboard/touchscreen, etc., as all of these are determined by the device or the participants' preferences. As @reimersPresentationResponseTiming2015 point out, there are two ways of testing whether timing and response issues are problematic: (1) comparing a Web-based experiment directly with an established lab-based version by measuring presentation timings (using a photodiode) and response timings on various device configurations and (2) attempting to replicate existing lab-based findings using a Web-based paradigm. If the results of the Web-based study are comparable to previous lab-based results, this suggests that whatever the deviations in stimulus and response timing are, they are not severe enough to affect the overall findings in the paradigm in question.
+
+The first approach has the advantage that differences in presentation timings can be objectively recorded and evaluated. A very thorough recent example of this approach is the "timing mega-study" by @bridges2020, who compared the timing in experiments run in lab-based setups with the timing in online packages run in different browsers. The very similar study by @anwyl-irvine2020a compares only online packages and browsers with regard to timing. Overall, @bridges2020 found that online packages were capable of presenting visual stimuli with "reasonable" precision, although the lab-based packages were slightly better in this regard. This first approach is important in order to establish that a certain level of precision and accuracy can be achieved at all. If this is not possible, there is no point in moving forward to the second approach and replicating specific paradigms. However, it is of course impossible to test every possible device and configuration that participants might use. On the other hand, some of the differences in precision and accuracy between setups that can be observed using a photodiode may be too small to have an influence on actual participant performance. Therefore, we consider replication of previous lab-based effects a more important test of online paradigms than photodiode measurements. Based on the results by @bridges2020 and @anwyl-irvine2020a, we are satisfied that modern Javascript-based stimulus presentation systems are capable of sufficiently fast and precise stimulus presentation. To establish whether masked priming studies can be successfully run online, the next step is now to follow the second approach and implement the masked priming paradigm in one of the online experiment packages tested by @bridges2020 and @anwyl-irvine2020a. After evaluating their results, we decided on Psychopy/PsychoJS [@peirce2019] as it combines relative ease of use with high precision and accuracy across the great majority of platforms.
+
+In the present study, we were particularly interested in manipulating the duration of the prime, as this is what determines whether the stimulus is consciously perceived or not. Indeed, @gomezDiffusionModelAccount2013 performed an experiment in which they presented a prime either for 56 ms preceded by a mask or for 200 ms without a mask and found qualitative differences between masked and unmasked priming, which they explained using the diffusion model [@ratcliff2004]: For masked priming, the priming effects for identical compared to unrelated primes were the same across all quantiles of the response time distribution. In the diffusion model, this corresponds to a shift in a change in the $T_{er}$ parameter, which corresponds to encoding process. However, for unmasked priming, the identity priming effects were stronger in the upper quantiles of the RT distribution than in the lower quantiles. In the diffusion model, this corresponds to a shift in both the $T_{er}$ parameter and the drift rate, the parameter corresponding to the quality of the information gathered. This qualitative pattern can help us interpret our results as well. 
+
+Additionally, if the prime duration can be manipulated very precisely, we may be able to see effects of small differences in prime durations. @ziegler2000 found that priming effects were smaller for lower prime durations and interpreted this as evidence for different levels of facilitation (due to phonological overlap) and inhibition (due to visual differences between prime and target). In order to test this, we presented masked primes of different durations in an online experiment and measured response times and accuracy.
+
+If it is possible to present masked primes reliably in an online experiment, our results should be similar to those observed by @gomezDiffusionModelAccount2013 in their masked priming condition for word trials:
+
+1: The priming effects should be approximately the same across quantiles in the reaction time distributions. 
+
+2: In terms of the Diffusion model,
+
+a) allowing the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
+
+b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition).
+
+
+If it is not possible to achieve consistent presentation times in an online experiment, and the primes are effectively presented for longer durations than intended, we should see a pattern that resembles that observed by Gomez et al. (2013) for unmasked primes:
+
+1': The priming effects would increase in the higher quantiles in the reaction time distributions.
+
+2': In terms of the Diffusion model, both
+
+a) allowing the drift rate parameter for words to vary as a function of the priming condition should improve the model compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition, and
+
+b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition.
+
+
+Finally, there is the (unlikely) possibility that there are no priming effects at all due to inconsistent stimulus presentation (for example, the frames with the prime are not displayed at all due to timing issues with the participant's device). In this case, we would expect to observe no difference in reaction time between the identical and the unrelated control priming condition for word stimuli.
+
+If the online experiment succeeds in not only presenting the primes fast enough to create masked priming effects, but also in manipulating the prime duration precisely enough that this affects reaction times and accuracy, we expect to find smaller effects for shorter prime presentations, analogous to @ziegler2000.
+
+
+# Method
+
+We report here how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+# Results
+
+# Discussion
+
+\newpage
+
+# References
+
+```{=tex}
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+```
+::: {#refs custom-style="Bibliography"}
+:::
+
+\endgroup
