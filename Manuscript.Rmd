@@ -86,9 +86,9 @@ If it is possible to present masked primes reliably in an online experiment, our
 
 1: The priming effects should be approximately the same across quantiles in the reaction time distributions. 2: In terms of the Diffusion model, allowing
 
-a) the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
+a)  the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
 
-b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition).
+b)  allowing the non-decision parameter $T_{er}$ to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one $T_{er}$ parameter for all word stimuli regardless of priming condition).
 
 If it is not possible to achieve consistent presentation times in an online experiment, and the primes are effectively presented for longer durations than intended, we should see a pattern that resembles that observed by Gomez et al. (2013) for unmasked primes:
 
@@ -96,31 +96,61 @@ If it is not possible to achieve consistent presentation times in an online expe
 
 2': In terms of the Diffusion model, both
 
-a) allowing the drift rate parameter for words to vary as a function of the priming condition should improve the model compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition, and
+a)  allowing the drift rate parameter for words to vary as a function of the priming condition should improve the model compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition, and
 
-b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition.
+b)  allowing the non-decision parameter $T_{er}$ to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one $T_{er}$ parameter for all word stimuli regardless of priming condition.
 
 Finally, there is the (unlikely) possibility that there are no priming effects at all due to inconsistent stimulus presentation (for example, the frames with the prime are not displayed at all due to timing issues with the participant's device). In this case, we would expect to observe no difference in reaction time between the identical and the unrelated control priming condition for word stimuli.
 
 If the online experiment succeeds in not only presenting the primes fast enough to create masked priming effects, but also in manipulating the prime duration precisely enough that this affects reaction times and accuracy, we expect to find smaller effects for shorter prime presentations, analogous to @ziegler2000.
 
-# Method
+# Experiment 1
+
+In the first experiment, we tested whether we could observe reliable effects of masked priming at prime durations of 33 ms and 50 ms (roughly corresponding to two and three frames at a refresh rate of 60 Hz).
 
 We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
 
-## Participants
+## Method
 
-## Material
+```{r load_exp1_data, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(sp)
+library(rworldmap)
 
-## Procedure
+e1_all_participants <- read_csv("participant_data_exp1.csv")
 
-## Data analysis
+e1 <- read_csv(file = "Exp 1 data.csv")
+
+e1_actual_participants <- filter(e1_all_participants, PROLIFIC_PID %in% e1$participant & `What is your age?` != 99)
+
+participant_ages <- e1_actual_participants$`What is your age?`
+
+male_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Male") %>% nrow
+
+female_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Female") %>% nrow
+
+other_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
+
+NA_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
+```
+
+### Participants
+
+We collected data from `r e1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants aged from `r participant_ages %>% min` to `r participant_ages %>% max` (mean age: `r participant_ages %>% mean %>% round(2)`) recruited through Prolific [www.prolific.co, -@prolific2021]. Of the participants, The experiment was only be shown to participants who have indicated that English is their first language in the Prolific screening questions. They were paid £1.25 for their participation (corresponding to £5/hour). Participants indicated that English was their first language before starting the experiment.
+
+### Material
+
+### Procedure
+
+### Data analysis
 
 We used `r cite_r("r-references.bib")` for all our analyses.
 
-# Results
+## Results
 
-# Discussion
+## Discussion
+
+# General Discussion
 
 \newpage
 

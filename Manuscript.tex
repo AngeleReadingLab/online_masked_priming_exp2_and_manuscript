@@ -197,7 +197,7 @@ If it is possible to present masked primes reliably in an online experiment, our
 \item
   the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
 \item
-  allowing the non-decision parameter T\_er to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one T\_er parameter for all word stimuli regardless of priming condition).
+  allowing the non-decision parameter \(T_{er}\) to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one \(T_{er}\) parameter for all word stimuli regardless of priming condition).
 \end{enumerate}
 
 If it is not possible to achieve consistent presentation times in an online experiment, and the primes are effectively presented for longer durations than intended, we should see a pattern that resembles that observed by Gomez et al.~(2013) for unmasked primes:
@@ -211,37 +211,55 @@ If it is not possible to achieve consistent presentation times in an online expe
 \item
   allowing the drift rate parameter for words to vary as a function of the priming condition should improve the model compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition, and
 \item
-  allowing the non-decision parameter T\_er to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one T\_er parameter for all word stimuli regardless of priming condition.
+  allowing the non-decision parameter \(T_{er}\) to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one \(T_{er}\) parameter for all word stimuli regardless of priming condition.
 \end{enumerate}
 
 Finally, there is the (unlikely) possibility that there are no priming effects at all due to inconsistent stimulus presentation (for example, the frames with the prime are not displayed at all due to timing issues with the participant's device). In this case, we would expect to observe no difference in reaction time between the identical and the unrelated control priming condition for word stimuli.
 
 If the online experiment succeeds in not only presenting the primes fast enough to create masked priming effects, but also in manipulating the prime duration precisely enough that this affects reaction times and accuracy, we expect to find smaller effects for shorter prime presentations, analogous to Ziegler, Ferrand, Jacobs, Rey, and Grainger (2000).
 
-\hypertarget{method}{%
-\section{Method}\label{method}}
+\hypertarget{experiment-1}{%
+\section{Experiment 1}\label{experiment-1}}
+
+In the first experiment, we tested whether we could observe reliable effects of masked priming at prime durations of 33 ms and 50 ms (roughly corresponding to two and three frames at a refresh rate of 60 Hz).
 
 We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.
 
+\hypertarget{method}{%
+\subsection{Method}\label{method}}
+
+\begin{verbatim}
+## Warning: package 'sp' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'rworldmap' was built under R version 4.0.4
+\end{verbatim}
+
 \hypertarget{participants}{%
-\subsection{Participants}\label{participants}}
+\subsubsection{Participants}\label{participants}}
+
+We collected data from 78 participants aged from 18 to 99 (mean age: 31.94) recruited through Prolific (www.prolific.co, Prolific (2021)). The experiment was only be shown to participants who have indicated that English is their first language in the Prolific screening questions. They were paid £1.25 for their participation (corresponding to £5/hour). Participants indicated that English was their first language before starting the experiment.
 
 \hypertarget{material}{%
-\subsection{Material}\label{material}}
+\subsubsection{Material}\label{material}}
 
 \hypertarget{procedure}{%
-\subsection{Procedure}\label{procedure}}
+\subsubsection{Procedure}\label{procedure}}
 
 \hypertarget{data-analysis}{%
-\subsection{Data analysis}\label{data-analysis}}
+\subsubsection{Data analysis}\label{data-analysis}}
 
 We used R {[}Version 4.0.3; R Core Team (2020){]} and the R-package \emph{papaja} {[}Version 0.1.0.9942; Aust and Barth (2020){]} for all our analyses.
 
 \hypertarget{results}{%
-\section{Results}\label{results}}
+\subsection{Results}\label{results}}
 
 \hypertarget{discussion}{%
-\section{Discussion}\label{discussion}}
+\subsection{Discussion}\label{discussion}}
+
+\hypertarget{general-discussion}{%
+\section{General Discussion}\label{general-discussion}}
 
 \newpage
 
@@ -292,6 +310,9 @@ Paolacci, G., Chandler, J., \& Ipeirotis, P. G. (2010). \emph{Running {Experimen
 
 \leavevmode\hypertarget{ref-peirce2019}{}%
 Peirce, J., Gray, J. R., Simpson, S., MacAskill, M., Höchenberger, R., Sogo, H., \ldots{} Lindeløv, J. K. (2019). PsychoPy2: Experiments in behavior made easy. \emph{Behavior Research Methods}, \emph{51}(1), 195--203. \url{https://doi.org/10.3758/s13428-018-01193-y}
+
+\leavevmode\hypertarget{ref-prolific2021}{}%
+Prolific. (2021). Prolific \textbar{} online participant recruitment for surveys and market research. Retrieved from \url{https://www.prolific.co/}
 
 \leavevmode\hypertarget{ref-R-base}{}%
 R Core Team. (2020). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
