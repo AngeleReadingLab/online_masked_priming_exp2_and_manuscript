@@ -132,14 +132,18 @@ female_participants_nr <- filter(e1_actual_participants, `What is your gender (o
 
 other_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
 
-NA_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
+NA_participants_nr <- filter(e1_actual_participants, is.na(`What is your gender (optional)?`)) %>% nrow
+
+
 ```
 
 ### Participants
 
-We collected data from `r e1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants aged from `r participant_ages %>% min` to `r participant_ages %>% max` (mean age: `r participant_ages %>% mean %>% round(2)`) recruited through Prolific [www.prolific.co, -@prolific2021]. Of the participants, The experiment was only be shown to participants who have indicated that English is their first language in the Prolific screening questions. They were paid £1.25 for their participation (corresponding to £5/hour). Participants indicated that English was their first language before starting the experiment.
+We collected data from `r e1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants aged from `r participant_ages %>% min` to `r participant_ages %>% max` (mean age: `r participant_ages %>% mean %>% round(2)`) recruited through Prolific [www.prolific.co, -@prolific2021]. Of the participants, `r male_participants_nr` identified as male, `r female_participants_nr` identified as female, `r other_participants_nr` identified as other, and `r NA_participants_nr` declined to identify their gender. The experiment was only shown to participants who indicated that English was their first language in the Prolific screening questions. Based on Participants who completed the experiment were paid £1.25 for their participation (corresponding to £5/hour). All participants were naïve to the purpose of the experiment.
 
-### Material
+### Materials
+
+
 
 ### Procedure
 
