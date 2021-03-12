@@ -66,7 +66,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 Masked priming [@forsterRepetitionPrimingFrequency1984] is one of the most important paradigms in the study of visual word recognition. Priming refers to the observation that the response to a target stimulus (e.g., responding that "DOCTOR" is a word in a lexical decision task or pronouncing the same stimulus in a naming task) is faster, more accurate, or both when it was preceded by a related stimulus (e.g., "nurse") compared to an unrelated stimulus (e.g., "horse"). In masked priming, the prime stimulus ("nurse" or "horse") is presented very briefly (for less than 60 ms) and is itself preceded by a mask (e.g., "\#\#\#\#\#") which is presented fora much longer duration (typically 500 ms). This forward mask ensures that participants are usually unaware of the prime [@forsterRepetitionPrimingFrequency1984]. The masked priming paradigm has been used in a large number of studies over the last decades [for a review, see e.g., @kinoshitaMaskedPrimingState2004; @vandenbusscheMechanismsMaskedPriming2009], but so far, virtually all of these studies have been done in a laboratory setting, often using the DMDX software by @forsterDMDXWindowsDisplay2003.
 
-Given that, as of the time of this writing, researchers in a large part of the world are unable to perform psychology experiments in a laboratory due to the COVID-19 pandemic, with not much clarity about when laboratories will be able to reopen completely, it is an important consideration whether it may be possible to collect masked priming data remotely using online experiments. Even after the current exceptional situation, online data collection has many advantages, such as easy access to a much more diverse population than would be accessible at the typical university research laboratory, independence from laboratory space constraints, and, often, lower costs as participants only need to be compensated for their time on the experiment, not time spent commuting, waiting for the experiment to start, etc. Researchers in decision making and economics have been using online paradigms for several decades now [e.g., @birnbaumPsychologicalExperimentsInternet2000a; @paolacciRunningExperimentsAmazon2010], but cognitive and experimental psychology have been much slower in taking up online paradigms, often due to concerns about the validity of the results. Such concerns are not limited to cognitive studies [@austSeriousnessChecksAre2013], but they are exacerbated by the reliance on precise presentation times. In masked priming, it is critical for the onset of the mask, the prime, and the target to occur at the intended times. In particular, presenting the prime for too long will counteract the effect of the mask, making the prime consciously visible to the participant. 
+Given that, as of the time of this writing, researchers in a large part of the world are unable to perform psychology experiments in a laboratory due to the COVID-19 pandemic, with not much clarity about when laboratories will be able to reopen completely, it is an important consideration whether it may be possible to collect masked priming data remotely using online experiments. Even after the current exceptional situation, online data collection has many advantages, such as easy access to a much more diverse population than would be accessible at the typical university research laboratory, independence from laboratory space constraints, and, often, lower costs as participants only need to be compensated for their time on the experiment, not time spent commuting, waiting for the experiment to start, etc. Researchers in decision making and economics have been using online paradigms for several decades now [e.g., @birnbaumPsychologicalExperimentsInternet2000a; @paolacciRunningExperimentsAmazon2010], but cognitive and experimental psychology have been much slower in taking up online paradigms, often due to concerns about the validity of the results. Such concerns are not limited to cognitive studies [@austSeriousnessChecksAre2013], but they are exacerbated by the reliance on precise presentation times. In masked priming, it is critical for the onset of the mask, the prime, and the target to occur at the intended times. In particular, presenting the prime for too long will counteract the effect of the mask, making the prime consciously visible to the participant.
 
 There have been attempts to address these concerns. For example, a Web version of DMDX (webDMDX) was developed which showed promising results in a trial experiment [@witzelTestingViabilityWebDMDX2013]. However, webDMDX was a self-contained Windows executable file that participants had to download and run rather than a "true" online experiment that could be run inside of a browser. A downside of this is that participants often are (and should be) understandably skeptical about downloading and running files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer. As a consequence, the use of webDMDX has been rather limited so far. Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets [@reimersPresentationResponseTiming2015]. There is now a variety of software packages taking advantage of the new capabilities to present experimental stimuli and collect data, both commercial, e.g., Gorilla [@anwyl-irvine2020] or Testable [@rezlescu2020] and open-source, e.g., jsPsych [@deleeuw2015] or PsychoJS [the Javascript version of Psychopy 3, @peirce2019].
 
@@ -74,20 +74,19 @@ Of course, despite the technological advances, there are still concerns about ti
 
 The first approach has the advantage that differences in presentation timings can be objectively recorded and evaluated. A very thorough recent example of this approach is the "timing mega-study" by @bridges2020, who compared the timing in experiments run in lab-based setups with the timing in online packages run in different browsers. The very similar study by @anwyl-irvine2020a compares only online packages and browsers with regard to timing. Overall, @bridges2020 found that online packages were capable of presenting visual stimuli with "reasonable" precision, although the lab-based packages were slightly better in this regard. This first approach is important in order to establish that a certain level of precision and accuracy can be achieved at all. If this is not possible, there is no point in moving forward to the second approach and replicating specific paradigms. However, it is of course impossible to test every possible device and configuration that participants might use. On the other hand, some of the differences in precision and accuracy between setups that can be observed using a photodiode may be too small to have an influence on actual participant performance. Therefore, we consider replication of previous lab-based effects a more important test of online paradigms than photodiode measurements. Based on the results by @bridges2020 and @anwyl-irvine2020a, we are satisfied that modern Javascript-based stimulus presentation systems are capable of sufficiently fast and precise stimulus presentation. To establish whether masked priming studies can be successfully run online, the next step is now to follow the second approach and implement the masked priming paradigm in one of the online experiment packages tested by @bridges2020 and @anwyl-irvine2020a. After evaluating their results, we decided on Psychopy/PsychoJS [@peirce2019] as it combines relative ease of use with high precision and accuracy across the great majority of platforms.
 
-In the present study, we were particularly interested in manipulating the duration of the prime, as this is what determines whether the stimulus is consciously perceived or not. Indeed, @gomezDiffusionModelAccount2013 performed an experiment in which they presented a prime either for 56 ms preceded by a mask or for 200 ms without a mask and found qualitative differences between masked and unmasked priming, which they explained using the diffusion model [@ratcliff2004]: For masked priming, the priming effects for identical compared to unrelated primes were the same across all quantiles of the response time distribution. In the diffusion model, this corresponds to a shift in a change in the $T_{er}$ parameter, which corresponds to encoding process. However, for unmasked priming, the identity priming effects were stronger in the upper quantiles of the RT distribution than in the lower quantiles. In the diffusion model, this corresponds to a shift in both the $T_{er}$ parameter and the drift rate, the parameter corresponding to the quality of the information gathered. This qualitative pattern can help us interpret our results as well. 
+In the present study, we were particularly interested in manipulating the duration of the prime, as this is what determines whether the stimulus is consciously perceived or not. Indeed, @gomezDiffusionModelAccount2013 performed an experiment in which they presented a prime either for 56 ms preceded by a mask or for 200 ms without a mask and found qualitative differences between masked and unmasked priming, which they explained using the diffusion model [@ratcliff2004]: For masked priming, the priming effects for identical compared to unrelated primes were the same across all quantiles of the response time distribution. In the diffusion model, this corresponds to a shift in a change in the $T_{er}$ parameter, which corresponds to encoding process. However, for unmasked priming, the identity priming effects were stronger in the upper quantiles of the RT distribution than in the lower quantiles. In the diffusion model, this corresponds to a shift in both the $T_{er}$ parameter and the drift rate, the parameter corresponding to the quality of the information gathered. This qualitative pattern can help us interpret our results as well.
 
 Additionally, if the prime duration can be manipulated very precisely, we may be able to see effects of small differences in prime durations. @ziegler2000 found that priming effects were smaller for lower prime durations and interpreted this as evidence for different levels of facilitation (due to phonological overlap) and inhibition (due to visual differences between prime and target). In order to test this, we presented masked primes of different durations in an online experiment and measured response times and accuracy.
 
 If it is possible to present masked primes reliably in an online experiment, our results should be similar to those observed by @gomezDiffusionModelAccount2013 in their masked priming condition for word trials:
 
-1: The priming effects should be approximately the same across quantiles in the reaction time distributions. 
+1: The priming effects should be approximately the same across quantiles in the reaction time distributions.
 
 2: In terms of the Diffusion model,
 
-a) allowing the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
+a)  allowing the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
 
 b)  allowing the non-decision parameter $T_{er}$ to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one $T_{er}$ parameter for all word stimuli regardless of priming condition).
-
 
 If it is not possible to achieve consistent presentation times in an online experiment, and the primes are effectively presented for longer durations than intended, we should see a pattern that resembles that observed by Gomez et al. (2013) for unmasked primes:
 
@@ -99,12 +98,10 @@ a)  allowing the drift rate parameter for words to vary as a function of the pri
 
 b)  allowing the non-decision parameter $T_{er}$ to vary as a function of the priming conditions for word stimuli should improve the model compared to a model that has only one $T_{er}$ parameter for all word stimuli regardless of priming condition.
 
-
 Finally, there is the (unlikely) possibility that there are no priming effects at all due to inconsistent stimulus presentation (for example, the frames with the prime are not displayed at all due to timing issues with the participant's device). In this case, we would expect to observe no difference in reaction time between the identical and the unrelated control priming condition for word stimuli.
 
 If the online experiment succeeds in not only presenting the primes fast enough to create masked priming effects, but also in manipulating the prime duration precisely enough that this affects reaction times and accuracy, we expect to find smaller effects for shorter prime presentations, analogous to @ziegler2000.
 
-<<<<<<< HEAD:Manuscript.Rmd
 # Experiment 1
 
 In the first experiment, we tested whether we could observe reliable effects of masked priming at prime durations of 33 ms and 50 ms (roughly corresponding to two and three frames at a refresh rate of 60 Hz).
@@ -114,6 +111,7 @@ We report here how we determined our sample size, all data exclusions (if any), 
 ## Method
 
 ```{r load_exp1_data, message=FALSE, echo=FALSE}
+library(xfun)
 library(tidyverse)
 library(sp)
 library(rworldmap)
@@ -122,7 +120,11 @@ e1_all_participants <- read_csv("participant_data_exp1.csv")
 
 e1 <- read_csv(file = "Exp 1 data.csv")
 
-e1_actual_participants <- filter(e1_all_participants, PROLIFIC_PID %in% e1$participant & `What is your age?` != 99)
+# only consider participants who have actually participated in the whole experiment
+# also don't consider participants whose age is 99 (used for testing)
+# one participant is duplicate. Remove the first occurrence (likely incompatible device)
+
+e1_actual_participants <- filter(e1_all_participants, PROLIFIC_PID %in% e1$participant & `What is your age?` != 99 & `Response ID` != "R_sU4qJ6UCe9jRKs9")
 
 participant_ages <- e1_actual_participants$`What is your age?`
 
@@ -130,22 +132,57 @@ male_participants_nr <- filter(e1_actual_participants, `What is your gender (opt
 
 female_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Female") %>% nrow
 
+# there aren't actually any of these, but will leave the code in just in calse
 other_participants_nr <- filter(e1_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
 
 NA_participants_nr <- filter(e1_actual_participants, is.na(`What is your gender (optional)?`)) %>% nrow
 
+#coordinates(e1_actual_participants) <- c("Location Longitude","Location Latitude")
 
+# from https://stackoverflow.com/questions/14334970/convert-latitude-and-longitude-coordinates-to-country-name-in-r
+
+# The single argument to this function, points, is a data.frame in which:
+#   - column 1 contains the longitude in degrees
+#   - column 2 contains the latitude in degrees
+coords2country = function(points)
+{  
+  countriesSP <- getMap(resolution='low')
+  #countriesSP <- getMap(resolution='high') #you could use high res map from rworldxtra if you were concerned about detail
+
+  # convert our list of points to a SpatialPoints object
+
+  # pointsSP = SpatialPoints(points, proj4string=CRS(" +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
+
+  #setting CRS directly to that from rworldmap
+  pointsSP = SpatialPoints(points, proj4string=CRS(proj4string(countriesSP)))  
+
+
+  # use 'over' to get indices of the Polygons object containing each point 
+  indices = over(pointsSP, countriesSP)
+
+  # return the ADMIN names of each country
+  indices$ADMIN  
+  #indices$ISO3 # returns the ISO3 code 
+  #indices$continent   # returns the continent (6 continent model)
+  #indices$REGION   # returns the continent (7 continent model)
+}
+
+participant_coords <- e1_actual_participants %>% select("Location Longitude", "Location Latitude")
+
+e1_actual_participants$country <- coords2country(participant_coords)
+
+e1_participant_countries <- table(e1_actual_participants$country %>% as.character) #make into a character vector since the original output is a factor with as many levels as there are countries
 ```
 
 ### Participants
 
-We collected data from `r e1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants aged from `r participant_ages %>% min` to `r participant_ages %>% max` (mean age: `r participant_ages %>% mean %>% round(2)`) recruited through Prolific [www.prolific.co, -@prolific2021]. Of the participants, `r male_participants_nr` identified as male, `r female_participants_nr` identified as female, `r other_participants_nr` identified as other, and `r NA_participants_nr` declined to identify their gender. The experiment was only shown to participants who indicated that English was their first language in the Prolific screening questions. Based on Participants who completed the experiment were paid £1.25 for their participation (corresponding to £5/hour). All participants were naïve to the purpose of the experiment.
+We collected data from `r e1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants aged from `r participant_ages %>% min` to `r participant_ages %>% max` (mean age: `r participant_ages %>% mean %>% round(2)`) recruited through Prolific [www.prolific.co, -@prolific2021]. Of the participants, `r male_participants_nr` identified as male and `r female_participants_nr` identified as female. The experiment was only shown to participants who indicated that English was their first language in the Prolific screening questions. Based on their IP addresses, `r e1_participant_countries["United Kingdom"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in the UK, `r e1_participant_countries["United States of America"] %>% ifelse(. < 11, numbers_to_words(.), .)` were based in the US, `r e1_participant_countries["Canada"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Canada, and `r e1_participant_countries["Ireland"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Ireland. Two participants could not be localized in this way. Participants who completed the experiment were paid £1.25 for their participation (corresponding to £5/hour). All participants were naïve to the purpose of the experiment.
 
 ### Materials
 
-
-
 ### Procedure
+
+Participants were able to sign up for the experiment on the Prolific website. On signing up, they were redirected to the participant agreement form on the Qualtrics online survey development environment [@qualtrics2020]. After indicating their agreement to participate, participants were forwarded to Pavlovia [@pavlovia2020], where the actual PsychoJS experiment was hosted. After completing the experiment, participants were redirected to a debriefing form on Qualtrics and from there back to Prolific in order to receive their participation payment.
 
 ### Data analysis
 
@@ -157,6 +194,9 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # General Discussion
 
+```{=html}
+<script src="https://hypothes.is/embed.js" async></script>
+```
 \newpage
 
 # References
