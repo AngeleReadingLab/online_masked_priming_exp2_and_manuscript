@@ -138,6 +138,19 @@ library(brms)
 prior_exp1 <- c(set_prior("normal(0,100)", class = "b", coef = "Condition1"),
             set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
             set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"))
+
+blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
+                        rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
+                        warmup = 1000,
+                        iter = 5000,
+                        chains = 4,
+                        prior = prior_exp1,
+                        family = exgaussian(),
+                        inits = "random",
+                        control = list(adapt_delta = 0.95),
+                        cores = 4, backend = "cmdstanr", threads = threading(2))
+
+save(blmm_exp1_rt, file = "blmm_exp1_rt_new.RData")
   
 
 blmm_exp1_acc <- brm(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
@@ -153,22 +166,9 @@ blmm_exp1_acc <- brm(data = exp1_data_to_include %>% filter(corr != -1 & Stimulu
 
 save(blmm_exp1_acc, file = "blmm_exp1_acc_new.RData")
 
-                 #blmm_exp1_full <- update(blmm_exp1,
-#                         warmup = 1000,
-#                         iter = 5000, 
-#                         chains = 4,
-#                         prior = prior_exp1,
-#                         family = exgaussian(),
-#                         inits = "random",
-#                         control = list(adapt_delta = 0.95),
-#                         cores = 4, 
-#                         backend = "cmdstanr", 
-#                         threads = threading(2))
+### Experiment 2 
 
-
-#save(blmm_exp2, file = "blmm_exp2.RData")
-
-blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
+blmm_exp2_rt <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
                         rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
                         warmup = 1000,
                         iter = 5000,
@@ -179,6 +179,20 @@ blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusT
                         control = list(adapt_delta = 0.95),
                         cores = 4, backend = "cmdstanr", threads = threading(2))
 
-save(blmm_exp1_rt, file = "blmm_exp1_rt_new.RData")
+save(blmm_exp2_rt, file = "blmm_exp2_rt_new.RData")
+
+blmm_exp2_acc <- brm(data = exp2_data_to_include %>% filter(corr != -1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
+                 formula = corr ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
+                 warmup = 1000,
+                 iter = 5000,
+                 chains = 4,
+                 prior = prior_exp1,
+                 family = bernoulli(link = "logit"),
+                 inits = "random",
+                 control = list(adapt_delta = 0.95),
+                 cores = 4, backend = "cmdstanr", threads = threading(2))
+
+save(blmm_exp2_acc, file = "blmm_exp2_acc_new.RData")
+
 
 ```
