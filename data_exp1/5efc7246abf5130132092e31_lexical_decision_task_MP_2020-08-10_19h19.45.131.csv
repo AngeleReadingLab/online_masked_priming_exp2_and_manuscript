@@ -1,0 +1,19 @@
+counterbalancing_condition,instr_done_keyboard.keys,instr_done_keyboard.rt,instr_done_touch.x,instr_done_touch.y,instr_done_touch.leftButton,instr_done_touch.midButton,instr_done_touch.rightButton,instruction_pages.thisRepN,instruction_pages.thisTrialN,instruction_pages.thisN,instruction_pages.thisIndex,instruction_pages.ran,pageN,phase,instruct_text,has_image,instruct_image,participant,date,expName,psychopyVersion,OS,frameRate
+3,space,18.664505,0.606770833,-0.143229167,0,0,0,0,0,0,0,1,1,instructions,"INSTRUCTIONS
+At the start of each trial, look at the hash marks (######) in the center of the screen. After a moment, a string of letters will appear. Your task is to indicate if the letter string forms a word or not (i.e., if it is a nonword). For example, AUTHOR is a word while AUTHON is a nonword.
+
+Press the space bar or touch the button below to continue.",0,,5efc7246abf5130132092e31,2020-08-10_19h19.45.131,lexical_decision_task_MP,2020.1.3,Win32,60
+,space,613.56298,0.60546875,-0.1015625,0,0,0,0,1,1,1,1,2,instructions,"If your device has a keyboard, press the 'Z' key for nonwords and the 'M' key for words.
+
+
+
+
+
+Press the space bar or touch the button below to continue.",1,keyboard-example.gif,5efc7246abf5130132092e31,2020-08-10_19h19.45.131,lexical_decision_task_MP,2020.1.3,Win32,60
+,space,9.71868,0.60546875,-0.1015625,0,0,0,0,2,2,2,1,3,instructions,"If you are using a touchscreen only device, use the buttons on the screen. Do not use the mouse.
+
+
+
+
+
+Press the space bar or touch the button below to continue.",1,touchscreen-example.gif,5efc7246abf5130132092e31,2020-08-10_19h19.45.131,lexical_decision_task_MP,2020.1.3,Win32,60
