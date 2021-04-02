@@ -113,8 +113,15 @@ library(brms)
 #ncores = parallel::detectCores()
 # Mean RTs in each condition
 
+
+prior_exp1 <- c(set_prior("normal(0,2500)", class = "b", coef = "", dpar = ""),
+                set_prior("normal(0,100)", class = "b", coef = "Condition1", dpar = ""),
+                set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
+                set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"))
+
+
 blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
-                    bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition),
+                    bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration),
                     warmup = 10,
                     iter = 50,
                     chains = 4,
@@ -124,10 +131,8 @@ blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & Stim
                     control = list(adapt_delta = 0.95),
                     cores = 4, backend = "cmdstanr", threads = threading(2))
 
+save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist.RData")
 
-prior_exp1 <- c(set_prior("normal(0,100)", class = "b", coef = "Condition1"),
-                set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
-                set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"))
 
 blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
                     rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
