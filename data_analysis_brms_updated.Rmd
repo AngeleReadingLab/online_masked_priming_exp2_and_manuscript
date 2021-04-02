@@ -94,7 +94,9 @@ plot_raincloud(exp2_data_to_include %>% filter(corr == 1 & rt < 1500), x_column 
 ```{r lmm1}
 contrasts(exp1_data_to_include$Condition) <- c(-1,1)
 contrasts(exp1_data_to_include$PrimeDuration) <- c(-1,1)
-lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 2000), rt ~ Condition * PrimeDuration + (1|source) + (1|Target))
+lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), rt ~ Condition * PrimeDuration + (1|source) + (1|Target))
+
+lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), rt ~ Condition * PrimeDuration + (Condition*PrimeDuration|source) + (Condition*PrimeDuration|Target))
 
 summary(lmm_exp1)
 
@@ -114,7 +116,7 @@ gLMM for accuracy (Words)
 
 ```{r logistic_lmm_exp1}
 
-lmm_acc_exp1 <- glmer(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "WORD" & rt < 1500), corr ~ Condition * PrimeDuration + (1|Target), family = binomial(link = "logit"))
+lmm_acc_exp1 <- glmer(data = exp1_data_to_include %>% filter(rt > 250 & corr != -1 & StimulusType == "Word" & rt < 2000), corr ~ Condition * PrimeDuration + (1|Target), family = binomial(link = "logit"))
 
 summary(lmm_acc_exp1)
 
@@ -139,7 +141,7 @@ prior_exp1 <- c(set_prior("normal(0,100)", class = "b", coef = "Condition1"),
             set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
             set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"))
 
-blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
+blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
                         rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
                         warmup = 1000,
                         iter = 5000,
@@ -149,6 +151,20 @@ blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusT
                         inits = "random",
                         control = list(adapt_delta = 0.95),
                         cores = 4, backend = "cmdstanr", threads = threading(2))
+
+blmm_exp1_rt_string <- make_stancode(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+                        rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
+                        warmup = 1000,
+                        iter = 5000,
+                        chains = 4,
+                        prior = prior_exp1,
+                        family = exgaussian(),
+                        inits = "random",
+                        control = list(adapt_delta = 0.95),
+                        cores = 4, backend = "cmdstanr", threads = threading(2))
+
+
+
 
 save(blmm_exp1_rt, file = "blmm_exp1_rt_new.RData")
   
@@ -165,6 +181,18 @@ blmm_exp1_acc <- brm(data = exp1_data_to_include %>% filter(corr != -1 & Stimulu
                  cores = 4, backend = "cmdstanr", threads = threading(2))
 
 save(blmm_exp1_acc, file = "blmm_exp1_acc_new.RData")
+
+
+blmm_exp1_acc_string <- make_stancode(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+                 formula = corr ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
+                 warmup = 1000,
+                 iter = 5000,
+                 chains = 4,
+                 prior = prior_exp1,
+                 family = bernoulli(link = "logit"),
+                 inits = "random",
+                 control = list(adapt_delta = 0.95),
+                 cores = 4, backend = "cmdstanr", threads = threading(2))
 
 ### Experiment 2 
 
