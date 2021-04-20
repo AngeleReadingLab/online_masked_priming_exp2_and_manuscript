@@ -117,21 +117,30 @@ library(brms)
 prior_exp1 <- c(set_prior("normal(0,2500)", class = "b", coef = "", dpar = ""),
                 set_prior("normal(0,100)", class = "b", coef = "Condition1", dpar = ""),
                 set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
+                set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"),
+                set_prior("normal(0,100)", class = "b", coef = "Condition1", dpar = ""),
+                set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
                 set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"))
 
+prior_exp1 <- c(set_prior("normal(0,1000)", class = "b"),
+                set_prior("normal(0,2500)", class = "Intercept"),
+                set_prior("normal(0,1000)", class = "b", dpar = "beta"),
+                set_prior("normal(0,2500)", class = "Intercept", dpar = "beta"))
+
+#formula_exp1 <- bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target))
 
 blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
-                    bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration),
-                    warmup = 1000,
-                    iter = 5000,
+                    bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
+                    warmup = 200,
+                    iter = 1000,
                     chains = 4,
-                    #prior = prior_exp1,
+                    prior = prior_exp1,
                     family = exgaussian(),
                     inits = "random",
-                    control = list(adapt_delta = 0.95),
+                    control = list(adapt_delta = 0.8),
                     cores = 4, backend = "cmdstanr", threads = threading(2))
 
-save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist.RData")
+save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist_full_ranef.RData")
 
 
 blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
