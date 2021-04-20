@@ -1,0 +1,340 @@
+---
+title: "EDA"
+author: "Ana Baciero"
+date: "20/4/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(ggplot2)
+library(papaja)
+
+```
+
+
+# Data sets:
+
+## Experiment 1
+
+```{r Experiment 1, include=FALSE}
+
+# Qualtrics survey data
+exp1_all_participants <- read_csv("participant_data_exp1.csv")
+
+# PsychoJS trial data
+exp1 <- fs::dir_ls(path = "./data_exp1", glob = "*.csv") %>%
+  map_dfr(read_csv, .id = "source", col_type = cols(
+    .default = col_character(), rt = col_double(), corr = col_integer(), TrialID = col_integer())) %>% 
+  filter(!is.na(TrialID) & TrialID < 1000) %>%
+  select(source, participant, date, OS, frameRate, rt, corr, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target)
+
+exp1$device <- ifelse(exp1$OS %in% c("Linux armv7l", "Linux armv8l"), "android", "computer")
+
+# only consider participants who have actually participated in the whole experiment
+# also don't consider participants whose age is 99 (used for testing)
+# one participant is duplicate. Remove the first occurrence (likely incompatible device)
+
+exp1_actual_participants <- filter(exp1_all_participants, (PROLIFIC_PID %in% exp1$participant) & (nchar(PROLIFIC_PID) == 24) & !(PROLIFIC_PID %in% c("5fa3b4abbcfd0b6c243758bc")) & (`What is your age?` != 99) & (`Response ID` != "R_sU4qJ6UCe9jRKs9"))
+
+# get participants with more than 80% correct responses
+
+exp1_accuracy_by_participant <- exp1 %>% filter(participant %in% exp1_actual_participants$PROLIFIC_PID) %>% group_by(source) %>% summarise(acc = mean(corr == 1), N = n())
+
+exp1_participants_to_include <- exp1_accuracy_by_participant %>% filter(N == 480 & acc >= .8)   
+
+exp1_participants_to_exclude <- exp1_accuracy_by_participant %>% filter(N != 480 | acc < .8)   
+
+#participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
+
+exp1_data_to_include <- exp1 %>% filter(source %in% exp1_participants_to_include$source & participant %in% exp1_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(33, 50), labels = c("33 ms", "50 ms")), rt = rt * 1000)
+
+```
+
+```{r E1 Head, tidy=TRUE}
+
+E1<- exp1_data_to_include%>%
+  select(participant, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target, corr, rt)%>%
+  mutate(participant=factor(participant),
+         TrialID = factor(TrialID))
+
+head(E1)
+```
+
+## Experiment 2
+
+```{r Experiment 2, include=FALSE}
+
+exp2_all_participants <- read_csv("participant_data_exp2.csv")
+
+exp2 <- fs::dir_ls(path = "./data_exp2", glob = "*.csv") %>%
+  map_dfr(read_csv, .id = "source", col_type = cols(
+    .default = col_character(), rt = col_double(), corr = col_integer(), TrialID = col_integer())) %>% 
+  filter(!is.na(TrialID) & TrialID < 1000) %>%
+  select(source, participant, date, OS, frameRate, rt, corr, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target)
+
+exp2$device <- ifelse(exp2$OS %in% c("Linux armv7l", "Linux armv8l"), "android", "computer")
+
+# only consider participants who have actually participated in the whole experiment
+# also don't consider participants whose age is 99 (used for testing)
+# one participant is duplicate. Remove the first occurrence (likely incompatible device)
+
+exp2_actual_participants <- filter(exp2_all_participants, (PROLIFIC_PID %in% exp2$participant) & (nchar(PROLIFIC_PID) == 24) & !(PROLIFIC_PID %in% c("5fa3b4abbcfd0b6c243758bc")) & (`What is your age?` != 99) & !(`Response ID` %in% c("R_2c2dVRNmGvI6CH9", "R_3ELutaT6GNe5mmR", "R_XX7jgUk2NbIi41j", "R_125QKzJfHwoGHaT")))
+
+# get participants with more than 80% correct responses
+
+exp2_accuracy_by_participant <- exp2 %>% filter(participant %in% exp2_actual_participants$PROLIFIC_PID) %>% group_by(source) %>% summarise(acc = mean(corr == 1), N = n())
+
+exp2_participants_to_include <- exp2_accuracy_by_participant %>% filter(N == 480 & acc >= .8)   
+
+exp2_participants_to_exclude <- exp2_accuracy_by_participant %>% filter(N != 480 | acc < .8)   
+
+#participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
+
+exp2_data_to_include <- exp2 %>% filter(source %in% exp2_participants_to_include$source & participant %in% exp2_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(16, 33), labels = c("16 ms", "33 ms")), rt = rt * 1000)
+```
+
+```{r E2 Head, tidy=TRUE}
+
+E2<- exp2_data_to_include%>%
+  select(participant, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target, corr, rt)%>%
+  mutate(participant=factor(participant),
+         TrialID = factor(TrialID))
+
+head(E2)
+
+```
+
+
+\newpage
+
+
+# Delta Plots
+
+```{r Deltas E1, message=FALSE, warning=FALSE}
+
+quibble <- function(x, q = seq(.1, .9, .2)) {
+  tibble(x = quantile(x, q), q = q)
+}
+
+
+E1 %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration,corr) %>%
+  summarise(RT = list(quibble(rt, seq(.1, .9, .2)))) %>% 
+  tidyr::unnest(RT) -> data.E1.quantiles
+
+data.E1.quantiles %>%
+  filter(corr==1) %>%
+  select(-corr) %>%
+  group_by(StimulusType,PrimeDuration,Condition,q) %>%
+  summarize(RT=mean(x))%>%
+  ungroup()-> vincentiles.E1
+
+
+#Priming Effect (related vs. unrelated):
+
+vincentiles.E1 %>%
+  arrange(desc(Condition))%>%
+  group_by(StimulusType,PrimeDuration,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ungroup()%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line()+
+  geom_point()+
+  ylim(-60, +60)+
+  xlim(450, 950)+
+  xlab("Mean RT per quantile")+
+  ylab("Priming effect (delta)")+
+  ggtitle("Experiment 1")+
+  facet_wrap(~StimulusType + PrimeDuration)+
+  theme_minimal()-> DeltaE1.PrimingEffect
+
+DeltaE1.PrimingEffect
+
+#Prime Duration Effect (33ms vs 50 ms):
+ 
+vincentiles.E1 %>%
+  group_by(StimulusType,Condition,q) %>%
+ summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line()+
+  geom_point()+
+  ylim(-60, +60)+
+  xlim(450, 950)+
+  xlab("Mean RT per quantile")+
+  ylab("Prime duration effect (delta)")+
+  ggtitle("Experiment 1")+
+  facet_wrap(~StimulusType + Condition)+
+  theme_minimal()-> DeltaE1.PrimeDurationEffect
+
+DeltaE1.PrimeDurationEffect
+
+```
+
+```{r Deltas E2, message=FALSE, warning=FALSE}
+
+E2 %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration,corr) %>%
+  summarise(RT = list(quibble(rt, seq(.1, .9, .2)))) %>% 
+  tidyr::unnest(RT) -> data.E2.quantiles
+
+data.E2.quantiles %>%
+  filter(corr==1) %>%
+  select(-corr) %>%
+  group_by(StimulusType,PrimeDuration,Condition,q) %>%
+  summarize(RT=mean(x))%>%
+  ungroup()-> vincentiles.E2
+
+
+#Priming Effect (related vs. unrelated):
+
+vincentiles.E2 %>%
+  arrange(desc(Condition))%>%
+  group_by(StimulusType,PrimeDuration,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ungroup()%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line()+
+  geom_point()+
+  ylim(-60, +60)+
+  xlim(450, 950)+
+  xlab("Mean RT per quantile")+
+  ylab("Priming effect (delta)")+
+  ggtitle("Experiment 2")+
+  facet_wrap(~StimulusType + PrimeDuration)+
+  theme_minimal() -> DeltaE2.PrimingEffect
+
+DeltaE2.PrimingEffect
+
+
+#Prime Duration Effect (33ms vs 50 ms):
+ 
+vincentiles.E2 %>%
+  group_by(StimulusType,Condition,q) %>%
+ summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line()+
+  geom_point()+
+  ylim(-60, +60)+
+  xlim(450, 950)+
+  xlab("Mean RT per quantile")+
+  ylab("Prime duration effect (delta)")+
+  ggtitle("Experiment 2")+
+  facet_wrap(~StimulusType + Condition)+
+  theme_minimal() -> DeltaE2.PrimeDurationEffect
+
+DeltaE2.PrimeDurationEffect
+
+```
+
+
+\newpage
+
+# CAF
+
+```{r Experiment 1 CAF, message=FALSE, warning=FALSE}
+
+E1 %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration) %>%
+  mutate(Quantile = cut_number(rt, n = 10, labels = c(1,1,2,2,3,3,4,4,5,5))) %>%
+  ungroup() %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration, Quantile) %>%
+  summarize(Macc=mean(corr),
+            Mrt=mean(rt)) %>%
+  ungroup() -> data.caf.E1
+
+
+data.caf.E1 %>%
+  filter(StimulusType=="Word")%>%
+  group_by(Condition, PrimeDuration, Quantile) %>%
+    summarize(Macc2=mean(Macc),
+            Mrt2=mean(Mrt)) %>%
+  ggplot(aes(x=Mrt2, y=Macc2, )) +
+geom_line(alpha=.3, size=1.2) +
+  geom_point()+
+  ylim(0.5, 1)+
+  xlim(450, 1000)+
+  facet_wrap(~PrimeDuration+Condition)+
+  ggtitle("Accuracy as a function of RT in Experiment 1. Word data")+
+  theme_minimal()+
+  xlab("RT")+
+  ylab("Accuracy") -> CAF.E1.W
+
+CAF.E1.W
+
+data.caf.E1 %>%
+  filter(StimulusType=="Nonword")%>%
+  group_by(Condition, PrimeDuration, Quantile) %>%
+    summarize(Macc2=mean(Macc),
+            Mrt2=mean(Mrt)) %>%
+  ggplot(aes(x=Mrt2, y=Macc2, )) +
+  geom_line(alpha=.3, size=1.2) +
+  geom_point()+
+  ylim(0.5, 1)+
+  xlim(450, 1000)+
+  facet_wrap(~PrimeDuration+Condition)+
+  ggtitle("Accuracy as a function of RT in Experiment 1. Nonword data")+
+  theme_minimal()+
+  xlab("RT")+
+  ylab("Accuracy") -> CAF.E1.NW
+
+CAF.E1.NW
+
+```
+
+
+```{r Experiment 2 CAF, message=FALSE, warning=FALSE}
+
+E2 %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration) %>%
+  mutate(Quantile = cut_number(rt, n = 10, labels = c(1,1,2,2,3,3,4,4,5,5))) %>%
+  ungroup() %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration, Quantile) %>%
+  summarize(Macc=mean(corr),
+            Mrt=mean(rt)) %>%
+  ungroup() -> data.caf.E2
+
+
+data.caf.E2 %>%
+  filter(StimulusType=="Word")%>%
+  group_by(Condition, PrimeDuration, Quantile) %>%
+    summarize(Macc2=mean(Macc),
+            Mrt2=mean(Mrt)) %>%
+  ggplot(aes(x=Mrt2, y=Macc2, )) +
+geom_line(alpha=.3, size=1.2) +
+  geom_point()+
+  ylim(0.5, 1)+
+  xlim(450, 1000)+
+  facet_wrap(~PrimeDuration+Condition)+
+  ggtitle("Accuracy as a function of RT in Experiment 2. Word data")+
+  theme_minimal()+
+  xlab("RT")+
+  ylab("Accuracy") -> CAF.E2.W
+
+CAF.E2.W
+
+data.caf.E2 %>%
+  filter(StimulusType=="Nonword")%>%
+  group_by(Condition, PrimeDuration, Quantile) %>%
+    summarize(Macc2=mean(Macc),
+            Mrt2=mean(Mrt)) %>%
+  ggplot(aes(x=Mrt2, y=Macc2, )) +
+  geom_line(alpha=.3, size=1.2) +
+  geom_point()+
+  ylim(0.5, 1)+
+  xlim(450, 1000)+
+  facet_wrap(~PrimeDuration+Condition)+
+  ggtitle("Accuracy as a function of RT in Experiment 2. Nonword data")+
+  theme_minimal()+
+  xlab("RT")+
+  ylab("Accuracy") -> CAF.E2.NW
+
+CAF.E2.NW
+
+``` 
+
