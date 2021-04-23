@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+*.RData
+*_cache
+*_files
+Manuscript_AB_MP_files
+*-DESKTOP-9N26M3N*

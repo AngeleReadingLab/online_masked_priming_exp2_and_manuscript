@@ -1,0 +1,93 @@
+instr_done_keyboard.keys,instr_done_touch.x,instr_done_touch.y,instr_done_touch.leftButton,instr_done_touch.midButton,instr_done_touch.rightButton,instr_done_touch.clicked_name,instruction_pages.thisRepN,instruction_pages.thisTrialN,instruction_pages.thisN,instruction_pages.thisIndex,instruction_pages.ran,pageN,phase,instruct_text,has_image,instruct_image,participant,date,expName,psychopyVersion,OS,frameRate,response.keys,response.corr,touch_resp.x,touch_resp.y,touch_resp.leftButton,touch_resp.midButton,touch_resp.rightButton,touch_resp.time,touch_resp.clicked_name,rt,corr,practice_trials.thisRepN,practice_trials.thisTrialN,practice_trials.thisN,practice_trials.thisIndex,practice_trials.ran,TrialID,StimulusType,Condition,PrimeDuration,Prime,Target,corrAns,end_of_practice_trials_pages.thisRepN,end_of_practice_trials_pages.thisTrialN,end_of_practice_trials_pages.thisN,end_of_practice_trials_pages.thisIndex,end_of_practice_trials_pages.ran,break_done_touch.x,break_done_touch.y,break_done_touch.leftButton,break_done_touch.midButton,break_done_touch.rightButton,break_done_keyboard.keys,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,trials.ran
+,-0.002777778,-0.398148148,1,0,0,instr_done_button,0,0,0,0,1,1,instructions,"INSTRUCTIONS
+At the start of each trial, look at the hash marks (######) in the center of the screen. After a moment, a string of letters will appear. Your task is to indicate if the letter string forms a word or not (i.e., if it is a nonword). For example, AUTHOR is a word while AUTHON is a nonword.
+
+Press the space bar or touch the button below to continue.",0,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,-0.014814815,-0.39537037,1,0,0,instr_done_button,0,1,1,1,1,2,instructions,"If your device has a keyboard, press the 'Z' key for nonwords and the 'M' key for words.
+
+
+
+
+
+Press the space bar or touch the button below to continue.",1,keyboard-example.gif,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,-0.001851852,-0.403703704,1,0,0,instr_done_button,0,2,2,2,1,3,instructions,"If you are using a touchscreen only device, use the buttons on the screen. Do not use the mouse as this will slow down your response. 
+
+
+
+
+Press the space bar or touch the button below to continue.",1,touchscreen-example.gif,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,-0.001851852,-0.403703704,1,0,0,instr_done_button,0,3,3,3,1,4,instructions,"It is very important that you respond as quickly and accurately as possible, as each letter string will only be on the screen for two seconds. If you do not respond within this time, the message 'Too slow!' will be displayed and the experiment will progress to the next letter string. The first 20 trials will be practice trials and you will receive feedback on your answers. 
+
+Press the space bar or touch the button below to start the practice trials.",0,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,0.346296296,-0.265740741,1,0,0,0.896,button_right,0.896,0,0,0,0,9,1,1010,NW,"ID",33,fariny,FARINY,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,0.324074074,-0.285185185,1,0,0,0.4,button_right,0.4,0,0,1,1,12,1,1013,NW,UN,33,adveil,SPRINY,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,0.313888889,-0.310185185,1,0,0,0.898,button_right,0.898,0,0,2,2,11,1,1012,NW,"ID",50,rashet,RASHET,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,0.313888889,-0.310185185,1,0,0,0.348,button_right,0.348,0,0,3,3,8,1,1009,NW,"ID",33,aslert,ASLERT,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,0.313888889,-0.310185185,1,0,0,0.266,button_right,0.266,1,0,4,4,7,1,1008,WORD,UN,50,hurdle,VOLUME,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,0.298148148,-0.311111111,1,0,0,1.748,button_right,1.748,1,0,5,5,0,1,1001,WORD,"ID",33,utopia,UTOPIA,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,6,6,13,1,1014,NW,UN,33,winfer,ROUPET,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,7,7,6,1,1007,WORD,UN,50,tropic,ZOMBIE,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,8,8,5,1,1006,WORD,UN,33,frenzy,OBTAIN,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,9,9,3,1,1004,WORD,"ID",50,matrix,MATRIX,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,10,10,1,1,1002,WORD,"ID",33,adjust,ADJUST,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,11,11,15,1,1016,NW,UN,50,mushed,WHAISE,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,12,12,10,1,1011,NW,"ID",50,inlade,INLADE,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,13,13,4,1,1005,WORD,UN,33,abound,SQUEAK,l,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,14,14,14,1,1015,NW,UN,50,miaber,THRALE,a,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,0,15,15,2,1,1003,WORD,"ID",50,almond,ALMOND,l,,,,,,,,,,,,,,,,
+,0.017857143,-0.43452381,1,0,0,instr_done_button,,,,,,1,end_of_practice,"You have completed the practice trials. During the experimental trials, you will not receive feedback, but it is very important that you respond as quickly and accurately as possible. 
+Before you begin, please ensure that you are in a comfortable and quiet location and will not be disturbed for about 25 minutes, as we cannot use your data if you do not complete all the trials. 
+There will be opportunities to take breaks at regular intervals during the experiment. When you are ready to start the experimental trials, please press space or touch the button below.",,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,,,,,,,,,,,,,,,,,,,,,,,0,0,0,0,1,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,437,NW,UN,33,baitch,SNAPEL,a,,,,,,-0.295634921,-0.308531746,0,0,0,,0,0,0,376,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,216,WORD,UN,33,liquor,BEHALF,l,,,,,,-0.329365079,-0.3125,0,0,0,,0,1,1,155,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,199,WORD,UN,33,plague,INVOKE,l,,,,,,-0.328373016,-0.3125,0,0,0,,0,2,2,138,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,431,NW,UN,33,lunker,CHRUMS,a,,,,,,-0.452380952,-0.30952381,0,0,0,,0,3,3,370,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,426,NW,UN,33,schind,URIVEL,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,4,4,365,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,274,NW,UN,50,sleirt,FUMBLO,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,5,5,453,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,73,WORD,"ID",33,source,SOURCE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,6,6,12,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,134,WORD,"ID",50,staple,STAPLE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,7,7,73,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,294,NW,UN,50,gleath,INHORT,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,8,8,473,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,409,NW,"ID",50,elopia,ELOPIA,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,9,9,348,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,233,WORD,UN,33,clumsy,NATURE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,10,10,172,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,47,WORD,UN,50,walnut,INCOME,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,11,11,226,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,336,NW,"ID",33,ghodus,GHODUS,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,12,12,275,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,152,WORD,"ID",50,rocket,ROCKET,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,13,13,91,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,413,NW,"ID",50,equats,EQUATS,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,14,14,352,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,149,WORD,"ID",50,invade,INVADE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,15,15,88,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,196,WORD,UN,33,stream,CREDIT,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,16,16,135,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,178,WORD,"ID",50,inform,INFORM,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,17,17,117,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,326,NW,"ID",33,iguade,IGUADE,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,18,18,265,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,25,WORD,UN,50,sprint,DOMAIN,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,19,19,204,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,389,NW,"ID",50,witmer,WITMER,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,20,20,328,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,420,NW,"ID",50,gushop,GUSHOP,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,21,21,359,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,183,WORD,UN,33,sleazy,MILDEW,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,22,22,122,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,276,NW,UN,50,petain,YARMON,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,23,23,455,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,451,NW,UN,33,surden,CAINKY,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,24,24,390,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,133,WORD,"ID",50,chrome,CHROME,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,25,25,72,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,3,WORD,UN,50,trench,KNIGHT,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,26,26,182,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,226,WORD,UN,33,flower,CASINO,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,27,27,165,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,430,NW,UN,33,chrums,CAROEY,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,28,28,369,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,279,NW,UN,50,curbol,CELOND,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,29,29,458,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,97,WORD,"ID",33,client,CLIENT,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,30,30,36,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,362,NW,"ID",50,tireau,TIREAU,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,31,31,301,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,402,NW,"ID",50,syntic,SYNTIC,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,32,32,341,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,287,NW,UN,50,yaceup,NYMBEL,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,33,33,466,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,111,WORD,"ID",33,induce,INDUCE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,34,34,50,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,394,NW,"ID",50,spaqux,SPAQUX,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,35,35,333,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,38,WORD,UN,50,insect,POWDER,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,36,36,217,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,329,NW,"ID",33,yarike,YARIKE,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,37,37,268,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,146,WORD,"ID",50,couple,COUPLE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,38,38,85,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,9,WORD,UN,50,bridge,HUSTLE,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,39,39,188,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,42,WORD,UN,50,tongue,CHAPEL,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,40,40,221,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,281,NW,UN,50,porlex,MELATY,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,41,41,460,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,472,NW,UN,33,gorbie,CIGNEY,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,42,42,411,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,415,NW,"ID",50,higsta,HIGSTA,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,43,43,354,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,428,NW,UN,33,funtle,TANDLY,a,,,,,,-0.9375,-0.229166667,0,0,0,,0,44,44,367,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,75,WORD,"ID",33,trophy,TROPHY,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,45,45,14,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,10,WORD,UN,50,cruise,ETHNIC,l,,,,,,-0.9375,-0.229166667,0,0,0,,0,46,46,189,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,40,WORD,UN,50,spring,CONVEY,l,,,,,,-0.556547619,0.034722222,0,0,0,,0,47,47,219,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,213,WORD,UN,33,intake,SQUEAL,l,,,,,,-0.948412698,-0.162698413,0,0,0,,0,48,48,152,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,109,WORD,"ID",33,wonder,WONDER,l,,,,,,-0.948412698,-0.162698413,0,0,0,,0,49,49,48,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,184,WORD,UN,33,bother,SLEAZY,l,,,,,,-0.948412698,-0.162698413,0,0,0,,0,50,50,123,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,125,WORD,"ID",50,nickel,NICKEL,l,,,,,,-0.948412698,-0.162698413,0,0,0,,0,51,51,64,1
+,,,,,,,,,,,,,,,,,999,2020-08-05_18h49.41.372,lexical_decision_task_MP,2020.1.3,Win32,60,,0,,,,,,,,1.748,-1,,,,,,158,WORD,"ID",50,island,ISLAND,l,,,,,,-0.661706349,-0.473214286,0,0,0,,0,52,52,97,1
