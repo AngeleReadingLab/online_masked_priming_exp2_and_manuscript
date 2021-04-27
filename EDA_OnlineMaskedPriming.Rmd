@@ -48,12 +48,8 @@ exp1_participants_to_exclude <- exp1_accuracy_by_participant %>% filter(N != 480
 
 #participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
 
-exp1_data_to_include <- exp1 %>% 
-  filter(source %in% exp1_participants_to_include$source & participant %in% exp1_actual_participants$PROLIFIC_PID) %>% 
-  mutate(StimulusType = StimulusType %>% 
-           factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% 
-           factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(33, 50), labels = c("33 ms", "50 ms")), rt = rt * 1000) %>% 
-  filter(rt > 250 & rt < 2000)
+exp1_data_to_include <- exp1 %>% filter(source %in% exp1_participants_to_include$source & participant %in% exp1_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(33, 50), labels = c("33 ms", "50 ms")), rt = rt * 1000)
+
 ```
 
 ```{r E1 Head, tidy=TRUE}
@@ -96,8 +92,7 @@ exp2_participants_to_exclude <- exp2_accuracy_by_participant %>% filter(N != 480
 
 #participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
 
-exp2_data_to_include <- exp2 %>% filter(source %in% exp2_participants_to_include$source & participant %in% exp2_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(16, 33), labels = c("16 ms", "33 ms")), rt = rt * 1000) %>% filter(rt > 250 & rt < 2000)
-
+exp2_data_to_include <- exp2 %>% filter(source %in% exp2_participants_to_include$source & participant %in% exp2_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(16, 33), labels = c("16 ms", "33 ms")), rt = rt * 1000)
 ```
 
 ```{r E2 Head, tidy=TRUE}
