@@ -1,0 +1,92 @@
+---
+title: "Can we use masked priming in an online setting?"
+     
+subtitle: "The effect of prime exposure duration in online masked priming lexical decision"
+author: "Bernhard Angele, Ana Baciero, Pablo Gomez, & Manuel Perea"
+institute: "Bournemouth University, Universidad Nebrija, DePaul University, California State University San Bernardino, Universitat de Valencia"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# Doing research during a pandemic
+
+- No eye-tracking!
+- But lots of bored people sitting at home
+- What are language-related paradigms that we can do remotely?
+  - Surveys (not terribly interesting for many language researchers)
+  - Self-paced reading
+  - RSVP
+  - Lexical decision tasks
+
+---
+
+# Is priming possible online?
+
+- Overt priming certainly is
+- But masked priming relies on very precise timing of the stimuli.
+- Ken Forster did it a long time ago with GIFs:
+
+  - 40 ms prime duration: 
+  ![40 ms prime](http://www.u.arizona.edu/~kforster/priming/mp_demo_1.gif)
+  - 100 ms prime duration: 
+  ![100 ms prime](http://www.u.arizona.edu/~kforster/priming/mp_demo_2.gif)
+  
+- But a demo on a website and an online experiment are two very different things!
+
+---
+
+# Using the three Ps (Psychopy, Pavlovia, and Prolific) to collect data
+
+- Psychopy is an experiment presentation software allowing precise display of stimuli
+  - It's written in Python, but there is now the option of translating the experiments into Javascript (PsychoJS) for online presentation.
+  - Pavlovia is a paid service that integrates with Psychopy and hosts the experiment code and the collected data
+  - Prolific is a participant recruitment service (like Mechanical Turk, but more research-focused and less US-centric)
+
+---
+
+# Our study
+
+- Based on Gomez, Perea, & Ratcliff (2013)
+
+- Gomez et al. used the diffusion model to fit data from masked and unmasked prime presentation and found that masked and unmasked priming affect different model parameters:
+  - masked identity priming affects the $T_{er}$ parameter which represents encoding processes
+  - unmasked priming affects both $T_er$ and the drift rates parameter corresponding to the quality of information
+  
+- If we can show that the data from an online experiment pattern with the masked priming data from Gomez et al. rather than the unmasked priming data, that demonstrates the reliability of the online masked priming paradigm.
+
+---
+
+# Design
+
+## Experiment 1
+
+- Targets: 240 words and 240 nonwords
+- Conditions: 
+  - prime duration (33 vs. 50 ms)
+    - this corresponds to 2 vs. 3 refresh cycles at 60 Hz
+  - prime condition: identical vs. unrelated
+- 60 word/nonword stimuli per group
+
+---
+# Design
+
+## Experiment 2
+
+  - Like Experiment 1, but shorter prime duration condition (16 ms vs. 33 ms):
+    - Targets: same 240 words and 240 nonwords
+    - Conditions: 
+      - prime duration (16 vs. 33 ms)
+        - this corresponds to 1 vs. 2 refresh cycles at 60 Hz
+      - prime condition: identical vs. unrelated
+    - 60 word/nonword stimuli per group
+
+---
+# Results
+
