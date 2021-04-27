@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Can we use masked priming in an online setting?</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Bernhard Angele, Ana Baciero, Pablo Gomez, &amp; Manuel Perea" />
+    <script src="libs/header-attrs-2.7/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Can we use masked priming in an online setting?
+## The effect of prime exposure duration in online masked priming lexical decision
+### Bernhard Angele, Ana Baciero, Pablo Gomez, &amp; Manuel Perea
+
+---
+
+
+# Masked priming paradigm
+ 
+-  One of the most important techniques to study early letter/word processes
+
+![Trial diagram](MaskedPrimingDiagram.PNG)
+
+&lt;small&gt;(Forster &amp; Davis, 1984)
+
+---
+
+
+# Is masked priming possible online?
+
+&lt;br&gt;
+
+- Technology improvements + current situation have made online studies flourish
+
+&lt;br&gt;
+
+- Different paradigms are easily implemented in online settings:
+
+  - Surveys
+  - Self-paced reading
+  - RSVP
+  - Lexical decision tasks
+  
+&lt;br&gt;
+
+- But masked priming relies on very precise timing of the stimuli
+
+  - Issue: use of different devices to present the stimuli and record responses
+
+---
+
+# Here
+
+&lt;br&gt;
+&lt;center&gt;
+&lt;big&gt;
+**Is it possible to do masked priming experiments online?**
+
+&lt;br&gt;
+
+
+---
+
+# But before diving into our study...
+
+&lt;br&gt;
+
+- A key phenomenon in laboratory masked priming lexical decision is that asked identity priming reflects a *savings effect*:
+  - Lexical entry evaluation begins sooner for identity primes than for unrelated primes. 
+  
+    &gt;- RT distributions of the unrelated and identity pairs reflect a shift rather than a change in shape.
+
+&lt;br&gt;
+
+- Additionally, such shift should be similar in magnitude to the prime-target stimulus-onset asynchrony
+
+---
+# Model fits of observed data
+
+&lt;br&gt;
+
+- Gomez, Perea, &amp; Ratcliff (2013) diffusion model fits:
+
+  -  Masked identity priming affects the `\(T_{er}\)` parameter (encoding processes)
+    
+  -  Unmasked priming affects both `\(T_{er}\)` and the drift rates parameter (quality of information)
+    
+---
+
+# Research question
+
+&lt;br&gt;
+&lt;br&gt;
+
+Could we replicate these findings using an online setup?
+
+&lt;br&gt;
+
+ 
+
+- If we can show that the data from an online experiment pattern with the masked priming data from Gomez et al. rather than the unmasked priming data, that would show the reliability of the online masked priming paradigm.
+
+
+---
+
+# Popular online data collection method
+
+&lt;br&gt;
+
+- Integration of 3 pieces of software: *The three Ps* 
+
+  - **Psychopy**: experiment presentation software that allows precise display of stimuli
+
+  - **Pavlovia**: paid service that hosts the experiment code and the collected data
+
+  - **Prolific**: participant recruitment service (like Mechanical Turk, but more research-focused and less US-centric)
+
+---
+
+# The present study
+
+&lt;br&gt;
+
+- We used said data collection method to examine whether online masked priming studies follow the same pattern as in-lab masked priming studies, manipulating:
+
+  - Prime condition: 
+  
+    &gt;- Identity vs. Unrelated
+  
+  - Prime exposure duration: 
+    
+    &gt;- 33.3 vs. 50 ms (Experiment 1)
+    &gt;- 16.6 vs. 33.3 ms (Experiment 2)
+
+
+---
+
+# Experimental Design
+
+## Experiment 1
+
+&lt;br&gt;
+
+- Targets: 240 words and 240 nonwords
+
+&lt;br&gt;
+
+- Conditions: 
+
+  - prime duration (33 vs. 50 ms)
+    &gt;- Corresponding to 2 vs. 3 refresh cycles at 60 Hz
+    
+  - prime condition: identical vs. unrelated
+
+&lt;br&gt;
+
+- 60 word/nonword stimuli per group
+
+---
+# Experimental Design
+
+## Experiment 2
+
+&lt;br&gt;
+
+- Targets: 240 words and 240 nonwords
+
+&lt;br&gt;
+
+- Conditions: 
+
+  - prime duration (16 vs. 33.3 ms)
+    &gt;- Corresponding to 1 vs. 2 refresh cycles at 60 Hz
+    
+  - prime condition: identical vs. unrelated
+
+&lt;br&gt;
+
+- 60 word/nonword stimuli per group
+
+---
+# Results
+&lt;br&gt;
+
+
+---
+# EDA: Experiment 1
+&lt;br&gt;
+
+![Trial diagram](DeltaE1_PrimingEffect.png)
+---
+# EDA: Experiment 2
+&lt;br&gt;
+
+![Trial diagram](DeltaE2_PrimingEffect.png)
+---
+# Inferentials
+&lt;br&gt;
+
+---
+# Conclusions
+&lt;br&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
