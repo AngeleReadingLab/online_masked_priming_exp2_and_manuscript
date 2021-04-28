@@ -4,10 +4,6 @@
     <title>Can we use masked priming in an online setting?</title>
     <meta charset="utf-8" />
     <meta name="author" content="Bernhard Angele, Ana Baciero, Pablo Gomez, &amp; Manuel Perea" />
-<<<<<<< HEAD
-    <meta name="date" content="2021-04-27" />
-=======
->>>>>>> 17dcd2e10c843235b7d7c2422f330cd4551b7ffb
     <script src="libs/header-attrs-2.7/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
@@ -20,91 +16,12 @@ class: center, middle, inverse, title-slide
 # Can we use masked priming in an online setting?
 ## The effect of prime exposure duration in online masked priming lexical decision
 ### Bernhard Angele, Ana Baciero, Pablo Gomez, &amp; Manuel Perea
-<<<<<<< HEAD
-### Bournemouth University, Universidad Nebrija, DePaul University, California State University San Bernardino, Universitat de Valencia
-### 2021-04-27
-=======
->>>>>>> 17dcd2e10c843235b7d7c2422f330cd4551b7ffb
 
 ---
 
 
-<<<<<<< HEAD
-# Doing research during a pandemic
 
-- No eye-tracking!
-- But lots of bored people sitting at home
-- What are language-related paradigms that we can do remotely?
-  - Surveys (not terribly interesting for many language researchers)
-  - Self-paced reading
-  - RSVP
-  - Lexical decision tasks
 
----
-
-# Is priming possible online?
-
-- Overt priming certainly is
-- But masked priming relies on very precise timing of the stimuli.
-- Ken Forster did it a long time ago with GIFs:
-
-  - 40 ms prime duration: 
-  ![40 ms prime](http://www.u.arizona.edu/~kforster/priming/mp_demo_1.gif)
-  - 100 ms prime duration: 
-  ![100 ms prime](http://www.u.arizona.edu/~kforster/priming/mp_demo_2.gif)
-  
-- But a demo on a website and an online experiment are two very different things!
-
----
-
-# Using the three Ps (Psychopy, Pavlovia, and Prolific) to collect data
-
-- Psychopy is an experiment presentation software allowing precise display of stimuli
-  - It's written in Python, but there is now the option of translating the experiments into Javascript (PsychoJS) for online presentation.
-  - Pavlovia is a paid service that integrates with Psychopy and hosts the experiment code and the collected data
-  - Prolific is a participant recruitment service (like Mechanical Turk, but more research-focused and less US-centric)
-
----
-
-# Our study
-
-- Based on Gomez, Perea, &amp; Ratcliff (2013)
-
-- Gomez et al. used the diffusion model to fit data from masked and unmasked prime presentation and found that masked and unmasked priming affect different model parameters:
-  - masked identity priming affects the `\(T_{er}\)` parameter which represents encoding processes
-  - unmasked priming affects both `\(T_er\)` and the drift rates parameter corresponding to the quality of information
-  
-- If we can show that the data from an online experiment pattern with the masked priming data from Gomez et al. rather than the unmasked priming data, that demonstrates the reliability of the online masked priming paradigm.
-
----
-
-# Design
-
-## Experiment 1
-
-- Targets: 240 words and 240 nonwords
-- Conditions: 
-  - prime duration (33 vs. 50 ms)
-    - this corresponds to 2 vs. 3 refresh cycles at 60 Hz
-  - prime condition: identical vs. unrelated
-- 60 word/nonword stimuli per group
-
----
-# Design
-
-## Experiment 2
-
-  - Like Experiment 1, but shorter prime duration condition (16 ms vs. 33 ms):
-    - Targets: same 240 words and 240 nonwords
-    - Conditions: 
-      - prime duration (16 vs. 33 ms)
-        - this corresponds to 1 vs. 2 refresh cycles at 60 Hz
-      - prime condition: identical vs. unrelated
-    - 60 word/nonword stimuli per group
-
----
-# Results
-=======
 # Masked priming paradigm
  
 -  One of the most important techniques to study early letter/word processes
@@ -225,9 +142,9 @@ Could we replicate these findings using an online setup?
 
 ---
 
-# Experimental Design
+# Experiment 1
 
-## Experiment 1
+## Experimental Design
 
 &lt;br&gt;
 
@@ -245,11 +162,56 @@ Could we replicate these findings using an online setup?
 &lt;br&gt;
 
 - 60 word/nonword stimuli per group
+---
+
+# Experiment 1: Participants
+
+
+
+- 101 Prolific participants, with 77 actually completing the experiment with an accuracy of &gt; .8.
+- 41 male and 36 female participants 
+- Aged from 18 to 71 (mean: 31.14). 
+- Only shown to participants who indicated that English was their first language in the Prolific screening questions.
+- Participant countries (according to Qualtrics and based on the IP Addresses, only including participants who could be localized)
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Canada &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Ireland &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; United Kingdom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; United States of America &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- Participants who completed the experiment were paid £1.25 for their participation (corresponding to £5/hour). 
+- Participants could use a desktop or laptop computer or a mobile device.
+  - But not Safari (issues with PsychoJS)
 
 ---
-# Experimental Design
+# Experiment 1: Results
 
-## Experiment 2
+![](Lab-meeting-presentation-April-2021_files/figure-html/raincloud_exp1-1.png)&lt;!-- --&gt;
+
+---
+# Experiment 1: EDA
+&lt;br&gt;
+
+![Trial diagram](DeltaE1_PrimingEffect.png)
+
+
+---
+# Experiment 2
+
+## Experimental Design
 
 &lt;br&gt;
 
@@ -269,17 +231,64 @@ Could we replicate these findings using an online setup?
 - 60 word/nonword stimuli per group
 
 ---
-# Results
-&lt;br&gt;
+# Experiment 2: Participants
 
+
+```
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_character(),
+##   Progress = col_double(),
+##   `Duration (in seconds)` = col_double(),
+##   Finished = col_logical(),
+##   `Recipient Last Name` = col_logical(),
+##   `Recipient First Name` = col_logical(),
+##   `Recipient Email` = col_logical(),
+##   `External Data Reference` = col_logical(),
+##   `Location Latitude` = col_double(),
+##   `Location Longitude` = col_double(),
+##   `What is your age?` = col_double()
+## )
+## i Use `spec()` for the full column specifications.
+```
+
+- 102 Prolific participants, with 79 actually completing the experiment with an accuracy of &gt; .8.
+- 40 male and 39 female participants 
+- Aged from 18 to 69 (mean: 35.75). 
+- Only shown to participants who indicated that English was their first language in the Prolific screening questions.
+- Participant countries (according to Qualtrics and based on the IP Addresses, only including participants who could be localized)
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Canada &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Hungary &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Ireland &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; South Africa &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; United Kingdom &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; United States of America &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 ---
-# EDA: Experiment 1
-&lt;br&gt;
+# Experiment 2: Results
 
-![Trial diagram](DeltaE1_PrimingEffect.png)
+![](Lab-meeting-presentation-April-2021_files/figure-html/raincloud_exp2-1.png)&lt;!-- --&gt;
+
 ---
-# EDA: Experiment 2
+# Experiment 2: EDA
 &lt;br&gt;
 
 ![Trial diagram](DeltaE2_PrimingEffect.png)
@@ -290,7 +299,6 @@ Could we replicate these findings using an online setup?
 ---
 # Conclusions
 &lt;br&gt;
->>>>>>> 17dcd2e10c843235b7d7c2422f330cd4551b7ffb
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
