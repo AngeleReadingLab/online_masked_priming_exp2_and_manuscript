@@ -15,6 +15,20 @@ output:
       countIncrementalSlides: false
 ---
 
+```{r setup, echo=FALSE, message=FALSE}
+library(tidyverse)
+# for finding out where the participants were
+library(xfun)
+library(sp)
+library(rworldmap)
+# for the analyses
+library(brms)
+# for the plots
+library(cowplot)
+library(stargazer)
+source("RainCloudPlots.R")
+```
+
 # Masked priming paradigm
  
 -  One of the most important techniques to study early letter/word processes
@@ -135,9 +149,9 @@ Could we replicate these findings using an online setup?
 
 ---
 
-# Experimental Design
+# Experiment 1
 
-## Experiment 1
+## Experimental Design
 
 <br>
 
@@ -155,11 +169,137 @@ Could we replicate these findings using an online setup?
 <br>
 
 - 60 word/nonword stimuli per group
+---
+
+# Experiment 1: Participants
+
+```{r load_exp1_data, message=FALSE, echo=FALSE, warning=FALSE}
+
+# Qualtrics survey data
+exp1_all_participants <- read_csv("participant_data_exp1.csv")
+
+# PsychoJS trial data
+exp1 <- fs::dir_ls(path = "./data_exp1", glob = "*.csv") %>%
+  map_dfr(read_csv, .id = "source", col_type = cols(
+  .default = col_character(), rt = col_double(), corr = col_integer(), TrialID = col_integer())) %>% 
+  filter(!is.na(TrialID) & TrialID < 1000) %>%
+  select(source, participant, date, OS, frameRate, rt, corr, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target)
+
+exp1$device <- ifelse(exp1$OS %in% c("Linux armv7l", "Linux armv8l"), "android", "computer")
+
+# only consider participants who have actually participated in the whole experiment
+# also don't consider participants whose age is 99 (used for testing)
+# one participant is duplicate. Remove the first occurrence (likely incompatible device)
+
+exp1_actual_participants <- filter(exp1_all_participants, (PROLIFIC_PID %in% exp1$participant) & (nchar(PROLIFIC_PID) == 24) & !(PROLIFIC_PID %in% c("5fa3b4abbcfd0b6c243758bc")) & (`What is your age?` != 99) & (`Response ID` != "R_sU4qJ6UCe9jRKs9"))
+
+# get participants with more than 80% correct responses
+
+exp1_accuracy_by_participant <- exp1 %>% filter(participant %in% exp1_actual_participants$PROLIFIC_PID) %>% group_by(source) %>% summarise(acc = mean(corr == 1), N = n())
+  
+exp1_participants_to_include <- exp1_accuracy_by_participant %>% filter(N == 480 & acc >= .8)   
+
+exp1_participants_to_exclude <- exp1_accuracy_by_participant %>% filter(N != 480 | acc < .8)   
+
+#participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
+
+exp1_data_to_include <- exp1 %>% filter(source %in% exp1_participants_to_include$source & participant %in% exp1_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(33, 50), labels = c("33 ms", "50 ms")), rt = rt * 1000)
+
+# filter out any of the participants we eliminated from the Qualtrics file as well
+
+exp1_actual_participants <- filter(exp1_actual_participants, (PROLIFIC_PID %in% exp1_data_to_include$participant))
+
+exp1_participant_ages <- exp1_actual_participants$`What is your age?`
+
+exp1_male_participants_nr <- filter(exp1_actual_participants, `What is your gender (optional)?` == "Male") %>% nrow
+
+exp1_female_participants_nr <- filter(exp1_actual_participants, `What is your gender (optional)?` == "Female") %>% nrow
+
+# there aren't actually any of these, but will leave the code in just in case
+exp1_other_participants_nr <- filter(exp1_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
+
+exp1_NA_participants_nr <- filter(exp1_actual_participants, is.na(`What is your gender (optional)?`)) %>% nrow
+
+exp1_participant_coords <- exp1_actual_participants %>% select("Location Longitude", "Location Latitude")
+
+
+#coordinates(exp1_actual_participants) <- c("Location Longitude","Location Latitude")
+
+# from https://stackoverflow.com/questions/14334970/convert-latitude-and-longitude-coordinates-to-country-name-in-r
+
+# The single argument to this function, points, is a data.frame in which:
+#   - column 1 contains the longitude in degrees
+#   - column 2 contains the latitude in degrees
+coords2country = function(points)
+{  
+  countriesSP <- getMap(resolution='low')
+  #countriesSP <- getMap(resolution='high') #you could use high res map from rworldxtra if you were concerned about detail
+
+  # convert our list of points to a SpatialPoints object
+
+  # pointsSP = SpatialPoints(points, proj4string=CRS(" +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
+
+  #setting CRS directly to that from rworldmap
+  pointsSP = SpatialPoints(points, proj4string=CRS(proj4string(countriesSP)))  
+
+
+  # use 'over' to get indices of the Polygons object containing each point 
+  indices = over(pointsSP, countriesSP)
+
+  # return the ADMIN names of each country
+  indices$ADMIN  
+  #indices$ISO3 # returns the ISO3 code 
+  #indices$continent   # returns the continent (6 continent model)
+  #indices$REGION   # returns the continent (7 continent model)
+}
+
+participant_coords <- exp1_actual_participants %>% select("Location Longitude", "Location Latitude")
+
+exp1_actual_participants$country <- coords2country(participant_coords)
+
+exp1_participant_countries <- table(exp1_actual_participants$country %>% as.character) #make into a character vector since the original output is a factor with as many levels as there are countries
+```
+
+- `r exp1_all_participants$PROLIFIC_PID %>% unique %>% length` Prolific participants, with `r exp1_actual_participants$PROLIFIC_PID %>% unique %>% length` actually completing the experiment with an accuracy of > .8.
+- `r exp1_male_participants_nr` male and `r exp1_female_participants_nr` female participants 
+- Aged from `r exp1_participant_ages %>% min` to `r exp1_participant_ages %>% max` (mean: `r exp1_participant_ages %>% mean %>% round(2)`). 
+- Only shown to participants who indicated that English was their first language in the Prolific screening questions.
+- Participant countries (according to Qualtrics and based on the IP Addresses, only including participants who could be localized)
+
+```{r participant_location_table, as.is = TRUE, echo = FALSE}
+knitr::kable(exp1_participant_countries %>% t, format = "html")
+
+```
+- Participants who completed the experiment were paid £1.25 for their participation (corresponding to £5/hour). 
+- Participants could use a desktop or laptop computer or a mobile device.
+  - But not Safari (issues with PsychoJS)
 
 ---
-# Experimental Design
+# Experiment 1: Results
 
-## Experiment 2
+```{r raincloud_exp1, echo=FALSE}
+plot_raincloud(exp1_data_to_include %>% filter(corr == 1 & rt < 1500), x_column = "Condition", y_column = "rt", x_label = "Condition", y_label = "RT in ms (correct responses)", main_title = "RT by condition and word type") + 
+  # put labels on the mean for easier comparison
+  stat_summary(fun.data = function(x) {data.frame(label = format(mean(x), digits = 2), y = mean(x))}, 
+                                      geom = "text",
+                                      #width = 1,
+                                      position = position_nudge(x = 0.5, y = 0),
+                                      #size = 0.2,
+                                      color = "black") +
+  facet_grid(cols = vars(PrimeDuration), rows = vars(StimulusType), labeller = label_context)
+```
+
+---
+# Experiment 1: EDA
+<br>
+
+![Trial diagram](DeltaE1_PrimingEffect.png)
+
+
+---
+# Experiment 2
+
+## Experimental Design
 
 <br>
 
@@ -179,17 +319,97 @@ Could we replicate these findings using an online setup?
 - 60 word/nonword stimuli per group
 
 ---
-# Results
-<br>
+# Experiment 2: Participants
 
+```{r load-exp2-data, as.is = TRUE,echo=FALSE, warning=FALSE}
+#load raw Exp2 data
+
+exp2_all_participants <- read_csv("participant_data_exp2.csv")
+
+exp2 <- fs::dir_ls(path = "./data_exp2", glob = "*.csv") %>%
+  map_dfr(read_csv, .id = "source", col_type = cols(
+  .default = col_character(), rt = col_double(), corr = col_integer(), TrialID = col_integer())) %>% 
+  filter(!is.na(TrialID) & TrialID < 1000) %>%
+  select(source, participant, date, OS, frameRate, rt, corr, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target)
+
+exp2$device <- ifelse(exp2$OS %in% c("Linux armv7l", "Linux armv8l"), "android", "computer")
+
+# only consider participants who have actually participated in the whole experiment
+# also don't consider participants whose age is 99 (used for testing)
+# one participant is duplicate. Remove the first occurrence (likely incompatible device)
+
+exp2_actual_participants <- filter(exp2_all_participants, (PROLIFIC_PID %in% exp2$participant) & (nchar(PROLIFIC_PID) == 24) & !(PROLIFIC_PID %in% c("5fa3b4abbcfd0b6c243758bc")) & (`What is your age?` != 99) & !(`Response ID` %in% c("R_2c2dVRNmGvI6CH9", "R_3ELutaT6GNe5mmR", "R_XX7jgUk2NbIi41j", "R_125QKzJfHwoGHaT")))
+
+# get participants with more than 80% correct responses
+
+exp2_accuracy_by_participant <- exp2 %>% filter(participant %in% exp2_actual_participants$PROLIFIC_PID) %>% group_by(source) %>% summarise(acc = mean(corr == 1), N = n())
+  
+exp2_participants_to_include <- exp2_accuracy_by_participant %>% filter(N == 480 & acc >= .8)   
+
+exp2_participants_to_exclude <- exp2_accuracy_by_participant %>% filter(N != 480 | acc < .8)   
+
+#participant_list_for_prolific <- str_extract(string = participants_to_include$source, pattern = "[a-z0-9]{24}") 
+
+exp2_data_to_include <- exp2 %>% filter(source %in% exp2_participants_to_include$source & participant %in% exp2_actual_participants$PROLIFIC_PID) %>% mutate(StimulusType = StimulusType %>% factor(levels = c("NW", "WORD"), labels = c("Nonword", "Word")), Condition = Condition %>% factor(levels = c("ID", "UN"), labels = c("Identical", "Unrelated")), PrimeDuration = PrimeDuration %>% factor(levels = c(16, 33), labels = c("16 ms", "33 ms")), rt = rt * 1000)
+
+# filter out any of the participants we eliminated from the Qualtrics file as well
+
+exp2_actual_participants <- filter(exp2_actual_participants, (PROLIFIC_PID %in% exp2_data_to_include$participant))
+
+exp2_participant_ages <- exp2_actual_participants$`What is your age?`
+
+exp2_male_participants_nr <- filter(exp2_actual_participants, `What is your gender (optional)?` == "Male") %>% nrow
+
+exp2_female_participants_nr <- filter(exp2_actual_participants, `What is your gender (optional)?` == "Female") %>% nrow
+
+# there aren't actually any of these, but will leave the code in just in case
+exp2_other_participants_nr <- filter(exp2_actual_participants, `What is your gender (optional)?` == "Other") %>% nrow
+
+exp2_NA_participants_nr <- filter(exp2_actual_participants, is.na(`What is your gender (optional)?`)) %>% nrow
+
+exp2_participant_coords <- exp2_actual_participants %>% select("Location Longitude", "Location Latitude")
+
+
+
+# coords2country function definition in exp1 chunk above
+exp2_actual_participants$country <- coords2country(exp2_participant_coords)
+
+exp2_participant_countries <- table(exp2_actual_participants$country %>% as.character) #make into a character vector since the original output is a factor with as many levels as there are countries
+
+#paste0(participant_list_for_prolific, sep = "\n") %>% writeClipboard() # works on windows
+
+exclude_list_for_prolific <- str_extract(string = exp2_participants_to_exclude$source, pattern = "[a-z0-9]{24}") %>% paste0(collapse = "\n")
+
+```
+
+- `r exp2_all_participants$PROLIFIC_PID %>% unique %>% length` Prolific participants, with `r exp2_actual_participants$PROLIFIC_PID %>% unique %>% length` actually completing the experiment with an accuracy of > .8.
+- `r exp2_male_participants_nr` male and `r exp2_female_participants_nr` female participants 
+- Aged from `r exp2_participant_ages %>% min` to `r exp2_participant_ages %>% max` (mean: `r exp2_participant_ages %>% mean %>% round(2)`). 
+- Only shown to participants who indicated that English was their first language in the Prolific screening questions.
+- Participant countries (according to Qualtrics and based on the IP Addresses, only including participants who could be localized)
+
+```{r participant_location_table_exp2, as.is = TRUE, echo = FALSE}
+knitr::kable(exp2_participant_countries %>% t, format = "html")
+
+```
 
 ---
-# EDA: Experiment 1
-<br>
+# Experiment 2: Results
 
-![Trial diagram](DeltaE1_PrimingEffect.png)
+```{r raincloud_exp2, echo=FALSE}
+plot_raincloud(exp2_data_to_include %>% filter(corr == 1 & rt < 1500), x_column = "Condition", y_column = "rt", x_label = "Condition", y_label = "RT in ms (correct responses)", main_title = "RT by condition and word type") + 
+  # put labels on the mean for easier comparison
+  stat_summary(fun.data = function(x) {data.frame(label = format(mean(x), digits = 2), y = mean(x))}, 
+                                      geom = "text",
+                                      #width = 1,
+                                      position = position_nudge(x = 0.5, y = 0),
+                                      #size = 0.2,
+                                      color = "black") +
+  facet_grid(cols = vars(PrimeDuration), rows = vars(StimulusType), labeller = label_context)
+```
+
 ---
-# EDA: Experiment 2
+# Experiment 2: EDA
 <br>
 
 ![Trial diagram](DeltaE2_PrimingEffect.png)
