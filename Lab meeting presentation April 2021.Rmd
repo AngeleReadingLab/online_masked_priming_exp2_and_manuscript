@@ -1,10 +1,10 @@
 ---
 title: "Can we use masked priming in an online setting?"
-     
 subtitle: "The effect of prime exposure duration in online masked priming lexical decision"
+
 author: "Bernhard Angele, Ana Baciero, Pablo Gomez, & Manuel Perea"
-institute: "Bournemouth University, Universidad Nebrija, DePaul University, California State University San Bernardino, Universitat de Valencia"
-date: "`r Sys.Date()`"
+
+
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -15,78 +15,189 @@ output:
       countIncrementalSlides: false
 ---
 
-# Doing research during a pandemic
+# Masked priming paradigm
+ 
+-  One of the most important techniques to study early letter/word processes
 
-- No eye-tracking!
-- But lots of bored people sitting at home
-- What are language-related paradigms that we can do remotely?
-  - Surveys (not terribly interesting for many language researchers)
+![Trial diagram](MaskedPrimingDiagram.PNG)
+
+<small>(Forster & Davis, 1984)
+
+---
+
+
+# Is masked priming possible online?
+
+<br>
+
+- Technology improvements + current situation have made online studies flourish
+
+<br>
+
+- Different paradigms are easily implemented in online settings:
+
+  - Surveys
   - Self-paced reading
   - RSVP
   - Lexical decision tasks
-
----
-
-# Is priming possible online?
-
-- Overt priming certainly is
-- But masked priming relies on very precise timing of the stimuli.
-- Ken Forster did it a long time ago with GIFs:
-
-  - 40 ms prime duration: 
-  ![40 ms prime](http://www.u.arizona.edu/~kforster/priming/mp_demo_1.gif)
-  - 100 ms prime duration: 
-  ![100 ms prime](http://www.u.arizona.edu/~kforster/priming/mp_demo_2.gif)
   
-- But a demo on a website and an online experiment are two very different things!
+<br>
+
+- But masked priming relies on very precise timing of the stimuli
+
+  - Issue: use of different devices to present the stimuli and record responses
 
 ---
 
-# Using the three Ps (Psychopy, Pavlovia, and Prolific) to collect data
+# Here
 
-- Psychopy is an experiment presentation software allowing precise display of stimuli
-  - It's written in Python, but there is now the option of translating the experiments into Javascript (PsychoJS) for online presentation.
-  - Pavlovia is a paid service that integrates with Psychopy and hosts the experiment code and the collected data
-  - Prolific is a participant recruitment service (like Mechanical Turk, but more research-focused and less US-centric)
+<br>
+<center>
+<big>
+**Is it possible to do masked priming experiments online?**
+
+<br>
+
 
 ---
 
-# Our study
+# But before diving into our study...
 
-- Based on Gomez, Perea, & Ratcliff (2013)
+<br>
 
-- Gomez et al. used the diffusion model to fit data from masked and unmasked prime presentation and found that masked and unmasked priming affect different model parameters:
-  - masked identity priming affects the $T_{er}$ parameter which represents encoding processes
-  - unmasked priming affects both $T_er$ and the drift rates parameter corresponding to the quality of information
+- A key phenomenon in laboratory masked priming lexical decision is that asked identity priming reflects a *savings effect*:
+  - Lexical entry evaluation begins sooner for identity primes than for unrelated primes. 
   
-- If we can show that the data from an online experiment pattern with the masked priming data from Gomez et al. rather than the unmasked priming data, that demonstrates the reliability of the online masked priming paradigm.
+    >- RT distributions of the unrelated and identity pairs reflect a shift rather than a change in shape.
+
+<br>
+
+- Additionally, such shift should be similar in magnitude to the prime-target stimulus-onset asynchrony
+
+---
+# Model fits of observed data
+
+<br>
+
+- Gomez, Perea, & Ratcliff (2013) diffusion model fits:
+
+  -  Masked identity priming affects the $T_{er}$ parameter (encoding processes)
+    
+  -  Unmasked priming affects both $T_{er}$ and the drift rates parameter (quality of information)
+    
+---
+
+# Research question
+
+<br>
+<br>
+
+Could we replicate these findings using an online setup?
+
+<br>
+
+ 
+
+- If we can show that the data from an online experiment pattern with the masked priming data from Gomez et al. rather than the unmasked priming data, that would show the reliability of the online masked priming paradigm.
+
 
 ---
 
-# Design
+# Popular online data collection method
+
+<br>
+
+- Integration of 3 pieces of software: *The three Ps* 
+
+  - **Psychopy**: experiment presentation software that allows precise display of stimuli
+
+  - **Pavlovia**: paid service that hosts the experiment code and the collected data
+
+  - **Prolific**: participant recruitment service (like Mechanical Turk, but more research-focused and less US-centric)
+
+---
+
+# The present study
+
+<br>
+
+- We used said data collection method to examine whether online masked priming studies follow the same pattern as in-lab masked priming studies, manipulating:
+
+  - Prime condition: 
+  
+    >- Identity vs. Unrelated
+  
+  - Prime exposure duration: 
+    
+    >- 33.3 vs. 50 ms (Experiment 1)
+    >- 16.6 vs. 33.3 ms (Experiment 2)
+
+
+---
+
+# Experimental Design
 
 ## Experiment 1
 
+<br>
+
 - Targets: 240 words and 240 nonwords
+
+<br>
+
 - Conditions: 
+
   - prime duration (33 vs. 50 ms)
-    - this corresponds to 2 vs. 3 refresh cycles at 60 Hz
+    >- Corresponding to 2 vs. 3 refresh cycles at 60 Hz
+    
   - prime condition: identical vs. unrelated
+
+<br>
+
 - 60 word/nonword stimuli per group
 
 ---
-# Design
+# Experimental Design
 
 ## Experiment 2
 
-  - Like Experiment 1, but shorter prime duration condition (16 ms vs. 33 ms):
-    - Targets: same 240 words and 240 nonwords
-    - Conditions: 
-      - prime duration (16 vs. 33 ms)
-        - this corresponds to 1 vs. 2 refresh cycles at 60 Hz
-      - prime condition: identical vs. unrelated
-    - 60 word/nonword stimuli per group
+<br>
+
+- Targets: 240 words and 240 nonwords
+
+<br>
+
+- Conditions: 
+
+  - prime duration (16 vs. 33.3 ms)
+    >- Corresponding to 1 vs. 2 refresh cycles at 60 Hz
+    
+  - prime condition: identical vs. unrelated
+
+<br>
+
+- 60 word/nonword stimuli per group
 
 ---
 # Results
+<br>
+
+
+---
+# EDA: Experiment 1
+<br>
+
+![Trial diagram](DeltaE1_PrimingEffect.png)
+---
+# EDA: Experiment 2
+<br>
+
+![Trial diagram](DeltaE2_PrimingEffect.png)
+---
+# Inferentials
+<br>
+
+---
+# Conclusions
+<br>
 
