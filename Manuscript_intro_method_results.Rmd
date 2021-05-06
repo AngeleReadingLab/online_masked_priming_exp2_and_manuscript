@@ -297,7 +297,9 @@ Table \@ref(tab:exp1-blmm-table) shows the mean, standard error, lower and uppe
 ```{r exp1-blmm-table, echo=FALSE, as.is = TRUE}
 # We fit the models in a separate file to make sure that knitting the manuscript doesn't take too long
 load("blmm_exp1_rt_dist_full_ranef_5000.RData")
-# model name is blmm_exp1_rt
+# This file does not fit on GitHub
+# Download it at https://1drv.ms/u/s!ApE7JQmoH0baocARuxg21SFrS4riyg?e=8ZgbHA
+# model name is blmm_exp1_rt_dist
 
 # adapted from a paper by Nalborczyk et al. (2019) -- https://osf.io/eancg/
 
@@ -359,6 +361,9 @@ Table \@ref(tab:exp1-acc-blmm-table) shows the mean, standard error, lower and 
 ```{r exp1-acc-blmm-table, echo=FALSE, as.is = TRUE}
 
 load("blmm_exp1_acc_new_10000.RData")
+
+# This file does not fit on GitHub
+# Download it at https://1drv.ms/u/s!ApE7JQmoH0baobQPat43HR3ixhuqww?e=VySttd
 
 blmm_exp1_summary_acc <- summary(blmm_exp1_acc)
 
@@ -530,8 +535,11 @@ apa_table(
 
 ```{r load_exp2_brms_data, echo=FALSE, as.is = TRUE}
 # We fit the models in a separate file to make sure that knitting the manuscript doesn't take too long
-load("blmm_exp2_rt_dist.RData")
-# model name is blmm_exp2_rt
+load("blmm_exp2_rt_dist_full_ranef_5000.RData")
+# this file doesn't fit on GitHub
+# download it at https://1drv.ms/u/s!ApE7JQmoH0baocIO3qh2TNb_TlqvlA?e=q3vJml
+
+# model name is blmm_exp2_rt_dist
 
 # adapted from a paper by Nalborczyk et al. (2019) -- https://osf.io/eancg/
 
@@ -590,6 +598,9 @@ plot(del_hdi_exp2_rt) + scale_fill_flat() + theme_apa()
 ```{r exp2_acc_brms_table, echo=FALSE, as.is = TRUE}
 
 load("blmm_exp2_acc_new_10000.RData")
+
+# This file doesn't fit on GitHub
+# Download it at https://1drv.ms/u/s!ApE7JQmoH0baobF4qRyXSfOymglf_g?e=0JGhre
 
 blmm_exp2_summary_acc <- summary(blmm_exp2_acc)
 
