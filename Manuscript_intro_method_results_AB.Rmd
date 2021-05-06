@@ -592,7 +592,7 @@ We analyzed the data in the same way as in Experiment 1, again only analyzing tr
 exp2_descriptives_rt <- exp2_data_to_include %>%
   filter(rt > 250 & rt < 2000 & corr == 1) %>%
   group_by(StimulusType, PrimeDuration, Condition) %>%
-  summarize(a
+  summarize(
     Mean = mean(rt)
     , Median = median(rt)
     , SD = sd(rt)
