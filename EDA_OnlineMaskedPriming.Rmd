@@ -10,6 +10,7 @@ output: pdf_document
 library(tidyverse)
 library(ggplot2)
 library(papaja)
+library(patchwork)
 
 ```
 
@@ -58,7 +59,8 @@ exp1_data_to_include <- exp1 %>%
 
 ```{r E1 Head, tidy=TRUE}
 
-E1<- exp1_data_to_include%>%
+E1<- exp1_data_to_include%>% 
+  filter(rt > 250 & rt < 2000)%>%
   select(participant, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target, corr, rt)%>%
   mutate(participant=factor(participant),
          TrialID = factor(TrialID))
@@ -137,7 +139,7 @@ data.E1.quantiles %>%
   ungroup()-> vincentiles.E1
 
 
-#Priming Effect (related vs. unrelated):
+#Priming Effect (unrelated - identity):
 
 vincentiles.E1 %>%
   arrange(desc(Condition))%>%
@@ -158,7 +160,7 @@ ggplot(aes(y=Delta, x=MRT)) +
 
 DeltaE1.PrimingEffect
 
-#Prime Duration Effect (33ms vs 50 ms):
+#Prime Duration Effect (33ms - 50 ms):
  
 vincentiles.E1 %>%
   group_by(StimulusType,Condition,q) %>%
@@ -179,6 +181,74 @@ DeltaE1.PrimeDurationEffect
 
 ```
 
+
+```{r Deltas E1 Words, message=FALSE, warning=FALSE}
+
+#Priming Effect (unrelated - identity):
+
+vincentiles.E1 %>%
+  filter(StimulusType == "Word")%>%
+  arrange(desc(Condition))%>%
+  group_by(PrimeDuration,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ungroup()%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line(size = .75)+
+  geom_point(size = 2)+
+  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
+  ylim(-60, +60)+
+  xlim(450, 850)+
+  xlab("Mean RT per quantile")+
+  ylab("Effect (in ms)")+
+  ggtitle("Priming Effect")+
+  facet_wrap(~PrimeDuration)+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 12),
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE1.PrimingEffect.W
+
+
+
+#Prime Duration Effect (33ms - 50 ms):
+ 
+vincentiles.E1 %>%
+  filter(StimulusType == "Word")%>%
+  group_by(Condition,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ggplot(aes(y=Delta, x=MRT)) +
+  geom_line(size = .75)+
+  geom_point(size = 2)+
+  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
+  ylim(-60, +60)+
+  xlim(450, 850)+
+  xlab("Mean RT per quantile")+
+  ylab("Effect (in ms)")+
+  ggtitle("Prime duration effect")+
+  facet_wrap(~ Condition)+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 12),
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE1.PrimeDurationEffect.W
+
+
+#pdf("Fig_deltasE1.pdf", height = 5)
+
+cowplot::plot_grid(DeltaE1.PrimingEffect.W,
+                   DeltaE1.PrimeDurationEffect.W,
+                   ncol = 1,
+                   labels = c("A", "B"))+
+  plot_annotation(title = "Experiment 1: 33 vs. 50 ms",
+                  theme = theme(plot.title = element_text(size = 14)))
+  
+
+#dev.off()
+
+```
+
+
+
 ```{r Deltas E2, message=FALSE, warning=FALSE}
 
 E2 %>%
@@ -194,7 +264,7 @@ data.E2.quantiles %>%
   ungroup()-> vincentiles.E2
 
 
-#Priming Effect (related vs. unrelated):
+#Priming Effect (unrelated - identity):
 
 vincentiles.E2 %>%
   arrange(desc(Condition))%>%
@@ -216,7 +286,7 @@ ggplot(aes(y=Delta, x=MRT)) +
 DeltaE2.PrimingEffect
 
 
-#Prime Duration Effect (33ms vs 50 ms):
+#Prime Duration Effect (16ms - 33 ms):
  
 vincentiles.E2 %>%
   group_by(StimulusType,Condition,q) %>%
@@ -237,6 +307,65 @@ DeltaE2.PrimeDurationEffect
 
 ```
 
+```{r Deltas E2 Words, message=FALSE, warning=FALSE}
+
+#Priming Effect (unrelated - identity):
+
+vincentiles.E2 %>%
+  filter(StimulusType == "Word")%>%
+  arrange(desc(Condition))%>%
+  group_by(PrimeDuration,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ungroup()%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line(size = .75)+
+  geom_point(size = 2)+
+  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
+  ylim(-60, +60)+
+  xlim(450, 850)+
+  xlab("Mean RT per quantile")+
+  ylab("Effect (in ms)")+
+  ggtitle("Priming Effect")+
+  facet_wrap(~PrimeDuration)+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 12),
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE2.PrimingEffect.W
+
+#Prime Duration Effect (16ms - 33 ms):
+ 
+vincentiles.E2 %>%
+  filter(StimulusType == "Word")%>%
+  group_by(Condition,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ggplot(aes(y=Delta, x=MRT)) +
+  geom_line(size = .75)+
+  geom_point(size = 2)+
+  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
+  ylim(-60, +60)+
+  xlim(450, 850)+
+  xlab("Mean RT per quantile")+
+  ylab("Effect (in ms)")+
+  ggtitle("Prime duration effect")+
+  facet_wrap(~ Condition)+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 12),
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE2.PrimeDurationEffect.W
+
+#pdf("Fig_deltasE2.pdf", height = 5)
+
+cowplot::plot_grid(DeltaE2.PrimingEffect.W,
+                   DeltaE2.PrimeDurationEffect.W,
+                   ncol = 1,
+                   labels = c("A", "B"))+
+  plot_annotation(title = "Experiment 2: 16 vs. 33 ms",
+                  theme = theme(plot.title = element_text(size = 14)))
+  
+
+```
 
 \newpage
 
