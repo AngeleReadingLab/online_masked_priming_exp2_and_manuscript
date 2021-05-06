@@ -46,7 +46,7 @@ linenumbers       : no
 mask              : no
 draft             : no
 csl               : "apa.csl"
-documentclass     : "apa7"
+documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
 bibliography: ["references.bib", "r-references.bib"]
@@ -60,7 +60,6 @@ library("brms")
 library("bayestestR")
 library("see")
 library("papaja")
-library(ggplot2)
 library(patchwork)
 
 r_refs("r-references.bib")
@@ -71,6 +70,7 @@ r_refs("r-references.bib")
 # Seed for random number generation
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+knitr::opts_chunk$set(error = TRUE)
 ```
 
 Masked priming [@forsterRepetitionPrimingFrequency1984] is one of the most important techniques to study the effects of orthography, phonology, morphology, and meaning in visual word recognition[see @forster1998pros; and @grainger2008cracking, for reviews]. Priming refers to the influence of a prime stimulus (e.g., *nurse*, *horse*) on a subsequently presented stimulus that the participant has to respond (e.g., "is *DOCTOR* a word?"). It is measured as the difference in a dependent variable (e.g., response time [RT]) between two conditions (e.g., unrelated: *horse-DOCTOR*; related: *nurse-DOCTOR*). In masked priming, the prime stimulus is presented very briefly (for less than 60 ms) and is itself preceded by a pattern mask (e.g., \#\#\#\#\#) for a much longer duration (typically 500 ms). The rationale of the procedure is to make participants unaware of the identity of the masked prime [@forsterRepetitionPrimingFrequency1984; @forster1998pros], thus minimizing the role of participants' strategies. Indeed, masked priming experiments do not show the strategical effects that occur with visible, unmasked primes [e.g., @grossi2006relatedness; @perea2002does].
@@ -592,7 +592,7 @@ We analyzed the data in the same way as in Experiment 1, again only analyzing tr
 exp2_descriptives_rt <- exp2_data_to_include %>%
   filter(rt > 250 & rt < 2000 & corr == 1) %>%
   group_by(StimulusType, PrimeDuration, Condition) %>%
-  summarize(
+  summarize(a
     Mean = mean(rt)
     , Median = median(rt)
     , SD = sd(rt)
@@ -677,11 +677,11 @@ The model indicates that response times were higher in the unrelated condition t
 
 ```{r exp2-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp2-brms-rt-plot-caption)"}
 
-del_hdi_exp2_rt = hdi(blmm_exp2_rt, ci = c(0.5, 0.75, 0.89, 0.95))
+#del_hdi_exp2_rt = hdi(blmm_exp2_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
 # brms (like any other lm-like function) automatically adds a "1" to the parameter name (for the contrast)
 # get rid of the ones (and any other numbers) by using gsub 
 #del_hdi_exp2_rt$Parameter <- del_hdi_exp2_rt$Parameter %>% gsub(pattern = "[[:digit:]]", replacement = "")
-plot(del_hdi_exp2_rt) + scale_fill_flat() + theme_apa()
+#plot(del_hdi_exp2_rt_dist) + scale_fill_flat() + theme_apa()
 ```
 
 (ref:exp2-blmm-accuracy-table-caption) Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for the fixed effects of the model fitted for response accuracy on word trials in Experiment 2.
