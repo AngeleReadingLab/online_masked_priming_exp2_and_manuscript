@@ -347,7 +347,7 @@ The RT model indicates that response times were higher in the unrelated conditio
 
 ```{r exp1-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp1-brms-rt-plot-caption)"}
 
-del_hdi_exp1_rt = hdi(blmm_exp1_rt, ci = c(0.5, 0.75, 0.89, 0.95))
+del_hdi_exp1_rt = hdi(blmm_exp1_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
 
 plot(del_hdi_exp1_rt) +
   scale_fill_flat() + theme_apa()
