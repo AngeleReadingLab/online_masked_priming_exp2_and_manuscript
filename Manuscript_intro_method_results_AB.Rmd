@@ -95,11 +95,7 @@ In the present paper, we took advantage of the above marker to examine whether o
 
 To further constrain the research questions, Experiment 2 was designed to be analogous to Experiment 1, except for the use of a very short prime exposure duration (i.e., 16.6ms). Similar prime exposure durations have shown rather weak masked priming lexical decision experiments in a laboratory setting: smaller than 5 ms for prime durations of 14 ms [@ziegler2000] and smaller than 9 ms for a prime duration of 20 ms [@Tzur_2007]---in the @Tzur_2007 experiment, this difference increased to 16 ms when using a very high level of contrast in the computer screen. Thus, if the size of the priming effect is roughly similar to the prime exposure duration, we would expect a much larger priming effect at the 33.3 ms prime exposure duration than at the 16.6 ms prime exposure duration. If we do observe a large effect at the 16.6 ms prime exposure duration (e.g., above 20-25 ms), this would suggest, again, that there is a qualitative difference between using the masked priming technique in the laboratory and in online experiments. Keep in mind that we are using a software that has good control over the exposure duration [@bridges2020; @anwyl-irvine2020a].All in all, replicating the results observed in controlled laoboratory masked primiming studies would provide some grounds to the validity of online masked priming tasks,even with no control over many variables (e.g., the devices in which the experiment is run, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021].
 
-\color{red}ADD at some point:
-
-    - Hypotheses in a figure (as in Gomez & Perea, 2020). 
-    
-\color{black}
+\color{red} ADD: Hypotheses -> Model -> Data in a figure. \color{black}
 
 The study was pre-registered on the Open Science Framework (OSF) prior to data collection. The registration form, together with the materials, data files, and R scripts can be found at https://osf.io/d2txs/.
 
@@ -207,9 +203,7 @@ exp1_participant_countries <- table(exp1_actual_participants$country %>% as.char
 
 Participants were recruited through Prolific [www.prolific.co, -@prolific2021]. The experiment was accessed by `r exp1_all_participants$PROLIFIC_PID %>% unique %>% length` participants. Out of these, `r exp1_accuracy_by_participant %>% nrow` provided experimental data. `r exp1_participants_to_exclude %>% filter(N != 480) %>% nrow %>% numbers_to_words() %>% str_to_sentence()` of these participants did not complete the experiment. A further `r exp1_participants_to_exclude %>% filter(N == 480 & acc < .8) %>% nrow %>% ifelse(. < 11, numbers_to_words(.), .)` were excluded because of low accuracy (less than .8, which was the pre-registered criterion). In the end, we analyzed the data from `r exp1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants (`r exp1_female_participants_nr` female), aged from `r exp1_participant_ages %>% min` to `r exp1_participant_ages %>% max` (mean age: `r exp1_participant_ages %>% mean %>% round(2)`). All these participants indicated that English was their first language in the Prolific screening questions. Based on their IP addresses, `r exp1_participant_countries["United Kingdom"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in the UK, `r exp1_participant_countries["United States of America"] %>% ifelse(. < 11, numbers_to_words(.), .)` were based in the US, `r exp1_participant_countries["Canada"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Canada, and `r exp1_participant_countries["Ireland"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Ireland. Two participants could not be localized in this way. All participants were naïve to the purpose of the experiment and received £1.25 for their participation (corresponding to £5/hour).  Participants could use either a desktop/laptop computer or a mobile device. Because of a technical display issue with PsychoJS and the Safari browser, participants who tried to access the experiment using that browser, including all participants on iOS devices, were advised to change browser or device and restart the experiment.
 
-#### Rationale for sample size and stopping rule
-
-@brysbaert2018 recommended that masked priming experiments should have at least 1,600 observations per condition. In order to account for potentially smaller effect sizes in an online experiment, we set a target of 3,000 observations per condition (12,000 observations total), which corresponds to a minimum of 50 participants given that there were 240 word stimuli in the experiment (see below). Our stopping rule was to keep collecting data until 3,000 valid observations were found. This goal was met and exceeded in our initial data collection with a budget of £200.
+***Rationale for sample size and stopping rule.*** @brysbaert2018 recommended that masked priming experiments should have at least 1,600 observations per condition. In order to account for potentially smaller effect sizes in an online experiment, we set a target of 3,000 observations per condition (12,000 observations total), which corresponds to a minimum of 50 participants given that there were 240 word stimuli in the experiment (see below). Our stopping rule was to keep collecting data until 3,000 valid observations were found. This goal was met and exceeded in our initial data collection with a budget of £200.
 
 
 ### Materials
@@ -235,18 +229,18 @@ Participants were able to sign up for the experiment on the Prolific website. On
 ### Data analysis
 
 We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the *brms* package [@R-brms_a; @R-brms_b] in R [@R-base][^1]. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). As the trials automatically ended after 2000 ms, there were no RTs longer than this. For both RTs and accuracy, we fitted a model with priming condition (unrelated vs. identical) and prime duration (33 ms vs. 50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -1 and unrelated was coded as 1. For priming duration, 33 ms was coded as -1 and 50 ms was coded as 1. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times and the Bernoulli distribution (with a logit link) to model response accuracy. We used the default priors suggested by *brms* except for the coefficients for the fixed effects, for which we applied weakly informative priors of $\beta \sim N(0,100)$ in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each (1000 warmup iterations). We consider an effect as credible if the 95% credible interval (CrI) estimated from the posterior distribution does not contain zero.
-
 In addition, to better visualize the distributional features of the latency data, we computed the delta plots for both priming and prime duration effects. 
 
 [^1]: The full list of software we used for our analyses is as follows: `r cite_r("r-references.bib")`.
+
 
 ## Results
 
 Descriptive statistics for response times and accuracy for both words and nonwords in the experimental conditions are reported in Table \@ref(tab:exp1-descriptive-rt-table) (although note that we only analyzed the word trials).
 
-(ref:exp1-descriptives-rt-table-caption) Mean, median, standard deviation, and range of correct response times (in ms) and response accuracy (proportion of all responses) in Experiment 1 for words and nonwords and by prime duration and priming condition.
+(ref:exp1-descriptives-rt-table-caption) Mean, median, standard deviation, and range of correct response times (in ms) and response accuracy (proportion of all responses) in Experiment 1 for each condition.
 
-```{r exp1-descriptive-rt-table, as.is = TRUE,echo=FALSE}
+```{r exp1-descriptive-rt-table, as.is = TRUE,echo=FALSE, warning=FALSE, message=FALSE}
 #load raw Exp1 data
 
 
@@ -282,7 +276,6 @@ exp1_descriptives_rt$Accuracy <- exp1_descriptives_corr$Accuracy
 apa_table(
   exp1_descriptives_rt
   , caption = "(ref:exp1-descriptives-rt-table-caption)"
-  , note = "Trials with reaction times below 250 ms were excluded from the analysis. For the calculation of response times, incorrect responses were also removed."
   , escape = TRUE
 )  
 ```
@@ -293,7 +286,7 @@ Table \@ref(tab:exp1-blmm-table) shows the mean, standard error, lower and uppe
 
 (ref:exp1-blmm-table-caption) Posterior mean, standard error (SE), 95% credible interval and $\hat{R}$ statistic for the fixed effects of the model fitted for correct word response times in Experiment 1.
 
-```{r exp1-blmm-table, echo=FALSE, as.is = TRUE}
+```{r exp1-blmm-table, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE}
 # We fit the models in a separate file to make sure that knitting the manuscript doesn't take too long
 
 load("blmm_exp1_rt_dist_full_ranef_5000.RData")
@@ -337,30 +330,33 @@ apa_table(
     escape = FALSE
     )
 
-
-
 ```
 
 The RT model indicates that response times were higher in the unrelated condition than the identical (*b* = `r blmm_exp1_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["Condition1","u-95% CI"]`]) and higher in the 33 ms prime duration condition than in the 50 ms prime duration condition (*b* = `r blmm_exp1_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]). The interaction term indicates that the priming effect was stronger in the 50 ms condition than the 33 ms condition (*b* = `r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). Figure \@ref(fig:exp1-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
 
-(ref:exp1-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the parameters of the response time model in Experiment 1.
+(ref:exp1-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the conditional parameters of the RT model in Experiment 1.
 
-```{r exp1-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp1-brms-rt-plot-caption)"}
+```{r exp1-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp1-brms-rt-plot-caption)", warning=FALSE, message=FALSE}
 
 del_hdi_exp1_rt = hdi(blmm_exp1_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
 
-plot(del_hdi_exp1_rt) +
-  scale_fill_flat() + theme_apa()
+del_hdi_exp1_rt%>%
+  filter(!grepl("beta",Parameter)) -> posteriorsToPlot
 
-#scale_fill_manual(values = c("dodgerblue4","dodgerblue3","dodgerblue2","deepskyblue1", "lightskyblue"), labels = c("50%", "75%", "85%", "95%", "100%"))+
+plot(posteriorsToPlot) +
+  scale_fill_flat(labels = c("50%", "75%", "89%", "95%", "100%")) +
+  ylab("")+
+  theme_apa() -> Plot_post_E1
+
+Plot_post_E1
 
 ```
 
-To better visualize the data, we computed the delta plots for the effect of Priming (see Panel A in Figure \@ref(fig:Deltas_E1_Words)), as well as for the effect of Prime Duration (see Panel B in Figure \@ref(fig:Deltas_E1_Words)). These delta plots are residual quantile plots that show the size of the effect for the .1, .3, .5, .7, and .9 response time quantiles.
+To better visualize the data, we computed the delta plots for the effect of Priming (see Panel A in
+Figure \@ref(fig:Deltas_E1_Words) ), as well as for the effect of Prime Duration (see Panel B in Figure \@ref(fig:Deltas_E1_Words) ). These delta plots are residual quantile plots that show the size of the effect for the .1, .3, .5, .7, and .9 response time quantiles.
 
-(ref:Deltas_E1_Words-caption) Delta in Experiment 1...EXPLAIN.
 
-```{r Deltas_E1_Words, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp1-brms-rt-plot-caption)"}
+```{r Deltas_E1_Words, echo=FALSE, cache=TRUE, fig.cap = "Delta in Experiment 1...EXPLAIN.", message=FALSE, warning=FALSE}
 
 E1<- exp1_data_to_include%>% 
   filter(rt > 250 & rt < 2000)%>%
@@ -449,7 +445,7 @@ Table \@ref(tab:exp1-acc-blmm-table) shows the mean, standard error, lower and 
 
 (ref:exp1-blmm-accuracy-table-caption) Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for the fixed effects of the model fitted for response accuracy on word trials in Experiment 1.
 
-```{r exp1-acc-blmm-table, echo=FALSE, as.is = TRUE}
+```{r exp1-acc-blmm-table, echo=FALSE, as.is = TRUE, message=FALSE, warning=FALSE}
 
 load("blmm_exp1_acc_new_10000.RData")
 
@@ -567,9 +563,7 @@ exclude_list_for_prolific <- str_extract(string = exp2_participants_to_exclude$s
 As in Experiment 1, participants were recruited through Prolific [www.prolific.co, -@prolific2021]. The experiment was accessed by `r exp2_all_participants$PROLIFIC_PID %>% unique %>% length` participants. Out of these, `r exp2_accuracy_by_participant %>% nrow` provided experimental data. `r exp2_participants_to_exclude %>% filter(N != 480) %>% nrow %>% numbers_to_words() %>% str_to_sentence()` of these participants did not complete the experiment. A further `r exp2_participants_to_exclude %>% filter(N == 480 & acc < .8) %>% nrow %>% ifelse(. < 11, numbers_to_words(.), .)` were excluded because of low accuracy (again, less than .8). The remaining `r exp2_actual_participants$PROLIFIC_PID %>% unique %>% length` participants were aged from `r exp2_participant_ages %>% min` to `r exp2_participant_ages %>% max` (mean age: `r exp1_participant_ages %>% mean %>% round(2)`). Of the participants, `r exp2_male_participants_nr` identified as male, `r exp2_female_participants_nr` identified as female, and `r exp2_other_participants_nr` identified as other. All these participants indicated that English was their first language in the Prolific screening questions. Based on their IP addresses, `r exp2_participant_countries["United Kingdom"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in the UK, `r exp2_participant_countries["United States of America"] %>% ifelse(. < 11, numbers_to_words(.), .)` were based in the US, `r exp2_participant_countries["Canada"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Canada, `r exp2_participant_countries["South Africa"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in South Africa, and one participant each was based in Hungary and Ireland. `r exp2_actual_participants$country %>% is.na %>% sum %>% numbers_to_words %>% str_to_sentence()` participants could not be localized in this way. As in Experiment 1, all participants were naïve to the purpose of the experiment, and received £1.25 for their participation (corresponding to £5/hour). Participants could use either a desktop/laptop computer or a mobile device. Because of a technical display issue with PsychoJS and the Safari browser, participants who tried to access the experiment using that browser, including all participants on iOS devices, were advised to change browser or device and restart the experiment.
 
 
-#### Rationale for sample size and stopping rule
-
-As in Experiment 1, our stopping rule was to keep collecting data until 3,000 valid observations were collected. This goal was met and exceeded in our initial data collection with a budget of £200.
+***Rationale for sample size and stopping rule.*** As in Experiment 1, our stopping rule was to keep collecting data until 3,000 valid observations were collected. This goal was met and exceeded in our initial data collection with a budget of £200.
 
 ### Materials
 
@@ -581,18 +575,20 @@ The procedure was identical to Experiment 1, the only difference being that the 
 
 ### Data analysis
 
-We analyzed the data in the same way as in Experiment 1, again only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). For priming duration, 16 ms was coded as -1 and 33 ms was coded as 1. Otherwise, the model specifications were identical to those in Experiment 1. W
+We analyzed the data in the same way as in Experiment 1, again only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). For priming duration, 16 ms was coded as -1 and 33 ms was coded as 1. Otherwise, the model specifications were identical to those in Experiment 1. SAY SOMETHING ABOUT THE DELTAS
 
 ## Results
 
+The model indicates that response times were higher in the unrelated condition than the identical condition (*b* = `r blmm_exp2_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1","u-95% CI"]`]), although across the two prime duration conditions, the effect was much smaller than in Experiment 1. Response times were also higher in the 16 ms than in the 33 ms prime duration condition (*b* = `r blmm_exp2_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]) although, as the interaction effect shows, this was mainly due to an absence of the priming effect in the 16 ms prime duration condition, as opposed to the 33 ms condition, which showed a robust priming effect (*b* = `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). Figure \@ref(fig:exp2-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
+
 (ref:exp2-descriptives-rt-table-caption) Mean, median, standard deviation, and range of correct response times (in ms) and response accuracy (proportion of all responses) in Experiment 2 for words and nonwords and by prime duration and priming condition.
 
-```{r exp2-descriptive-rt-table, as.is = TRUE,echo=FALSE}
+```{r exp2-descriptive-rt-table, as.is = TRUE,echo=FALSE, message=FALSE, warning=FALSE}
 
 exp2_descriptives_rt <- exp2_data_to_include %>%
   filter(rt > 250 & rt < 2000 & corr == 1) %>%
   group_by(StimulusType, PrimeDuration, Condition) %>%
-  summarize(a
+  summarize(
     Mean = mean(rt)
     , Median = median(rt)
     , SD = sd(rt)
@@ -625,7 +621,7 @@ apa_table(
 
 (ref:exp2-blmm-rt-table-caption) Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for the fixed effects of the model fitted for correct word response times in Experiment 2.
 
-```{r load_exp2_brms_data, echo=FALSE, as.is = TRUE}
+```{r load_exp2_brms_data, echo=FALSE, as.is = TRUE, message=FALSE, warning=FALSE}
 # We fit the models in a separate file to make sure that knitting the manuscript doesn't take too long
 load("blmm_exp2_rt_dist_full_ranef_5000.RData")
 # this file doesn't fit on GitHub
@@ -671,22 +667,30 @@ apa_table(
 
 ```
 
-The model indicates that response times were higher in the unrelated condition than the identical condition (*b* = `r blmm_exp2_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1","u-95% CI"]`]), although across the two prime duration conditions, the effect was much smaller than in Experiment 1. Response times were also higher in the 16 ms than in the 33 ms prime duration condition (*b* = `r blmm_exp2_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]) although, as the interaction effect shows, this was mainly due to an absence of the priming effect in the 16 ms prime duration condition, as opposed to the 33 ms condition, which showed a robust priming effect (*b* = `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). Figure \@ref(fig:exp2-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
 
-(ref:exp2-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the parameters of the response time model in Experiment 2.
 
-```{r exp2-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp2-brms-rt-plot-caption)"}
+(ref:exp2-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the conditional parameters of the RT model in Experiment 2.
 
-#del_hdi_exp2_rt = hdi(blmm_exp2_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
-# brms (like any other lm-like function) automatically adds a "1" to the parameter name (for the contrast)
-# get rid of the ones (and any other numbers) by using gsub 
-#del_hdi_exp2_rt$Parameter <- del_hdi_exp2_rt$Parameter %>% gsub(pattern = "[[:digit:]]", replacement = "")
-#plot(del_hdi_exp2_rt_dist) + scale_fill_flat() + theme_apa()
+```{r exp2-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp2-brms-rt-plot-caption)", message=FALSE, warning=FALSE}
+
+del_hdi_exp2_rt = hdi(blmm_exp2_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
+
+del_hdi_exp2_rt%>%
+  filter(!grepl("beta",Parameter)) -> posteriorsToPlotE2
+
+plot(posteriorsToPlotE2) +
+  scale_fill_flat(labels = c("50%", "75%", "89%", "95%", "100%")) +
+  ylab("")+
+  theme_apa() -> Plot_post_E2
+
+Plot_post_E2
+
+
 ```
 
 (ref:exp2-blmm-accuracy-table-caption) Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for the fixed effects of the model fitted for response accuracy on word trials in Experiment 2.
 
-```{r exp2_acc_brms_table, echo=FALSE, as.is = TRUE}
+```{r exp2_acc_brms_table, echo=FALSE, as.is = TRUE, message=FALSE, warning=FALSE}
 
 load("blmm_exp2_acc_new_10000.RData")
 
