@@ -228,7 +228,7 @@ Participants were able to sign up for the experiment on the Prolific website. On
 
 ### Data analysis
 
-We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the *brms* package [@R-brms_a; @R-brms_b] in R [@R-base][^1]. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). As the trials automatically ended after 2000 ms, there were no RTs longer than this. For both RTs and accuracy, we fitted a model with priming condition (unrelated vs. identical) and prime duration (33 ms vs. 50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -1 and unrelated was coded as 1. For priming duration, 33 ms was coded as -1 and 50 ms was coded as 1. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times and the Bernoulli distribution (with a logit link) to model response accuracy. We used the default priors suggested by *brms* except for the coefficients for the fixed effects, for which we applied weakly informative priors of $\beta \sim N(0,100)$ in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each (1000 warmup iterations). We consider an effect as credible if the 95% credible interval (CrI) estimated from the posterior distribution does not contain zero.
+We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the *brms* package [@R-brms_a; @R-brms_b] in R [@R-base][^1]. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). As the trials automatically ended after 2000 ms, there were no RTs longer than this. For both RTs and accuracy, we fitted a model with priming condition (unrelated vs. identical) and prime duration (33 ms vs. 50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -1 and unrelated was coded as 1. For priming duration, 33 ms was coded as -1 and 50 ms was coded as 1. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times, with both the mean of the Gaussian component $\mu$ and the scale parameter of the exponential component $\beta$ (equalling the inverse of the rate parameter $\lambda$) being allowed to vary between conditions. To model response accuracy, we used the Bernoulli distribution with a logit link. We used the default priors suggested by *brms* except for the coefficients for the fixed effects, for which we applied weakly informative priors of $\beta \sim N(0,100)$ in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each with 1000 warmup iterations (10,000 iterations with 2000 warmup iterations for the accuracy models). We consider an effect as credible if the 95% credible interval (CrI) estimated from the posterior distribution does not contain zero.
 In addition, to better visualize the distributional features of the latency data, we computed the delta plots for both priming and prime duration effects. 
 
 [^1]: The full list of software we used for our analyses is as follows: `r cite_r("r-references.bib")`.
@@ -303,12 +303,12 @@ blmm_exp1_rt_fixed_for_print <- blmm_exp1_summary_rt$fixed
 parameter_names <- c(
     "Intercept ($\\mu$)",
     "Intercept ($\\beta$)",
-    "Condition ($\\mu$)",
+    "Relatedness ($\\mu$)",
     "Prime Duration ($\\mu$)",
-    "Condition:Prime Duration ($\\mu$)",
-    "Condition ($\\beta$)",
+    "Relatedness:Prime Duration ($\\mu$)",
+    "Relatedness ($\\beta$)",
     "Prime Duration ($\\beta$)",
-    "Condition:Prime Duration ($\\beta$)"
+    "Relatedness:Prime Duration ($\\beta$)"
     )
 
 
@@ -332,23 +332,26 @@ apa_table(
 
 ```
 
-The RT model indicates that response times were higher in the unrelated condition than the identical (*b* = `r blmm_exp1_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["Condition1","u-95% CI"]`]) and higher in the 33 ms prime duration condition than in the 50 ms prime duration condition (*b* = `r blmm_exp1_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]). The interaction term indicates that the priming effect was stronger in the 50 ms condition than the 33 ms condition (*b* = `r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). Figure \@ref(fig:exp1-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
+The RT model indicates that the mean of the normal distribution $\mu$ was higher in the unrelated condition than the identical (*b* = `r blmm_exp1_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["Condition1","u-95% CI"]`]). For the main effect of prime duration, the CrI contains 0, suggesting that, when averaging across the relatedness conditions, there is no strong difference between the 16.7 ms and the 33.3 ms prime duration (*b* = `r blmm_exp1_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]). However, the interaction term demonstrates that this is actually due to the fact that there was a strong priming effect in the 33 ms condition, but only a negligible effect in the 16 ms condition (*b* = `r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). 
+Once again, the shape parameter of the exponential distribution $\beta$ was affected very little by prime relatedness (*b* = `r blmm_exp1_summary_rt$fixed["beta_Condition1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["beta_Condition1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["beta_Condition1","u-95% CI"]`]). However, the 50 ms prime exposure duration (*b* = `r blmm_exp1_summary_rt$fixed["beta_PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["beta_PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["beta_PrimeDuration1","u-95% CI"]`]) seems to be associated with a slightly lower $\beta$, i.e., a slightly weaker right skew of the distribution, than the 33 ms condition. On the other hand, there did not seem to be an interactive effect of prime relatedness and prime exposure time on the shape of the distribution (*b* = `r blmm_exp1_summary_rt$fixed["beta_Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp1_summary_rt$fixed["beta_Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp1_summary_rt$fixed["beta_Condition1:PrimeDuration1","u-95% CI"]`]).
 
-(ref:exp1-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the conditional parameters of the RT model in Experiment 1.
+<!---  Figure \@ref(fig:exp1-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
+
+(ref:exp1-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the conditional parameters of the RT model in Experiment 1. -->
 
 ```{r exp1-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp1-brms-rt-plot-caption)", warning=FALSE, message=FALSE}
 
-del_hdi_exp1_rt = hdi(blmm_exp1_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
-
-del_hdi_exp1_rt%>%
-  filter(!grepl("beta",Parameter)) -> posteriorsToPlot
-
-plot(posteriorsToPlot) +
-  scale_fill_flat(labels = c("50%", "75%", "89%", "95%", "100%")) +
-  ylab("")+
-  theme_apa() -> Plot_post_E1
-
-Plot_post_E1
+# del_hdi_exp1_rt = hdi(blmm_exp1_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
+# 
+# del_hdi_exp1_rt%>%
+#   filter(!grepl("beta",Parameter)) -> posteriorsToPlot
+# 
+# plot(posteriorsToPlot) +
+#   scale_fill_flat(labels = c("50%", "75%", "89%", "95%", "100%")) +
+#   ylab("")+
+#   theme_apa() -> Plot_post_E1
+# 
+# Plot_post_E1
 
 ```
 
@@ -487,7 +490,7 @@ The accuracy model indicates that participants were less likely to produce a cor
 
 ## Discussion
 
-The results from Experiment 1 show that we were able to replicate masked priming effects using an online experiment. The size of the effect is similar to that observed in previous studies. We also saw a clear difference between the 33 ms prime duration and the 50 ms prime duration, indicating that the experiment can reliably implement timing differences of up to one frame across a variety of participant devices. We did not observe an effect of either the priming condition or the prime exposure duration on the shape parameter $\beta$ of the exponential distribution, suggesting, according to the savings hypothesis by @forster1998pros, that only encoding processes were affected.
+The results from Experiment 1 show that we were able to replicate masked priming effects using an online experiment. The size of the effect is similar to that observed in previous studies. We also saw a clear difference between the 33 ms prime duration and the 50 ms prime duration, indicating that the experiment can reliably implement timing differences of up to one frame across a variety of participant devices. While the shape of the distribution changed slightly between the 33.3 ms and the 50 ms prime exposure durations, we did not observe an effect of the prime relatedness condition on the shape parameter $\beta$ of the exponential distribution, suggesting, according to the savings hypothesis by @forster1998pros, that only encoding processes were affected by the relatedness manipulation.
 
 Of course, just because there was a difference between the conditions, this does not necessarily mean that the timings in the two prime duration conditions actually corresponded to the display durations set in the experiment script, just that they were different. In order to further explore this, we performed a second experiment in which we set the prime to be displayed for an even shorter duration. As described above, a 16.6 ms prime duration should yield qualitatively different effects from the 33.3 and 50 ms durations used in Experiment 1. If it does not, this casts doubt on the timing accuracy in online experiments.
 
@@ -577,9 +580,6 @@ The procedure was identical to Experiment 1, the only difference being that the 
 
 We analyzed the data in the same way as in Experiment 1, again only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). For priming duration, 16 ms was coded as -1 and 33 ms was coded as 1. Otherwise, the model specifications were identical to those in Experiment 1. SAY SOMETHING ABOUT THE DELTAS
 
-## Results
-
-The model indicates that response times were higher in the unrelated condition than the identical condition (*b* = `r blmm_exp2_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1","u-95% CI"]`]), although across the two prime duration conditions, the effect was much smaller than in Experiment 1. Response times were also higher in the 16 ms than in the 33 ms prime duration condition (*b* = `r blmm_exp2_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]) although, as the interaction effect shows, this was mainly due to an absence of the priming effect in the 16 ms prime duration condition, as opposed to the 33 ms condition, which showed a robust priming effect (*b* = `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). Figure \@ref(fig:exp2-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
 
 (ref:exp2-descriptives-rt-table-caption) Mean, median, standard deviation, and range of correct response times (in ms) and response accuracy (proportion of all responses) in Experiment 2 for words and nonwords and by prime duration and priming condition.
 
@@ -668,22 +668,27 @@ apa_table(
 ```
 
 
+## Results
 
-(ref:exp2-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the conditional parameters of the RT model in Experiment 2.
+As in Experiment 1, the RT model indicates that the mean of the normal distribution $\mu$ was higher in the unrelated condition than the identical (*b* = `r blmm_exp1_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1","u-95% CI"]`]) and higher in the 33 ms prime duration condition than in the 50 ms prime duration condition (*b* = `r blmm_exp2_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]). The interaction term indicates that the priming effect was stronger in the 50 ms condition than the 33 ms condition (*b* = `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). The shape parameter of the exponential distribution $\beta$ was affected very little by prime relatedness (*b* = `r blmm_exp2_summary_rt$fixed["beta_Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_Condition1","u-95% CI"]`]), prime exposure duration (*b* = `r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","u-95% CI"]`]), or their interaction (*b* = `r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","u-95% CI"]`]), suggesting that the shape of the RT distribution was not affected by the manipulations in Experiment 2.
+
+<!--- Figure \@ref(fig:exp2-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
+
+ (ref:exp2-brms-rt-plot-caption) 50%, 75%, 89%, 95%, and 100% highest density intervals (HDIs) of the posterior distributions for each of the conditional parameters of the RT model in Experiment 2. -->
 
 ```{r exp2-brms-rt-plot, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp2-brms-rt-plot-caption)", message=FALSE, warning=FALSE}
 
-del_hdi_exp2_rt = hdi(blmm_exp2_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
+#del_hdi_exp2_rt = hdi(blmm_exp2_rt_dist, ci = c(0.5, 0.75, 0.89, 0.95))
 
-del_hdi_exp2_rt%>%
-  filter(!grepl("beta",Parameter)) -> posteriorsToPlotE2
+#del_hdi_exp2_rt%>%
+#  filter(!grepl("beta",Parameter)) -> posteriorsToPlotE2
 
-plot(posteriorsToPlotE2) +
-  scale_fill_flat(labels = c("50%", "75%", "89%", "95%", "100%")) +
-  ylab("")+
-  theme_apa() -> Plot_post_E2
+#plot(posteriorsToPlotE2) +
+#  scale_fill_flat(labels = c("50%", "75%", "89%", "95%", "100%")) +
+#  ylab("")+
+#  theme_apa() -> Plot_post_E2
 
-Plot_post_E2
+#Plot_post_E2
 
 
 ```
@@ -814,7 +819,7 @@ cowplot::plot_grid(DeltaE2.PrimingEffect.W,
 
 ## Discussion
 
-In Experiment 2, we observed the pattern we expected from previous research: In the the mean $\mu$ of the Gaussian distribution, we saw a robust priming effect in response time and accuracy in the 33 ms condition, but a very weak effect in the 16 ms condition. This suggests that the timing in our online experiments was likely to be quite close to the timing set in the experiment script. Again, we did not observe an effect of either the priming condition or the prime exposure duration on the shape parameter $\beta$ of the exponential distribution.
+In Experiment 2, we observed the pattern we expected from previous research: In the the mean $\mu$ of the Gaussian distribution, we saw a robust priming effect in response time and accuracy in the 33 ms condition, but a very weak effect in the 16 ms condition. This suggests that the timing in our online experiments was likely to be quite close to the timing set in the experiment script. Again, we did not observe an effect of the prime relatedness condition on the shape parameter $\beta$ of the exponential distribution, and, unlike in Experiment 1, there was no evidence for a difference in the shape of the distribution between the 16.7 and 33.3 ms prime duration conditions.
 
 # General Discussion
 
