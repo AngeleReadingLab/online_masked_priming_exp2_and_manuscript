@@ -93,196 +93,9 @@ Critically, the above pattern is *specific* to masked priming. When primes are v
 
 In the present paper, we took advantage of the above marker to examine whether online masked priming studies follow the same pattern as in-lab masked priming studies. Specifically, we manipulated prime exposure duration in identity vs. unrelated primes: 33.3 vs. 50 ms in Experiment 1, and 16.6 vs. 33.3 ms in Experiment 2---note that targets were presented immediately after the primes (i.e., prime exposure duration was equal to the prime-target SOA). The rationale of Experiment 1 is that if the actual exposure duration of the primes is the nominal exposure duration, then we would expect the typical shift between the identity and unrelated response time distributions, which according to the savings hypothesis [@forster1998pros] would be greater for 50 ms than for 33.3 ms exposure duration (i.e., the head-start would be greater for 50 ms identity primes than for 33.3 ms identity primes). This outcome would indicate that the on-line masked priming studies reproduce a characteristic signature of laboratory masked priming studies. Alternatively, if the online presentation conditions lead to a greater actual exposure duration on the participant's device compared to that specified in our experiment, (e.g., prime durations are approximately 20 ms longer on average than programmed) then the 50 ms primes may no longer be masked, but may rather be consciously perceived. If this is the case, the prime could affect not only the encoding, but also core decision processes (i.e., the drift rate), which would be reflected as a stronger priming effect in the higher quantiles of the distribution (i.e., the two RT distributions would have a different shape). In this scenario, one should be very cautious when running online masked priming experiments---at least with the typical software and hardware currently available.
 
-To further constrain the research questions, Experiment 2 was designed to be analogous to Experiment 1, except for the use of a very short prime exposure duration (i.e., 16.6ms). Similar prime exposure durations have shown rather weak masked priming lexical decision experiments in a laboratory setting: smaller than 5 ms for prime durations of 14 ms [@ziegler2000] and smaller than 9 ms for a prime duration of 20 ms [@Tzur_2007]---in the @Tzur_2007 experiment, this difference increased to 16 ms when using a very high level of contrast in the computer screen. Thus, if the size of the priming effect is roughly similar to the prime exposure duration, we would expect a much larger priming effect at the 33.3 ms prime exposure duration than at the 16.6 ms prime exposure duration. If we do observe a large effect at the 16.6 ms prime exposure duration (e.g., above 20-25 ms), this would suggest, again, that there is a qualitative difference between using the masked priming technique in the laboratory and in online experiments. Keep in mind that we are using a software that has good control over the exposure duration [@bridges2020; @anwyl-irvine2020a]. Figure \ref{fig:hyp-mod-dat-figure} displays the link between all these verbal hypotheses, the process model that corresponds to each of them, and their predictions in the response time distributions. 
+To further constrain the research questions, Experiment 2 was designed to be analogous to Experiment 1, except for the use of a very short prime exposure duration (i.e., 16.6ms). Similar prime exposure durations have shown rather weak masked priming lexical decision experiments in a laboratory setting: smaller than 5 ms for prime durations of 14 ms [@ziegler2000] and smaller than 9 ms for a prime duration of 20 ms [@Tzur_2007]---in the @Tzur_2007 experiment, this difference increased to 16 ms when using a very high level of contrast in the computer screen. Thus, if the size of the priming effect is roughly similar to the prime exposure duration, we would expect a much larger priming effect at the 33.3 ms prime exposure duration than at the 16.6 ms prime exposure duration. If we do observe a large effect at the 16.6 ms prime exposure duration (e.g., above 20-25 ms), this would suggest, again, that there is a qualitative difference between using the masked priming technique in the laboratory and in online experiments. Keep in mind that we are using a software that has good control over the exposure duration [@bridges2020; @anwyl-irvine2020a].All in all, replicating the results observed in controlled laoboratory masked primiming studies would provide some grounds to the validity of online masked priming tasks,even with no control over many variables (e.g., the devices in which the experiment is run, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021].
 
-
-```{r hyp-mod-dat-figure, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE, fig.height=3.4, fig.cap = "Add caption"}
-suppressMessages(library("tidyverse"))
-
-#pdf("Fig1_ModelsToData.pdf", height = 3)
-
-par(mfrow=c(1,3))
-tdp   <- .386
-sd.dp <- .100
-
-nsims <- 1000000
-
-slope.gray  <- 0.00001
-slope.blue   <- rnorm(nsims, 3, .6)
-slope.yellow <- rnorm(nsims, 3, .6)
-
-sim.trials.blue<-matrix(ncol=4, nrow=nsims)
-sim.trials.yellow<-matrix(ncol=4, nrow=nsims)
-
-sim.trials.blue[,1]    <-  rep(tdp+.05, nsims)
-sim.trials.yellow[,1]  <-  rep(tdp+.05, nsims)
-
-sim.trials.blue[ ,2]   <- (slope.gray * sim.trials.blue[,1])
-sim.trials.yellow[ ,2] <- (slope.gray * sim.trials.yellow[,1])
-
-sim.trials.blue[ ,3]   <- (sim.trials.blue[,2] - slope.blue * sim.trials.blue[,1])
-sim.trials.yellow[ ,3] <- (sim.trials.yellow[,2] - slope.yellow * sim.trials.yellow[,1])
-
-sim.trials.blue[ ,4]   <- (1 - sim.trials.blue[,3]) / slope.blue
-sim.trials.yellow[ ,4] <- (1 - sim.trials.yellow[,3]) / slope.yellow
-
-
-nlines<- 1000
-sample.blue <- sample(1:nsims,nlines)
-sample.yellow <- sample(1:nsims,nlines)
-
-
-plot(c(rep(0,nlines),sim.trials.blue[sample.blue,1]), c(rep(.02,nlines),.02+sim.trials.blue[sample.blue,2]), type="l", col=alpha("dodgerblue2",alpha = .5), ylim = c(0,1.7), xlim=c(0,1.2), bty="n",yaxt='n', xlab="RT (sec)", ylab="", lwd=3)
-
-lines(c(rep(0,nlines),sim.trials.yellow[sample.yellow,1]), c(rep(0,nlines),sim.trials.yellow[sample.yellow,2]), type="l", col=alpha("deeppink2",alpha = .5), lwd=3)
-
-
-for(i in 1:nlines){
-    lines(c(sim.trials.blue[sample.blue[i],1], sim.trials.blue[sample.blue[i],4]), c(sim.trials.blue[sample.blue[i],2], 1), col=alpha("dodgerblue2",alpha = .005),lwd=2)
-    
-    lines(c(sim.trials.yellow[sample.yellow[i],1], sim.trials.yellow[sample.yellow[i],4]), c(sim.trials.yellow[sample.yellow[i],2], 1), col=alpha("deeppink2",alpha = .005), lwd=2)
-}
-
-
-lines(density(sim.trials.yellow[,4], from=.4,to=1.5)$x,(density(sim.trials.yellow[,4],, from=.4,to=1.5)$y)/20+1, col=alpha("deeppink2",alpha = 1), lwd=1)
-lines(density(sim.trials.blue[,4], from=.4,to=1.5)$x,(density(sim.trials.blue[,4], from=.4,to=1.5)$y)/20+1, col=alpha("dodgerblue2",alpha = .3),lwd=4)
-
-lines(c(0, 1), c(1,1), lwd=1.5)
-
-lines(c(tdp, tdp), c(0,1), lty=2)
-lines(c(tdp+.05, tdp+.05), c(0,1), lty=2)
-
-text("Evidence\naccumulations",x = .88, y=.4,cex=.8)
-text("Encoding",x = .2, y=.4,cex=.8)
-title("Null Effect")
-
-###########################################################################
-
-
-
-tdp   <- .386
-sd.dp <- .100
-
-nsims <- 1000000
-
-slope.gray  <- 0.00001
-slope.blue   <- rnorm(nsims, 3, .6)
-slope.yellow <- rnorm(nsims, 3, .6)
-
-sim.trials.blue<-matrix(ncol=4, nrow=nsims)
-sim.trials.yellow<-matrix(ncol=4, nrow=nsims)
-
-sim.trials.blue[,1]    <-  rep(tdp, nsims)
-sim.trials.yellow[,1]  <-  rep(tdp+.05, nsims)
-
-sim.trials.blue[ ,2]   <- (slope.gray * sim.trials.blue[,1])
-sim.trials.yellow[ ,2] <- (slope.gray * sim.trials.yellow[,1])
-
-sim.trials.blue[ ,3]   <- (sim.trials.blue[,2] - slope.blue * sim.trials.blue[,1])
-sim.trials.yellow[ ,3] <- (sim.trials.yellow[,2] - slope.yellow * sim.trials.yellow[,1])
-
-sim.trials.blue[ ,4]   <- (1 - sim.trials.blue[,3]) / slope.blue
-sim.trials.yellow[ ,4] <- (1 - sim.trials.yellow[,3]) / slope.yellow
-
-
-nlines<- 1000
-sample.blue <- sample(1:nsims,nlines)
-sample.yellow <- sample(1:nsims,nlines)
-
-
-plot(c(rep(0,nlines),sim.trials.blue[sample.blue,1]), c(rep(.02,nlines),.02+sim.trials.blue[sample.blue,2]), type="l", col=alpha("dodgerblue2",alpha = .5), ylim = c(0,1.7), xlim=c(0,1.2), bty="n",yaxt='n', xlab="RT (sec)", ylab="", lwd=3)
-
-lines(c(rep(0,nlines),sim.trials.yellow[sample.yellow,1]), c(rep(0,nlines),sim.trials.yellow[sample.yellow,2]), type="l", col=alpha("deeppink2",alpha = .5), lwd=3)
-
-
-for(i in 1:nlines){
-    lines(c(sim.trials.blue[sample.blue[i],1], sim.trials.blue[sample.blue[i],4]), c(sim.trials.blue[sample.blue[i],2], 1), col=alpha("dodgerblue2",alpha = .006),lwd=2)
-    
-    lines(c(sim.trials.yellow[sample.yellow[i],1], sim.trials.yellow[sample.yellow[i],4]), c(sim.trials.yellow[sample.yellow[i],2], 1), col=alpha("deeppink2",alpha = .006), lwd=2)
-    
-}
-
-
-lines(density(sim.trials.yellow[,4], from=.4,to=1.5)$x,(density(sim.trials.yellow[,4],, from=.4,to=1.5)$y)/20+1, col=alpha("deeppink2",alpha = .7), lwd=2)
-lines(density(sim.trials.blue[,4], from=.4,to=1.5)$x,(density(sim.trials.blue[,4], from=.4,to=1.5)$y)/20+1, col=alpha("dodgerblue2",alpha = .7),lwd=2)
-
-
-lines(c(0, 1), c(1,1), lwd=1.5)
-
-
-lines(c(tdp, tdp), c(0,1), lty=2)
-lines(c(tdp+.05, tdp+.05), c(0,1), lty=2)
-
-text("Evidence\naccumulations",x = .88, y=.4,cex=.8)
-text("Encoding",x = .2, y=.4,cex=.8)
-
-title("Effect in\nencoding")
-
-
-#############################################################################
-
-
-tdp   <- .386
-sd.dp <- .100
-
-nsims <- 1000000
-
-slope.gray  <- 0.00001 
-slope.blue   <- rnorm(nsims, 3.8, .6)
-slope.yellow <- rnorm(nsims, 3, .6)
-
-sim.trials.blue<-matrix(ncol=4, nrow=nsims)
-sim.trials.yellow<-matrix(ncol=4, nrow=nsims)
-
-sim.trials.blue[,1]    <-  rep(tdp, nsims)
-sim.trials.yellow[,1]  <-  rep(tdp+.05, nsims)
-
-sim.trials.blue[ ,2]   <- (slope.gray * sim.trials.blue[,1])
-sim.trials.yellow[ ,2] <- (slope.gray * sim.trials.yellow[,1])
-
-sim.trials.blue[ ,3]   <- (sim.trials.blue[,2] - slope.blue * sim.trials.blue[,1])
-sim.trials.yellow[ ,3] <- (sim.trials.yellow[,2] - slope.yellow * sim.trials.yellow[,1])
-
-sim.trials.blue[ ,4]   <- (1 - sim.trials.blue[,3]) / slope.blue
-sim.trials.yellow[ ,4] <- (1 - sim.trials.yellow[,3]) / slope.yellow
-
-
-nlines<- 1000
-
-sample.blue <- sample(1:nsims,nlines)
-sample.yellow <- sample(1:nsims,nlines)
-
-plot(c(rep(0,nlines),sim.trials.blue[sample.blue,1]), c(rep(.02,nlines),.02+sim.trials.blue[sample.blue,2]), type="l", col=alpha("dodgerblue2",alpha = .5), ylim = c(0,1.7), xlim=c(0,1.2), bty="n",yaxt='n', xlab="RT (sec)", ylab="", lwd=3)
-
-lines(c(rep(0,nlines),sim.trials.yellow[sample.yellow,1]), c(rep(0,nlines),sim.trials.yellow[sample.yellow,2]), type="l", col=alpha("deeppink2",alpha = .5), lwd=3)
-
-for(i in 1:nlines){
-    lines(c(sim.trials.blue[sample.blue[i],1], sim.trials.blue[sample.blue[i],4]), c(sim.trials.blue[sample.blue[i],2], 1), col=alpha("dodgerblue2",alpha = .006),lwd=2)
-    
-    lines(c(sim.trials.yellow[sample.yellow[i],1], sim.trials.yellow[sample.yellow[i],4]), c(sim.trials.yellow[sample.yellow[i],2], 1), col=alpha("deeppink2",alpha = .006), lwd=2)
-    
-}
-
-lines(density(sim.trials.yellow[,4], from=.4,to=1.5)$x,(density(sim.trials.yellow[,4],, from=.4,to=1.5)$y)/20+1, col=alpha("deeppink2",alpha = .7), lwd=2)
-lines(density(sim.trials.blue[,4], from=.4,to=1.5)$x,(density(sim.trials.blue[,4], from=.4,to=1.5)$y)/20+1, col=alpha("dodgerblue2",alpha = .7),lwd=2)
-
-
-lines(c(0, 1), c(1,1), lwd=1.5)
-
-lines(c(tdp, tdp), c(0,1), lty=2)
-lines(c(tdp+.05, tdp+.05), c(0,1), lty=2)
-
-text("Evidence\naccumulations",x = .88, y=.4,cex=.8)
-text("Encoding",x = .2, y=.4,cex=.8)
-
-title("Effect in encoding and \nevidence accumulation")
-
-#dev.off()
-
-```
-
-
-All in all, replicating the results observed in controlled laoboratory masked primiming studies would provide some grounds to the validity of online masked priming tasks,even with no control over many variables (e.g., the devices in which the experiment is run, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021].
+\color{red} ADD: Hypotheses -> Model -> Data in a figure. \color{black}
 
 The study was pre-registered on the Open Science Framework (OSF) prior to data collection. The registration form, together with the materials, data files, and R scripts can be found at https://osf.io/d2txs/.
 
@@ -411,7 +224,7 @@ We selected 240 six-letter English words from the English Lexicon Project [@balo
 
 ### Procedure
 
-Participants were able to sign up for the experiment on the Prolific website. On signing up, they were redirected to the participant agreement form on the Qualtrics online survey development environment [@qualtrics2020]. After indicating their agreement to participate, participants were forwarded to Pavlovia [@pavlovia2020], where the actual lexical decision task was implemented in PsychoJS. In the experiment, all stimuli were presented in the center of the screen in black Courier New font on a white background. As we do not know the exact dimensions of each participant's screen, all stimulus sizes and positions were defined in Psychopy's "height" units, with the bottom left of a 16:10 aspect ratio screen being represented as (-.8, -.5) and the top right being (.8, .5). The height for all text stimuli was 0.1 units. Each trial began with a six-character pattern mask (*######*) set to be presented for 500 ms, followed first by the lowercase prime (e.g. *region*) set to be presented for either 33 or 50 ms, and then by the uppercase target (e.g. *REGION*). Participants were instructed to respond to the target stimulus as quickly as possible either by using the keyboard, if their device had one, by pressing the "Z" key if the target was not a valid English word or the "M" key if the target was a valid English word. Participants on a device without a keyboard were instructed to respond by touching one of two rectangular touch areas labeled "Z = Non-word" (presented at -0.4, -0.3) and "M = Word" (presented at 0.4, -0.3). The touch areas each had a width of 0.4 and a height of 0.2 and were presented in white with a black outline. If participants did not respond within two seconds of the target onset, a "Too slow!" feedback message was shown for 500 ms and the trial ended. The experimental trials were preceded by 16 practice trials during which participants also received feedback on the accuracy of their responses. No feedback apart from the trial timeout feedback was given during the experimental trials. Every 120 trials, participants were asked to take a short break before continuing the experiment. After completing the experiment, participants were redirected to a debriefing form on Qualtrics and from there back to Prolific in order to receive their participation payment.
+Participants were able to sign up for the experiment on the Prolific website. On signing up, they were redirected to the participant agreement form on the Qualtrics online survey development environment [@qualtrics2020]. After indicating their agreement to participate, participants were forwarded to Pavlovia [@pavlovia2020], where the actual lexical decision task was implemented in PsychoJS. In the experiment, all stimuli were presented in the center of the screen in black Courier New font on a white background. As we do not know the exact dimensions of each participant's screen, all stimulus sizes and positions were defined in Psychopy's "height" units, with the bottom left of a 16:10 aspect ratio screen being represented as (-.8, -.5) and the top right being (.8, .5). The height for all text stimuli was 0.1 units. Each trial began with a six-character pattern mask (*######*) set to be presented for 500 ms, followed first by the lowercase prime (e.g. *region*) set to be presented for either 33 or 50 ms, and then by the uppercase target (e.g. *REGION*). Participants were instructed to respond to the target stimulus as quickly as possible either by using the keyboard, if their device had one, and pressing the "Z" key if the target was not a valid English word or the "M" key if the target was a valid English word. Participants on a device without a keyboard were instructed to respond by touching one of two rectangular touch areas labeled "Z = Non-word" (presented at -0.4, -0.3) and "M = Word" (presented at 0.4, -0.3). The touch areas each had a width of 0.4 and a height of 0.2 and were presented in white with a black outline. If participants did not respond within two seconds of the target onset, a "Too slow!" feedback message was shown for 500 ms and the trial ended. The experimental trials were preceded by 16 practice trials during which participants also received feedback on the accuracy of their responses. No feedback apart from the trial timeout feedback was given during the experimental trials. Every 120 trials, participants were asked to take a short break before continuing the experiment. After completing the experiment, participants were redirected to a debriefing form on Qualtrics and from there back to Prolific in order to receive their participation payment.
 
 ### Data analysis
 
@@ -542,12 +355,11 @@ Once again, the shape parameter of the exponential distribution $\beta$ was affe
 
 ```
 
-These results can be visualized in the delta plots depicted in Figure \ref{fig:deltas-e1-words}. Delta plots are residual quantile plots that show the distributional differences between conditions [@de1994conditional]. As can be seen in Panel A, there is a priming effect (computed as the difference in response times between responses to the unrelated condition and responses to the identity condition) of a parallel magnitude across all quantiles for both the 33 ms and the 50 ms prime durations, and the effect size is greater for the 50 ms prime duration condition than for the 33ms one. There is an increase of said effect for the longest responses (quantile .9) in the 33ms prime duration condition that can be understood by looking at Panel B of the same figure. In this panel, we show the size of the prime duration effect (computed as the difference in response times between responses to the 50 ms condition and responses to the 33 ms condition) across RT quantiles. While the identity condition produced a shift in the distributions of response times (i.e., the difference between conditions is constant across quantiles), the unrelated condition generated an effect only for very long responses.  
+To better visualize the data, we computed the delta plots for the effect of Priming (see Panel A in
+Figure \@ref(fig:Deltas_E1_Words) ), as well as for the effect of Prime Duration (see Panel B in Figure \@ref(fig:Deltas_E1_Words) ). These delta plots are residual quantile plots that show the size of the effect for the .1, .3, .5, .7, and .9 response time quantiles.
 
 
-
-
-```{r deltas-e1-words, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE, cache=TRUE, fig.cap = "Add caption 2"}
+```{r Deltas_E1_Words, echo=FALSE, cache=TRUE, fig.cap = "Delta in Experiment 1...EXPLAIN.", message=FALSE, warning=FALSE}
 
 E1<- exp1_data_to_include%>% 
   filter(rt > 250 & rt < 2000)%>%
@@ -582,8 +394,8 @@ vincentiles.E1 %>%
             Delta=diff(rev(RT)))%>%
   ungroup()%>%
 ggplot(aes(y=Delta, x=MRT)) +
-  geom_line(size = .7)+
-  geom_point(size = 1.7)+
+  geom_line(size = .75)+
+  geom_point(size = 2)+
   geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
   ylim(-60, +60)+
   xlim(450, 850)+
@@ -593,8 +405,8 @@ ggplot(aes(y=Delta, x=MRT)) +
   facet_wrap(~PrimeDuration)+
   theme_minimal()+
   theme(plot.title = element_text(size = 12),
-        axis.text=element_text(size=9),
-        axis.title=element_text(size=9))-> DeltaE1.PrimingEffect.W
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE1.PrimingEffect.W
 
 #Prime Duration Effect (33ms - 50 ms):
  
@@ -604,8 +416,8 @@ vincentiles.E1 %>%
   summarize(MRT=mean(RT),
             Delta=diff(rev(RT)))%>%
   ggplot(aes(y=Delta, x=MRT)) +
-  geom_line(size = .7)+
-  geom_point(size = 1.7)+
+  geom_line(size = .75)+
+  geom_point(size = 2)+
   geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
   ylim(-60, +60)+
   xlim(450, 850)+
@@ -615,14 +427,15 @@ vincentiles.E1 %>%
   facet_wrap(~ Condition)+
   theme_minimal()+
   theme(plot.title = element_text(size = 12),
-        axis.text=element_text(size=9),
-        axis.title=element_text(size=9))-> DeltaE1.PrimeDurationEffect.W
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE1.PrimeDurationEffect.W
 
 cowplot::plot_grid(DeltaE1.PrimingEffect.W,
                    DeltaE1.PrimeDurationEffect.W,
                    ncol = 1,
                    labels = c("A", "B"))+
-  plot_annotation(theme = theme(plot.title = element_text(size = 14)))
+  plot_annotation(title = "Experiment 1: 33 vs. 50 ms",
+                  theme = theme(plot.title = element_text(size = 14)))
   
 
 ```
@@ -750,7 +563,7 @@ exclude_list_for_prolific <- str_extract(string = exp2_participants_to_exclude$s
 
 ### Participants
 
-As in Experiment 1, participants were recruited through Prolific [www.prolific.co, -@prolific2021]. The experiment was accessed by `r exp2_all_participants$PROLIFIC_PID %>% unique %>% length` participants.  Out of these, `r exp2_accuracy_by_participant %>% nrow` provided experimental data. `r exp2_participants_to_exclude %>% filter(N != 480) %>% nrow %>% numbers_to_words() %>% str_to_sentence()` of these participants did not complete the experiment. A further `r exp2_participants_to_exclude %>% filter(N == 480 & acc < .8) %>% nrow %>% ifelse(. < 11, numbers_to_words(.), .)` were excluded because of low accuracy (again, less than .8). The remaining `r exp2_actual_participants$PROLIFIC_PID %>% unique %>% length` participants were aged from `r exp2_participant_ages %>% min` to `r exp2_participant_ages %>% max` (mean age: `r exp1_participant_ages %>% mean %>% round(2)`). Of the participants, `r exp2_male_participants_nr` identified as male, `r exp2_female_participants_nr` identified as female, and `r exp2_other_participants_nr` identified as other. All these participants indicated that English was their first language in the Prolific screening questions. Based on their IP addresses, `r exp2_participant_countries["United Kingdom"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in the UK, `r exp2_participant_countries["United States of America"] %>% ifelse(. < 11, numbers_to_words(.), .)` were based in the US, `r exp2_participant_countries["Canada"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Canada, `r exp2_participant_countries["South Africa"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in South Africa, and one participant each was based in Hungary and Ireland. `r exp2_actual_participants$country %>% is.na %>% sum %>% numbers_to_words %>% str_to_sentence()` participants could not be localized in this way. As in Experiment 1, all participants were naïve to the purpose of the experiment, and received £1.25 for their participation (corresponding to £5/hour). Participants could use either a desktop/laptop computer or a mobile device. Because of a technical display issue with PsychoJS and the Safari browser, participants who tried to access the experiment using that browser, including all participants on iOS devices, were advised to change browser or device and restart the experiment.
+As in Experiment 1, participants were recruited through Prolific [www.prolific.co, -@prolific2021]. The experiment was accessed by `r exp2_all_participants$PROLIFIC_PID %>% unique %>% length` participants. Out of these, `r exp2_accuracy_by_participant %>% nrow` provided experimental data. `r exp2_participants_to_exclude %>% filter(N != 480) %>% nrow %>% numbers_to_words() %>% str_to_sentence()` of these participants did not complete the experiment. A further `r exp2_participants_to_exclude %>% filter(N == 480 & acc < .8) %>% nrow %>% ifelse(. < 11, numbers_to_words(.), .)` were excluded because of low accuracy (again, less than .8). The remaining `r exp2_actual_participants$PROLIFIC_PID %>% unique %>% length` participants were aged from `r exp2_participant_ages %>% min` to `r exp2_participant_ages %>% max` (mean age: `r exp1_participant_ages %>% mean %>% round(2)`). Of the participants, `r exp2_male_participants_nr` identified as male, `r exp2_female_participants_nr` identified as female, and `r exp2_other_participants_nr` identified as other. All these participants indicated that English was their first language in the Prolific screening questions. Based on their IP addresses, `r exp2_participant_countries["United Kingdom"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in the UK, `r exp2_participant_countries["United States of America"] %>% ifelse(. < 11, numbers_to_words(.), .)` were based in the US, `r exp2_participant_countries["Canada"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Canada, `r exp2_participant_countries["South Africa"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in South Africa, and one participant each was based in Hungary and Ireland. `r exp2_actual_participants$country %>% is.na %>% sum %>% numbers_to_words %>% str_to_sentence()` participants could not be localized in this way. As in Experiment 1, all participants were naïve to the purpose of the experiment, and received £1.25 for their participation (corresponding to £5/hour). Participants could use either a desktop/laptop computer or a mobile device. Because of a technical display issue with PsychoJS and the Safari browser, participants who tried to access the experiment using that browser, including all participants on iOS devices, were advised to change browser or device and restart the experiment.
 
 
 ***Rationale for sample size and stopping rule.*** As in Experiment 1, our stopping rule was to keep collecting data until 3,000 valid observations were collected. This goal was met and exceeded in our initial data collection with a budget of £200.
@@ -765,7 +578,7 @@ The procedure was identical to Experiment 1, the only difference being that the 
 
 ### Data analysis
 
-We analyzed the data in the same way as in Experiment 1, again only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). For priming duration, 16 ms was coded as -1 and 33 ms was coded as 1. Otherwise, the model specifications were identical to those in Experiment 1.
+We analyzed the data in the same way as in Experiment 1, again only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). For priming duration, 16 ms was coded as -1 and 33 ms was coded as 1. Otherwise, the model specifications were identical to those in Experiment 1. SAY SOMETHING ABOUT THE DELTAS
 
 
 (ref:exp2-descriptives-rt-table-caption) Mean, median, standard deviation, and range of correct response times (in ms) and response accuracy (proportion of all responses) in Experiment 2 for words and nonwords and by prime duration and priming condition.
@@ -857,10 +670,7 @@ apa_table(
 
 ## Results
 
-### Response times
-
-As in Experiment 1, the RT model indicates that the mean of the normal distribution $\mu$ was higher in the unrelated condition than the identical (*b* = `r blmm_exp1_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1","u-95% CI"]`]) and higher in the 33 ms prime duration condition than in the 50 ms prime duration condition (*b* = `r blmm_exp2_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]). The interaction term indicates that the priming effect was stronger in the 50 ms condition than the 33 ms condition (*b* = `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). The shape parameter of the exponential distribution $\beta$ was affected very little by prime relatedness (*b* = `r blmm_exp2_summary_rt$fixed["beta_Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_Condition1","u-95% CI"]`]), prime exposure duration (*b* = `r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","u-95% CI"]`]), or their interaction (*b* = `r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","u-95% CI"]`]), suggesting that the shape of the RT distribution was not affected by the manipulations in Experiment 2. 
-
+As in Experiment 1, the RT model indicates that the mean of the normal distribution $\mu$ was higher in the unrelated condition than the identical (*b* = `r blmm_exp1_summary_rt$fixed["Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1","u-95% CI"]`]) and higher in the 33 ms prime duration condition than in the 50 ms prime duration condition (*b* = `r blmm_exp2_summary_rt$fixed["PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["PrimeDuration1","u-95% CI"]`]). The interaction term indicates that the priming effect was stronger in the 50 ms condition than the 33 ms condition (*b* = `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["Condition1:PrimeDuration1","u-95% CI"]`]). The shape parameter of the exponential distribution $\beta$ was affected very little by prime relatedness (*b* = `r blmm_exp2_summary_rt$fixed["beta_Condition1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_Condition1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_Condition1","u-95% CI"]`]), prime exposure duration (*b* = `r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_PrimeDuration1","u-95% CI"]`]), or their interaction (*b* = `r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","Estimate"]`, 95% CrI [`r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","l-95% CI"]`, `r blmm_exp2_summary_rt$fixed["beta_Condition1:PrimeDuration1","u-95% CI"]`]), suggesting that the shape of the RT distribution was not affected by the manipulations in Experiment 2.
 
 <!--- Figure \@ref(fig:exp2-brms-rt-plot) shows the posterior distributions of the fixed effects parameters, with various highest density intervals highlighted.
 
@@ -882,91 +692,6 @@ As in Experiment 1, the RT model indicates that the mean of the normal distribut
 
 
 ```
-
-
-We also created the delta plots of data from Experiment 2 (see Figure \ref{fig:deltas-e2-words}). Panel A, shows there is no priming effect for the 16 ms condition, but a consistent effect across quantiles for the 33ms condition (parallel to the one found in Experiment 1). Interestingly, when examining the delta plots for the prime duration effect, we can observe a slight facilitation for identity primes, together with a slight a slight hindering for unrelated primes.  
-
-
-```{r deltas-e2-words, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE, fig.cap = "Add caption 3"}
-
-E2<- exp2_data_to_include%>%
-  select(participant, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target, corr, rt)%>%
-  mutate(participant=factor(participant),
-         TrialID = factor(TrialID))
-
-
-E2 %>%
-  group_by(participant, StimulusType, Condition, PrimeDuration,corr) %>%
-  summarise(RT = list(quibble(rt, seq(.1, .9, .2)))) %>% 
-  tidyr::unnest(RT) -> data.E2.quantiles
-
-data.E2.quantiles %>%
-  filter(corr==1) %>%
-  select(-corr) %>%
-  group_by(StimulusType,PrimeDuration,Condition,q) %>%
-  summarize(RT=mean(x))%>%
-  ungroup()-> vincentiles.E2
-
-#Priming Effect (unrelated - identity):
-
-vincentiles.E2 %>%
-  filter(StimulusType == "Word")%>%
-  arrange(desc(Condition))%>%
-  group_by(PrimeDuration,q) %>%
-  summarize(MRT=mean(RT),
-            Delta=diff(rev(RT)))%>%
-  ungroup()%>%
-ggplot(aes(y=Delta, x=MRT)) +
-  geom_line(size = .7)+
-  geom_point(size = 1.7)+
-  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
-  ylim(-60, +60)+
-  xlim(450, 850)+
-  xlab("Mean RT per quantile")+
-  ylab("Effect (in ms)")+
-  ggtitle("Priming Effect")+
-  facet_wrap(~PrimeDuration)+
-  theme_minimal()+
-  theme(plot.title = element_text(size = 12),
-        axis.text=element_text(size=10),
-        axis.title=element_text(size=10))-> DeltaE2.PrimingEffect.W
-
-#Prime Duration Effect (16ms - 33 ms):
- 
-vincentiles.E2 %>%
-  filter(StimulusType == "Word")%>%
-  group_by(Condition,q) %>%
-  summarize(MRT=mean(RT),
-            Delta=diff(rev(RT)))%>%
-  ggplot(aes(y=Delta, x=MRT)) +
-  geom_line(size = .7)+
-  geom_point(size = 1.7)+
-  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
-  ylim(-60, +60)+
-  xlim(450, 850)+
-  xlab("Mean RT per quantile")+
-  ylab("Effect (in ms)")+
-  ggtitle("Prime duration effect")+
-  facet_wrap(~ Condition)+
-  theme_minimal()+
-  theme(plot.title = element_text(size = 12),
-        axis.text=element_text(size=10),
-        axis.title=element_text(size=10))-> DeltaE2.PrimeDurationEffect.W
-
-#pdf("Fig_deltasE2.pdf", height = 5)
-
-cowplot::plot_grid(DeltaE2.PrimingEffect.W,
-                   DeltaE2.PrimeDurationEffect.W,
-                   ncol = 1,
-                   labels = c("A", "B"))+
-  plot_annotation(theme = theme(plot.title = element_text(size = 14)))
-  
-```
-
-
-
-
-### Accuracy
 
 (ref:exp2-blmm-accuracy-table-caption) Posterior mean, standard error, 95% credible interval and $\hat{R}$ statistic for the fixed effects of the model fitted for response accuracy on word trials in Experiment 2.
 
@@ -1012,6 +737,85 @@ The accuracy model indicates that participants were less likely to produce a cor
 
 
 
+We also created the delta plots for the effect of Priming (see Panel A in Figure \@ref(fig:Deltas_E2_Words)), as well as for the effect of Prime Duration (see Panel B in Figure \@ref(fig:Deltas_E2_Words)).
+
+(ref:Deltas_E2_Words-caption) Delta in Experiment 2...EXPLAIN.
+
+```{r Deltas_E2_Words, echo=FALSE, cache=TRUE, fig.cap = "(ref:exp1-brms-rt-plot-caption)"}
+
+E2<- exp2_data_to_include%>% 
+  filter(rt > 250 & rt < 2000)%>%
+  select(participant, TrialID, StimulusType, Condition, PrimeDuration, Prime, Target, corr, rt)%>%
+  mutate(participant=factor(participant),
+         TrialID = factor(TrialID))
+
+
+E2 %>%
+  group_by(participant, StimulusType, Condition, PrimeDuration,corr) %>%
+  summarise(RT = list(quibble(rt, seq(.1, .9, .2)))) %>% 
+  tidyr::unnest(RT) -> data.E2.quantiles
+
+data.E2.quantiles %>%
+  filter(corr==1) %>%
+  select(-corr) %>%
+  group_by(StimulusType,PrimeDuration,Condition,q) %>%
+  summarize(RT=mean(x))%>%
+  ungroup()-> vincentiles.E2
+
+#Priming Effect (unrelated - identity):
+
+vincentiles.E2 %>%
+  filter(StimulusType == "Word")%>%
+  arrange(desc(Condition))%>%
+  group_by(PrimeDuration,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ungroup()%>%
+ggplot(aes(y=Delta, x=MRT)) +
+  geom_line(size = .75)+
+  geom_point(size = 2)+
+  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
+  ylim(-60, +60)+
+  xlim(450, 850)+
+  xlab("Mean RT per quantile")+
+  ylab("Effect (in ms)")+
+  ggtitle("Priming Effect")+
+  facet_wrap(~PrimeDuration)+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 12),
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE2.PrimingEffect.W
+
+#Prime Duration Effect (16ms - 33 ms):
+ 
+vincentiles.E2 %>%
+  filter(StimulusType == "Word")%>%
+  group_by(Condition,q) %>%
+  summarize(MRT=mean(RT),
+            Delta=diff(rev(RT)))%>%
+  ggplot(aes(y=Delta, x=MRT)) +
+  geom_line(size = .75)+
+  geom_point(size = 2)+
+  geom_hline(yintercept = 0, color = "darkmagenta", alpha = .25)+
+  ylim(-60, +60)+
+  xlim(450, 850)+
+  xlab("Mean RT per quantile")+
+  ylab("Effect (in ms)")+
+  ggtitle("Prime duration effect")+
+  facet_wrap(~ Condition)+
+  theme_minimal()+
+  theme(plot.title = element_text(size = 12),
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10))-> DeltaE2.PrimeDurationEffect.W
+
+cowplot::plot_grid(DeltaE2.PrimingEffect.W,
+                   DeltaE2.PrimeDurationEffect.W,
+                   ncol = 1,
+                   labels = c("A", "B"))+
+  plot_annotation(title = "Experiment 2: 16 vs. 33 ms",
+                  theme = theme(plot.title = element_text(size = 14)))
+  
+```
 
 ## Discussion
 
