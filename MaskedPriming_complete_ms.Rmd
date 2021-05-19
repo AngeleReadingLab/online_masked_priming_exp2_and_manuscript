@@ -1,6 +1,6 @@
 ---
 title             : |
-    | Does online masked priming passes the Turing test?
+    | Does online masked priming pass the test?
     | The effects of prime exposure duration on masked identity priming
 shorttitle        : "Online masked priming"
 author: 
