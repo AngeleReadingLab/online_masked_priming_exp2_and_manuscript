@@ -2,10 +2,9 @@
 title             : |
     | Does online masked priming pass the test?
     | The effects of prime exposure duration on masked identity priming
-
 shorttitle        : "Online masked priming"
-
 author: 
+    
   - name          : "Bernhard Angele"
     affiliation   : "1,2"
     corresponding : yes    # Define only one corresponding author
@@ -17,7 +16,6 @@ author:
     affiliation   : "4"
   - name          : "Manuel Perea"
     affiliation   : "2,5"
-    
 affiliation:
     
   - id            : "1"
@@ -30,9 +28,7 @@ affiliation:
     institution   : "California State University San Bernardino, Palm Desert Campus, USA"
   - id            : "5"
     institution   : "Universitat de València, Valencia, Spain"
-
 note: "\\clearpage"
-
 authornote: |
   
   We thank Grace Backhouse for her help with data collection. The data for Experiment 1 were collected as part of her MSc dissertation.
