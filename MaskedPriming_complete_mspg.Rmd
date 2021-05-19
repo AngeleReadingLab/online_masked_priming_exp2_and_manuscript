@@ -2,7 +2,9 @@
 title             : |
     | Does online masked priming passes the Turing test?
     | The effects of prime exposure duration on masked identity priming
+
 shorttitle        : "Online masked priming"
+
 author: 
   - name          : "Bernhard Angele"
     affiliation   : "1,2"
@@ -15,6 +17,7 @@ author:
     affiliation   : "4"
   - name          : "Manuel Perea"
     affiliation   : "2,5"
+    
 affiliation:
     
   - id            : "1"
@@ -27,15 +30,20 @@ affiliation:
     institution   : "California State University San Bernardino, Palm Desert Campus, USA"
   - id            : "5"
     institution   : "Universitat de València, Valencia, Spain"
+
+note: "\\clearpage"
+
 authornote: |
   
   We thank Grace Backhouse for her help with data collection. The data for Experiment 1 were collected as part of her MSc dissertation.
+  
   This research has been partly supported by Grant PSI2017-86210-P from  the  Spanish Ministry of Science and Innovation (MP), Grant PGC2018-097145-B-I00 from the Spanish State Research Agency (AB), and internal funding from Bournemouth University (BA).
+  
 abstract: |
   Masked priming is one of the most important paradigms in the study of visual word recognition, but it is usually thought to require a laboratory setup with a known monitor and keyboard. To test if this technique can be safely used in an online setting, we conducted two online masked priming lexical decision task experiments using PsychoPy/PsychoJS [@peirce2019]. Importantly, we also tested the role of prime exposure duration (33.3 vs. 50 ms in Experiment 1 and 16.7 vs. 33.3 ms in Experiment 2), thus allowing us to examine both across conditions and within-conditions effects. We found that our online data are indeed very similar to the masked priming data reported by @gomezDiffusionModelAccount2013. Additionally, we found a clear effect of prime duration, with the priming effect (measured in terms of response time and accuracy) being stronger at 50 ms than 33.3 ms and no priming effect at 16.7 ms prime duration. From these results, we can conclude that modern online browser-based experimental psychophysics packages (e.g., PsychoPy) can present stimuli and collect responses on standard end user devices with enough precision. These findings provide us with confidence that masked priming can be used online, thus allowing us not only to run less time-consuming experiments, but also to reach populations that are difficult to test in a laboratory.
   
 keywords          : "Masked priming, Lexical decision task, Online experiments, PsychoPy, Prime duration"
-wordcount         : "7863"
+wordcount         : "7916"
 floatsintext      : yes
 figurelist        : no
 tablelist         : no
@@ -94,6 +102,12 @@ In the present paper, we took advantage of the above marker to examine whether o
 To further constrain the research questions, Experiment 2 was designed to be analogous to Experiment 1, except for replacing the 50 ms prime exposure duration with a very short prime exposure duration, namely, 16.7 ms. Similar extremely brief prime exposure durations have shown very weak masked priming lexical decision experiments in a laboratory setting: less than 5 ms for a prime duration of 14 ms [@ziegler2000] and less than 9 ms for a prime duration of 20 ms [@Tzur_2007]---in the @Tzur_2007 experiment, this difference increased to 16.7 ms when using a very high level of contrast in the computer screen. Thus, if the size of the priming effect is roughly similar to the prime exposure duration, we would expect a much larger priming effect at the 33.3 ms prime exposure duration than at the 16.7 ms prime exposure duration. If we do observe a large effect at the 16.7 ms prime exposure duration (e.g., above 20-25 ms), this would suggest, again, that there is a qualitative difference between using the masked priming technique in the laboratory and in online experiments. Keep in mind that we are using a software that has very good control over the exposure duration [@bridges2020; @anwyl-irvine2020a]. Figure \ref{fig:hyp-mod-dat-figure} displays the link between all these verbal hypotheses, the process model that corresponds to each of them, and their predictions in the RT distributions. 
 
 All in all, replicating the results observed in controlled laboratory masked priming studies would provide some grounds to the validity of online masked priming tasks, even in a scenario with no control over many variables (e.g., the devices in which the experiment is run, the level of contrast of the computer screen, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021]. Importantly, the present experiments go beyond an online replication: they allow us to test masked priming effects not only across conditions (identity vs. unrelated) but also within conditions (the effect of identity primes, or unrelated primes, across two prime durations) [see @Jacobs_1995; @ziegler2000, for advantages of within-condition comparisons]. Thus, the within-subject manipulation of prime exposure duration in both experiments allows us to obtain a comprehensive picture of masked identity priming effects--also including the examination of potential inhibitory effects of unrelated primes.
+
+
+The study was pre-registered on the Open Science Framework (OSF) prior to data collection. The registration form, together with the materials, data files, and R scripts can be found at https://osf.io/d2txs/.
+
+\newpage
+
 
 ```{r hyp-mod-dat-figure, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE, fig.height=3.4, fig.cap = "Mapping from hypotheses to data via evidence accumulation models. The bottom part of each graph represents sample paths, and the top part shows the cumulative density functions.  From left to right: *Null Effect* - there are no differences between the conditions; *Effect in Encoding* - the difference between the conditions is on the encoding time, hence the RT distributions are shifted; and *Effect of Encoding and Evidence Accumulation* - the differences between the conditions is on the rate of evidence accumulation, thus increasing the effect size for longer RTs (right-tail of the distribution)."}
 
@@ -283,8 +297,6 @@ title("Effect in Encoding and \nEvidence Accumulation")
 ```
 
 
-
-The study was pre-registered on the Open Science Framework (OSF) prior to data collection. The registration form, together with the materials, data files, and R scripts can be found at https://osf.io/d2txs/.
 
 # Experiment 1
 
