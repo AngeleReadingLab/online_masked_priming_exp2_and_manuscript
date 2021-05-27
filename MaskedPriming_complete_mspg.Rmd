@@ -394,6 +394,8 @@ exp1_actual_participants$country <- coords2country(participant_coords)
 exp1_participant_countries <- table(exp1_actual_participants$country %>% as.character) #make into a character vector since the original output is a factor with as many levels as there are countries
 ```
 
+The pre-registration form for Experiment 1, together with the materials, data files, and R scripts can be found at [https://osf.io/57rzq/].
+
 ### Participants
 
 Participants were recruited through Prolific [www.prolific.co, -@prolific2021]. The experiment was accessed by `r exp1_all_participants$PROLIFIC_PID %>% unique %>% length` participants. Out of these, `r exp1_accuracy_by_participant %>% nrow` provided experimental data. `r exp1_participants_to_exclude %>% filter(N != 480) %>% nrow %>% numbers_to_words() %>% str_to_sentence()` of these participants did not complete the experiment. A further `r exp1_participants_to_exclude %>% filter(N == 480 & acc < .8) %>% nrow %>% ifelse(. < 11, numbers_to_words(.), .)` were excluded because of low accuracy (less than .8, which was the pre-registered criterion). In the end, we analyzed the data from `r exp1_actual_participants$PROLIFIC_PID %>% unique %>% length` participants (`r exp1_female_participants_nr` female), aged from `r exp1_participant_ages %>% min` to `r exp1_participant_ages %>% max` (mean age: `r exp1_participant_ages %>% mean %>% round(2)`). All these participants indicated that English was their first language in the Prolific screening questions. Based on their IP addresses, `r exp1_participant_countries["United Kingdom"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in the UK, `r exp1_participant_countries["United States of America"] %>% ifelse(. < 11, numbers_to_words(.), .)` were based in the US, `r exp1_participant_countries["Canada"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Canada, and `r exp1_participant_countries["Ireland"] %>% ifelse(. < 11, numbers_to_words(.), .)` participants were based in Ireland. Two participants could not be localized in this way. All participants were naïve to the purpose of the experiment and received £1.25 for their participation (corresponding to £5/hour).  Participants could use either a desktop/laptop computer or a mobile device. Because of a technical display issue with PsychoJS and the Safari browser, participants who tried to access the experiment using that browser, including all participants on iOS devices, were advised to change browser or device and restart the experiment.
@@ -690,6 +692,8 @@ Of course, just because there was a difference between the conditions, this does
 # Experiment 2
 
 In the second experiment, we tested whether we could observe reliable effects of masked priming at prime durations of 16.7 ms and 33.3 ms (roughly corresponding to one and two frames at a refresh rate of 60 Hz).
+
+The pre-registration form for Experiment 2 can be found at [https://osf.io/957s8]. The materials, data files, and R scripts can be found at [https://osf.io/57rzq/]
 
 ## Method
 
