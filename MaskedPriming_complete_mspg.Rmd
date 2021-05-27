@@ -99,8 +99,7 @@ To further constrain the research questions, Experiment 2 was designed to be ana
 
 All in all, replicating the results observed in controlled laboratory masked priming studies would provide some grounds to the validity of online masked priming tasks, even in a scenario with no control over many variables (e.g., the devices in which the experiment is run, the level of contrast of the computer screen, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021]. Importantly, the present experiments go beyond an online replication: they allow us to test masked priming effects not only across conditions (identity vs. unrelated) but also within conditions (the effect of identity primes, or unrelated primes, across two prime durations) [see @Jacobs_1995; @ziegler2000, for advantages of within-condition comparisons]. Thus, the within-subject manipulation of prime exposure duration in both experiments allows us to obtain a comprehensive picture of masked identity priming effects--also including the examination of potential inhibitory effects of unrelated primes.
 
-
-The study was pre-registered on the Open Science Framework (OSF) prior to data collection. The registration form, together with the materials, data files, and R scripts can be found at https://osf.io/d2txs/.
+The study was pre-registered on the Open Science Framework (OSF) prior to data collection. The registration form, together with the materials, data files, and R scripts can be found at https://osf.io/57rzq/.
 
 \newpage
 
@@ -300,6 +299,8 @@ In the first experiment, we tested whether we could observe reliable effects of 
 
 We report here how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the two experiments. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
 
+The study was pre-registered on OSF. The pre-registration form, stimuli used in the experiment, scripts to run the experiment, data files, and data analyses are presented in the following OSF link: https://osf.io/fdtv5/ 
+
 ## Method
 
 ```{r load_exp1_data, message=FALSE, echo=FALSE, warning=FALSE}
@@ -490,8 +491,7 @@ Table \@ref(tab:exp1-blmm-table) shows the mean, standard error, lower and upper
 # We fit the models in a separate file to make sure that knitting the manuscript doesn't take too long
 
 load("blmm_exp1_rt_dist_full_ranef_5000.RData")
-# This file does not fit on GitHub
-# Download it at https://1drv.ms/u/s!ApE7JQmoH0baocARuxg21SFrS4riyg?e=8ZgbHA
+# 
 # model name is blmm_exp1_rt_dist
 
 # adapted from a paper by Nalborczyk et al. (2019) -- https://osf.io/eancg/
@@ -638,8 +638,6 @@ Table \@ref(tab:exp1-acc-blmm-table) shows the mean, standard error, lower and u
 
 load("blmm_exp1_acc_new_10000.RData")
 
-# This file does not fit on GitHub
-# Download it at https://1drv.ms/u/s!ApE7JQmoH0baobQPat43HR3ixhuqww?e=VySttd
 # Relatedness = Condition
 
 blmm_exp1_summary_acc <- summary(blmm_exp1_acc)
