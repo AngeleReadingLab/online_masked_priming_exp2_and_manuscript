@@ -110,7 +110,8 @@ lmm_acc_exp2 <- glmer(data = exp2_data_to_include %>% filter(corr != -1 & Stimul
 summary(lmm_acc_exp2)
 
 library(brms)
-#ncores = parallel::detectCores()
+
+ncores = parallel::detectCores()
 # Mean RTs in each condition
 
 
@@ -138,7 +139,7 @@ blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & Stim
                     family = exgaussian(),
                     inits = "random",
                     control = list(adapt_delta = 0.8),
-                    cores = 4, backend = "cmdstanr", threads = threading(2))
+                    cores = 4, backend = "cmdstanr", threads = threading(4))
 
 save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist_full_ranef_5000.RData")
 
