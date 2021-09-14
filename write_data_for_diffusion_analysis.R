@@ -91,40 +91,44 @@ exp2_data_to_include <- exp2 %>% filter(source %in% exp2_participants_to_include
 # exp1
 # RT
 
-exp1_rt_quantiles_by_subject <- exp1_data_to_include %>% filter(corr == 1 & rt > 250 & rt < 1800) %>% 
-  group_by(StimulusType, source, Condition, PrimeDuration) %>% 
+exp1_rt_quantiles_by_subject <- exp1_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
+  group_by(StimulusType, source, Condition, PrimeDuration, corr) %>% 
+  summarise(qRT = quantile(rt, c(0.1, 0.3, 0.5, 0.7, 0.9)), q = c(0.1, 0.3, 0.5, 0.7, 0.9), min = min(rt), max = max(rt)) 
+
+exp1_rt_quantiles <- exp1_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
+  group_by(StimulusType, Condition, PrimeDuration, corr) %>% 
   summarise(qRT = quantile(rt, c(0.1, 0.3, 0.5, 0.7, 0.9)), q = c(0.1, 0.3, 0.5, 0.7, 0.9)) 
 
-exp1_rt_quantiles <- exp1_rt_quantiles_by_subject %>% group_by(StimulusType, Condition, PrimeDuration, q) %>% 
-  summarise(mean_qRT = mean(qRT))
+exp1_acc_by_condition <- exp1_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
+  group_by(StimulusType, Condition, PrimeDuration) %>% 
+  summarise(acc = mean(corr)) 
 
-exp1_acc_quantiles_by_subject <- exp1_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
-  group_by(StimulusType, source, Condition, PrimeDuration) %>% 
-  summarise(qAcc = quantile(corr, c(0.1, 0.3, 0.5, 0.7, 0.9)), q = c(0.1, 0.3, 0.5, 0.7, 0.9)) 
 
-exp1_acc_quantiles <- exp1_acc_quantiles_by_subject %>% group_by(StimulusType, Condition, PrimeDuration, q) %>% 
-  summarise(mean_qAcc = mean(qAcc))
+exp1_rt_quantiles_subject_means <- exp1_rt_quantiles_by_subject %>% group_by(StimulusType, Condition, PrimeDuration, corr, q) %>% 
+  summarise(N = n(), mean_qRT = mean(qRT), mean_min = mean(min), mean_max = mean(max))
 
-exp1_rt_quantiles$mean_qAcc <- exp1_acc_quantiles$mean_qAcc
+write_csv(exp1_rt_quantiles_subject_means, file = "exp1_quantiles_for_diffusion_analysis.csv")
 
-write_csv(exp1_rt_quantiles, file = "exp1_quantiles_for_diffusion_analysis.csv")
+write_csv(exp1_rt_quantiles_subject_means, file = "exp1_acc_by_condition.csv")
 
 # exp2
 
-exp2_rt_quantiles_by_subject <- exp2_data_to_include %>% filter(corr == 1 & rt > 250 & rt < 1800) %>% 
-  group_by(StimulusType, source, Condition, PrimeDuration) %>% 
+exp2_rt_quantiles_by_subject <- exp2_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
+  group_by(StimulusType, source, Condition, PrimeDuration, corr) %>% 
+  summarise(qRT = quantile(rt, c(0.1, 0.3, 0.5, 0.7, 0.9)), q = c(0.1, 0.3, 0.5, 0.7, 0.9), min = min(rt), max = max(rt)) 
+
+exp2_rt_quantiles <- exp2_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
+  group_by(StimulusType, Condition, PrimeDuration, corr) %>% 
   summarise(qRT = quantile(rt, c(0.1, 0.3, 0.5, 0.7, 0.9)), q = c(0.1, 0.3, 0.5, 0.7, 0.9)) 
 
-exp2_rt_quantiles <- exp2_rt_quantiles_by_subject %>% group_by(StimulusType, Condition, PrimeDuration, q) %>% 
-  summarise(mean_qRT = mean(qRT))
+exp2_acc_by_condition <- exp2_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
+  group_by(StimulusType, Condition, PrimeDuration) %>% 
+  summarise(acc = mean(corr)) 
 
-exp2_acc_quantiles_by_subject <- exp2_data_to_include %>% filter(corr != -1 & rt > 250 & rt < 1800) %>% 
-  group_by(StimulusType, source, Condition, PrimeDuration) %>% 
-  summarise(qAcc = quantile(corr, c(0.1, 0.3, 0.5, 0.7, 0.9)), q = c(0.1, 0.3, 0.5, 0.7, 0.9)) 
 
-exp2_acc_quantiles <- exp2_acc_quantiles_by_subject %>% group_by(StimulusType, Condition, PrimeDuration, q) %>% 
-  summarise(mean_qAcc = mean(qAcc))
+exp2_rt_quantiles_subject_means <- exp2_rt_quantiles_by_subject %>% group_by(StimulusType, Condition, PrimeDuration, corr, q) %>% 
+  summarise(N = n(), mean_qRT = mean(qRT), mean_min = mean(min), mean_max = mean(max))
 
-exp2_rt_quantiles$mean_qAcc <- exp2_acc_quantiles$mean_qAcc
+write_csv(exp2_rt_quantiles_subject_means, file = "exp2_quantiles_for_diffusion_analysis.csv")
 
-write_csv(exp2_rt_quantiles, file = "exp2_quantiles_for_diffusion_analysis.csv")
+write_csv(exp2_rt_quantiles_subject_means, file = "exp2_acc_by_condition.csv")
