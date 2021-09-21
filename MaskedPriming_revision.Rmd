@@ -59,12 +59,15 @@ editor_options:
 ---
 
 ```{r setup, include = FALSE}
-library("tidyverse")
-library("brms")
-library("bayestestR")
+library(tidyverse)
 library("see")
 library("papaja")
 library(patchwork)
+library(xfun)
+library(sp)
+library(rworldmap)
+library("brms")
+library("bayestestR")
 
 r_refs("r-references.bib")
 
@@ -299,10 +302,6 @@ We report here how we determined our sample size, all data exclusions (if any), 
 ## Method
 
 ```{r load_exp1_data, message=FALSE, echo=FALSE, warning=FALSE}
-library(xfun)
-library(tidyverse)
-library(sp)
-library(rworldmap)
 
 # Qualtrics survey data
 exp1_all_participants <- read_csv("participant_data_exp1.csv")
@@ -423,7 +422,7 @@ Participants were able to sign up for the experiment on the Prolific website. Up
 
 ### Data analysis
 
-We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the *brms* package [@R-brms_a; @R-brms_b] in R [@R-base][^2]. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). As the trials automatically ended after 2000 ms, there were no RTs longer than this. For both RTs and accuracy, we fitted a model with priming condition (unrelated vs. identical) and prime duration (33.3 ms vs. 50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -0.5 and unrelated was coded as 0.5. For priming duration, 33.3 ms was coded as -0.5 and 50 ms was coded as 0.5. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times, with both the mean of the Gaussian component $\mu$ and the scale parameter of the exponential component $\beta$ (equaling the inverse of the rate parameter $\lambda$) being allowed to vary between conditions. To model response accuracy, we used the Bernoulli distribution with a logit link. We used the default priors suggested by *brms* except for the coefficients for the fixed effects, for which we applied weakly informative priors of $\beta \sim N(0,100)$ in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each with 1000 warmup iterations (10,000 iterations with 2000 warmup iterations for the accuracy models). We consider an effect as credible if the 95% Credible Interval (CrI) estimated from the posterior distribution does not contain zero. In addition, to better visualize the distributional features of the latency data, we computed the delta plots for both priming and prime duration effects.
+We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the *brms* package [@R-brms_a; @R-brms_b] in R [@R-base][^2]. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms or higher than 1800 ms as well as incorrect responses (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt >= 1800 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms or higher than 1800 ms (`r exp1_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt >= 1800))/nrow(.)}*100` % of trials). For both RTs and accuracy, we fitted a model with priming condition (unrelated vs. identical) and prime duration (33.3 ms vs. 50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -0.5 and unrelated was coded as 0.5. For priming duration, 33.3 ms was coded as -0.5 and 50 ms was coded as 0.5. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times, with both the mean of the Gaussian component $\mu$ and the scale parameter of the exponential component $\beta$ (equaling the inverse of the rate parameter $\lambda$) being allowed to vary between conditions. To model response accuracy, we used the Bernoulli distribution with a logit link. We used the default priors suggested by *brms* except for the coefficients for the fixed effects, for which we applied weakly informative priors of $\beta \sim N(0,100)$ in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each with 1000 warmup iterations (10,000 iterations with 2000 warm-up iterations for the accuracy models). We consider an effect as credible if the 95% Credible Interval (CrI) estimated from the posterior distribution does not contain zero. In addition, to better visualize the distributional features of the latency data, we computed the delta plots for both priming and prime duration effects.
 
 [^2]: The full list of software we used for our analyses is as follows: `r cite_r("r-references.bib")`.
 
@@ -441,7 +440,7 @@ Descriptive statistics for response times and accuracy for both words and nonwor
 
 
 exp1_descriptives_rt <- exp1_data_to_include %>%
-  filter(rt > 250 & rt < 2000 & corr == 1) %>%
+  filter(rt > 250 & rt <= 1800 & corr == 1) %>%
   group_by(StimulusType, PrimeDuration, Relatedness) %>%
   summarize(
     Mean = mean(rt)
@@ -452,7 +451,7 @@ exp1_descriptives_rt <- exp1_data_to_include %>%
   )
 
 exp1_descriptives_corr <- exp1_data_to_include %>%
-  filter(rt > 250 & rt < 2000) %>%
+  filter(rt > 250 & rt <= 1800) %>%
   group_by(StimulusType, PrimeDuration, Relatedness) %>%
   summarize(
     Accuracy = mean(corr)
@@ -483,7 +482,7 @@ Table \@ref(tab:exp1-blmm-table) shows the mean, standard error, lower and upper
 
 # We fit the models in a separate file to make sure that knitting the manuscript doesn't take too long
 
-load("blmm_exp1_rt_dist_full_ranef_5000.RData")
+load("blmm_exp1_rt_dist_revision.RData")
 # 
 # model name is blmm_exp1_rt_dist
 
@@ -538,7 +537,7 @@ These results can be visualized in the delta plots depicted in Figure \ref{fig:d
 
 
 E1<- exp1_data_to_include%>% 
-  filter(rt > 250 & rt < 2000)%>%
+  filter(rt > 250 & rt <= 1800)%>%
   select(participant, TrialID, StimulusType, Relatedness, PrimeDuration, Prime, Target, corr, rt)%>%
   mutate(participant=factor(participant),
          TrialID = factor(TrialID))
@@ -621,7 +620,7 @@ Table \@ref(tab:exp1-acc-blmm-table) shows the mean, standard error, lower and u
 
 ```{r exp1-models-acc, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE}
 
-load("blmm_exp1_acc_new_10000.RData")
+load("blmm_exp1_acc_revision.RData")
 
 # Relatedness = Condition
 
@@ -755,7 +754,7 @@ The procedure was identical to Experiment 1, the only difference being that the 
 
 ### Data analysis
 
-We analyzed the data in the same way as in Experiment 1, by only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms and incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 2000))/nrow(.)}*100` % of trials). For priming duration, 16.7 ms was coded as -0.5 and 33.3 ms was coded as 0.5. Otherwise, the model specifications were identical to those in Experiment 1.
+We analyzed the data in the same way as in Experiment 1, by only analyzing trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms or higher than 1800 ms as well as those with incorrect responses (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 1800 | corr == 0))/nrow(.)}*100` % of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms or higher than 1800 ms (`r exp2_data_to_include %>% filter(StimulusType == "Word") %>% {nrow(filter(., rt < 250 | rt > 1800))/nrow(.)}*100` % of trials). For priming duration, 16.7 ms was coded as -0.5 and 33.3 ms was coded as 0.5. Otherwise, the model specifications were identical to those in Experiment 1.
 
 ## Results
 
@@ -766,7 +765,7 @@ Descriptive statistics for RTs and accuracy in all the experimental conditions a
 ```{r exp2-models-rt, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE}
 
 # We fitted the models in a separate file to make sure that knitting the manuscript doesn't take too long
-load("blmm_exp2_rt_dist_full_ranef_5000.RData")
+load("blmm_exp2_rt_dist_revision.RData")
 
 # this file doesn't fit on GitHub
 # download it at https://1drv.ms/u/s!ApE7JQmoH0baocIO3qh2TNb_TlqvlA?e=q3vJml
@@ -792,7 +791,7 @@ Table \@ref(tab:exp2-blmm-table) shows the mean, standard error, lower and upper
 ```{r exp2-descriptive-rt-table, as.is = TRUE,echo=FALSE, message=FALSE, warning=FALSE}
 
 exp2_descriptives_rt <- exp2_data_to_include %>%
-  filter(rt > 250 & rt < 2000 & corr == 1) %>%
+  filter(rt > 250 & rt <= 1800 & corr == 1) %>%
   group_by(StimulusType, PrimeDuration, Relatedness) %>%
   summarize(
     Mean = mean(rt)
@@ -803,7 +802,7 @@ exp2_descriptives_rt <- exp2_data_to_include %>%
   )
 
 exp2_descriptives_corr <- exp2_data_to_include %>%
-  filter(rt > 250 & rt < 2000) %>%
+  filter(rt > 250 & rt <= 1800) %>%
   group_by(StimulusType, PrimeDuration, Relatedness) %>%
   summarize(
     Accuracy = mean(corr)
@@ -943,7 +942,7 @@ cowplot::plot_grid(DeltaE2.PrimingEffect.W,
 
 ```{r exp2-models-acc, echo=FALSE, as.is = TRUE, warning=FALSE, message=FALSE}
 
-load("blmm_exp2_acc_new_10000.RData")
+load("blmm_exp2_acc_revision.RData")
 
 # This file doesn't fit on GitHub
 # Download it at https://1drv.ms/u/s!ApE7JQmoH0baobF4qRyXSfOymglf_g?e=0JGhre

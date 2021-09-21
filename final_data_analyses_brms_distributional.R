@@ -143,90 +143,6 @@ blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & Stim
 
 save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist_full_ranef_5000_2.RData")
 
-
-blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
-                    rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                    warmup = 1000,
-                    iter = 5000,
-                    chains = 4,
-                    prior = prior_exp1,
-                    family = exgaussian(),
-                    inits = "random",
-                    control = list(adapt_delta = 0.95),
-                    cores = 4, backend = "cmdstanr", threads = threading(4))
-
-save(blmm_exp1_rt, file = "blmm_exp1_rt_new2_5000.RData")
-
-blmm_exp1_rt_string <- make_stancode(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
-                                     rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                                     warmup = 1000,
-                                     iter = 5000,
-                                     chains = 4,
-                                     prior = prior_exp1,
-                                     family = exgaussian(),
-                                     inits = "random",
-                                     control = list(adapt_delta = 0.95),
-                                     cores = 4, backend = "cmdstanr", threads = threading(4))
-
-
-
-
-
-
-
-blmm_exp1_acc <- brm(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
-                     formula = corr ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                     warmup = 1000,
-                     iter = 5000,
-                     chains = 4,
-                     prior = prior_exp1,
-                     family = bernoulli(link = "logit"),
-                     inits = "random",
-                     control = list(adapt_delta = 0.95),
-                     cores = 4, backend = "cmdstanr", threads = threading(4))
-
-save(blmm_exp1_acc, file = "blmm_exp1_acc_new2_5000.RData")
-
-
-blmm_exp1_acc_string <- make_stancode(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
-                                      formula = corr ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                                      warmup = 1000,
-                                      iter = 5000,
-                                      chains = 4,
-                                      prior = prior_exp1,
-                                      family = bernoulli(link = "logit"),
-                                      inits = "random",
-                                      control = list(adapt_delta = 0.95),
-                                      cores = 4, backend = "cmdstanr", threads = threading(4))
-
-### Experiment 2 
-
-blmm_exp2_rt <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 1800), 
-                    rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                    warmup = 1000,
-                    iter = 5000,
-                    chains = 4,
-                    prior = prior_exp1,
-                    family = exgaussian(),
-                    inits = "random",
-                    control = list(adapt_delta = 0.95),
-                    cores = 4, backend = "cmdstanr", threads = threading(4))
-
-save(blmm_exp2_rt, file = "blmm_exp2_rt_new2.RData")
-
-# blmm_exp2_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
-#                          bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
-#                          warmup = 200,
-#                          iter = 1000,
-#                          chains = 4,
-#                          prior = prior_exp1,
-#                          family = exgaussian(),
-#                          inits = "random",
-#                          control = list(adapt_delta = 0.8),
-#                          cores = 4, backend = "cmdstanr", threads = threading(4))
-# 
-# save(blmm_exp2_rt_dist, file = "blmm_exp2_rt_dist_full_ranef.RData")
-
 blmm_exp2_rt_dist <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                          bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
                          warmup = 1000,
@@ -244,10 +160,10 @@ save(blmm_exp2_rt_dist, file = "blmm_exp2_rt_dist_full_ranef_5000_3.RData")
 
 blmm_exp2_acc <- brm(data = exp2_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                          bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration+ (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
-                         warmup = 1000,
-                         iter = 5000,
+                         warmup = 2000,
+                         iter = 10000,
                          chains = 4,
-                         #prior = prior_exp1,
+                         prior = prior_exp1,
                          family = exgaussian(),
                          inits = "random",
                          control = list(adapt_delta = 0.95),
