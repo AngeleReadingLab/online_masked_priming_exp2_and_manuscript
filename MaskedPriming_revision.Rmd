@@ -54,6 +54,9 @@ documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
 bibliography: ["references.bib", "r-references.bib"]
+appendix:
+  - "Appendix_A.Rmd"
+  - "Appendix_B.Rmd"
 editor_options: 
   chunk_output_type: console
 ---
@@ -88,7 +91,9 @@ Cognitive psychologists have been much slower that their behavioral economics co
 
 There have been attempts to address these concerns. @witzelTestingViabilityWebDMDX2013 developed a Web version of DMDX (webDMDX) showing promising results in a trial experiment. However, webDMDX is a self-contained Windows executable file that participants have to download and run rather than a "true" online programming script that could be run inside of a browser. A downside of this format is that participants often are (and should be) understandably skeptical about downloading and running executable files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer. As a consequence, the use of webDMDX in masked priming experiments has been rather limited so far [see @Alluhaybi_2020; @Dubey_2018, for exceptions].
 
-Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets [@reimersPresentationResponseTiming2015]. There is now a variety of software packages taking advantage of the new capabilities to present experimental stimuli and collect data, both commercial, such as Gorilla [@anwyl-irvine2020] or Testable [@rezlescu2020], and open-source such as jsPsych [@deleeuw2015] or PsychoJS [the Javascript version of PsychoPy 3, @peirce2019]. In addition, online setups allow researchers to target any individual with an internet connection as a participant, from very different countries and backgrounds. Indeed, various on-line platforms (e.g., Prolific, Amazon Mechanical Turk) offer the possibility of recruiting participants for on-line experiments based on various specific characteristics set up by the experimenters regardless of their location (e.g., native French speakers, not older than 30 years old, not currently in college).
+Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets [@reimersPresentationResponseTiming2015]. There have been attempts to use this technology for online masked priming experiments: @crump2013 (Experiment 7) attempted a masked priming paradigm using custom written Javascript code, but failed to replicate the masked priming effect which may be due to problems with their implementation (unfortunately, their study does not provide many details about the Javascript code used). @barnhoorn2015 developed a software package called *QRTEngine* designed to run experiments within the Qualtrics online survey development environment [@qualtrics2020] and were able to successfully find masked priming effects (Experiment 3). Unfortunately, *QRTEngine* was only maintained for a few years and is now defunct, which is an issue with many custom-developed solutions.
+
+Nowadays, there a variety of well-maintained software packages taking advantage of the HTML5 capabilities to present experimental stimuli and collect data, both commercial, such as Gorilla [@anwyl-irvine2020] or Testable [@rezlescu2020], and open-source such as jsPsych [@deleeuw2015] or PsychoJS [the Javascript version of PsychoPy 3, @peirce2019]. In addition, online setups allow researchers to target any individual with an internet connection as a participant, from very different countries and backgrounds. Indeed, various on-line platforms (e.g., Prolific, Amazon Mechanical Turk) offer the possibility of recruiting participants for on-line experiments based on various specific characteristics set up by the experimenters regardless of their location (e.g., native French speakers, not older than 30 years old, not currently in college).
 
 Of course, despite the technological advances, many cognitive psychologists still have concerns about timing and measurement precision. While Javascript-based experiments run on the participants' devices and thereby avoid any lag due to connection issues (e.g., to avoid delays, all stimuli are usually downloaded before the start of the experiment), experimenters have little control over which devices the experiment is run on beyond the option of explicitly preventing the experiment to run on specific device types such as mobile devices. Moreover, experimenters have no control at all over what other applications are running on the device, screen size and resolution, viewing distance, properties of the keyboard/touchscreen, etc., as all of these are determined by the device or the participants' preferences. As @reimersPresentationResponseTiming2015 pointed out, there are two ways of testing whether timing and response issues are problematic: (1) comparing a Web-based experiment directly with an established lab-based version by measuring presentation timings (using a photodiode) and response timings on various device configurations and (2) attempting to replicate existing lab-based findings using a Web-based paradigm. If the results of the Web-based study are comparable to previous lab-based results, this suggests that, whatever the deviations in stimulus and response timing are, they are not severe enough to affect the overall findings in the paradigm in question.
 
@@ -102,7 +107,7 @@ In the present paper, we took advantage of the above marker to examine whether o
 
 To further constrain the research questions, Experiment 2 was designed to be analogous to Experiment 1, except for replacing the 50 ms prime exposure duration with a very short prime exposure duration, namely, 16.7 ms. Similar extremely brief prime exposure durations have shown very weak masked priming lexical decision experiments in a laboratory setting: less than 5 ms for a prime duration of 14 ms [@ziegler2000] and less than 9 ms for a prime duration of 20 ms [@Tzur_2007]---in the @Tzur_2007 experiment, this difference increased to 16.7 ms when using a very high level of contrast in the computer screen. Thus, if the size of the priming effect is roughly similar to the prime exposure duration, we would expect a much larger priming effect at the 33.3 ms prime exposure duration than at the 16.7 ms prime exposure duration. If we do observe a large effect at the 16.7 ms prime exposure duration (e.g., above 20-25 ms), this would suggest, again, that there is a qualitative difference between using the masked priming technique in the laboratory and in online experiments. Keep in mind that we are using a software that has very good control over the exposure duration [@bridges2020; @anwyl-irvine2020a]. Figure \ref{fig:hyp-mod-dat-figure} displays the link between all these verbal hypotheses, the process model that corresponds to each of them, and their predictions in the RT distributions.
 
-All in all, replicating the results observed in controlled laboratory masked priming studies would be an important step in establishing the validity of online masked priming tasks, even in a scenario with no control over many variables (e.g., the devices in which the experiment is run, the level of contrast of the computer screen, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021]. This would open the possibility for masked priming researchers to collect large samples from diverse populations via online crowdsourcing methods, as has been done previously using other paradigms [e.g., @aguasvivas2020; @brysbaert2021a; @mandera2020; @brysbaert2016impact]. So far, this has only been possible in many-labs studies depending on the collaboration of many researchers in different countries [e.g., @adelman2014]. Importantly, the present experiments go beyond an online replication: they allow us to test masked priming effects not only across conditions (identity vs. unrelated) but also within conditions (the effect of identity primes, or unrelated primes, across two prime durations) [see @Jacobs_1995; @ziegler2000, for advantages of within-condition comparisons]. Thus, the within-subject manipulation of prime exposure duration in both experiments allows us to obtain a comprehensive picture of masked identity priming effects--also including the examination of potential inhibitory effects of unrelated primes.
+All in all, replicating the results observed in controlled laboratory masked priming studies would be an important step in establishing the validity of online masked priming tasks, even in a scenario with no control over many variables (e.g., the devices in which the experiment is run, the level of contrast of the computer screen, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli [e.g., @Parker_2021]. This would open the possibility for masked priming researchers to collect large samples from diverse populations via online crowdsourcing methods, as has been done previously using other paradigms [e.g., @aguasvivas2020; @brysbaert2021a; @mandera2020; @brysbaert2016impact, @ratcliff2021]. So far, this has only been possible in many-labs studies depending on the collaboration of many researchers in different countries [e.g., @adelman2014]. Importantly, the present experiments go beyond an online replication: they allow us to test masked priming effects not only across conditions (identity vs. unrelated) but also within conditions (the effect of identity primes, or unrelated primes, across two prime durations) [see @Jacobs_1995; @ziegler2000, for advantages of within-condition comparisons]. Thus, the within-subject manipulation of prime exposure duration in both experiments allows us to obtain a comprehensive picture of masked identity priming effects--also including the examination of potential inhibitory effects of unrelated primes.
 
 \newpage
 
@@ -388,7 +393,7 @@ exp1_actual_participants$country <- coords2country(participant_coords)
 exp1_participant_countries <- table(exp1_actual_participants$country %>% as.character) #make into a character vector since the original output is a factor with as many levels as there are countries
 ```
 
-The pre-registration form for Experiment 1, together with the materials, data files, and R scripts can be found at <https://osf.io/57rzq/>.
+The pre-registration form for Experiment 1 can be found at <https://osf.io/v97bp>, and the materials, data files, and R scripts can be found at <https://osf.io/57rzq/>.
 
 ### Participants
 
@@ -984,6 +989,7 @@ apa_table(
     escape = FALSE
     )
 
+papaja::render_appendix("Appendix_B.Rmd")
 ```
 
 ## Discussion
@@ -1015,34 +1021,5 @@ In conclusion, our results give us confidence that high-quality behavioral data 
 :::
 
 \newpage
-
-# Appendix A
-
-## Words:
-
-```{r}
-trials%>%
-  filter(StimulusType=="WORD")%>%
-  pull(Target)%>%
-  noquote()->Word_targets
-
-Word_targets
-
-
-
-```
-
-## Non-Words:
-
-```{r}
-
-trials%>%
-  filter(StimulusType=="NW")%>%
-  pull(Target)%>%
-  noquote()->NonWord_targets
-
-NonWord_targets
-
-```
 
 \endgroup

@@ -204,7 +204,9 @@ Cognitive psychologists have been much slower that their behavioral economics co
 
 There have been attempts to address these concerns. Witzel et al. (2013) developed a Web version of DMDX (webDMDX) showing promising results in a trial experiment. However, webDMDX is a self-contained Windows executable file that participants have to download and run rather than a ``true'' online programming script that could be run inside of a browser. A downside of this format is that participants often are (and should be) understandably skeptical about downloading and running executable files from the Internet. Additionally, many participants may not have access to a Windows PC, or may be discouraged from participating by the extra work it takes to deploy the experiment on their computer. As a consequence, the use of webDMDX in masked priming experiments has been rather limited so far (see Alluhaybi \& Witzel, 2020; Dubey et al., 2018, for exceptions).
 
-Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets (Reimers \& Stewart, 2015). There is now a variety of software packages taking advantage of the new capabilities to present experimental stimuli and collect data, both commercial, such as Gorilla (Anwyl-Irvine, Massonni, et al., 2020) or Testable (Rezlescu et al., 2020), and open-source such as jsPsych (de Leeuw, 2015) or PsychoJS (the Javascript version of PsychoPy 3, Peirce et al., 2019). In addition, online setups allow researchers to target any individual with an internet connection as a participant, from very different countries and backgrounds. Indeed, various on-line platforms (e.g., Prolific, Amazon Mechanical Turk) offer the possibility of recruiting participants for on-line experiments based on various specific characteristics set up by the experimenters regardless of their location (e.g., native French speakers, not older than 30 years old, not currently in college).
+Fortunately, in recent years, there have been significant improvements in how content can be presented on the World Wide Web. Most notably, the HTML5 standard now makes it possible to use Javascript in order to draw stimuli interactively and monitor participant responses with remarkable flexibility inside the browser. Participants do not have to install any software, and the HTML5 standard is supported by a wide variety of devices, including mobile phones and tablets (Reimers \& Stewart, 2015). There have been attempts to use this technology for online masked priming experiments: Crump et al. (2013) (Experiment 7) attempted a masked priming paradigm using custom written Javascript code, but failed to replicate the masked priming effect which may be due to problems with their implementation (unfortunately, their study does not provide many details about the Javascript code used). Barnhoorn et al. (2015) developed a software package called \emph{QRTEngine} designed to run experiments within the Qualtrics online survey development environment (Qualtrics, 2020) and were able to successfully find masked priming effects (Experiment 3). Unfortunately, \emph{QRTEngine} was only maintained for a few years and is now defunct, which is an issue with many custom-developed solutions.
+
+Nowadays, there a variety of well-maintained software packages taking advantage of the HTML5 capabilities to present experimental stimuli and collect data, both commercial, such as Gorilla (Anwyl-Irvine, Massonni, et al., 2020) or Testable (Rezlescu et al., 2020), and open-source such as jsPsych (de Leeuw, 2015) or PsychoJS (the Javascript version of PsychoPy 3, Peirce et al., 2019). In addition, online setups allow researchers to target any individual with an internet connection as a participant, from very different countries and backgrounds. Indeed, various on-line platforms (e.g., Prolific, Amazon Mechanical Turk) offer the possibility of recruiting participants for on-line experiments based on various specific characteristics set up by the experimenters regardless of their location (e.g., native French speakers, not older than 30 years old, not currently in college).
 
 Of course, despite the technological advances, many cognitive psychologists still have concerns about timing and measurement precision. While Javascript-based experiments run on the participants' devices and thereby avoid any lag due to connection issues (e.g., to avoid delays, all stimuli are usually downloaded before the start of the experiment), experimenters have little control over which devices the experiment is run on beyond the option of explicitly preventing the experiment to run on specific device types such as mobile devices. Moreover, experimenters have no control at all over what other applications are running on the device, screen size and resolution, viewing distance, properties of the keyboard/touchscreen, etc., as all of these are determined by the device or the participants' preferences. As Reimers and Stewart (2015) pointed out, there are two ways of testing whether timing and response issues are problematic: (1) comparing a Web-based experiment directly with an established lab-based version by measuring presentation timings (using a photodiode) and response timings on various device configurations and (2) attempting to replicate existing lab-based findings using a Web-based paradigm. If the results of the Web-based study are comparable to previous lab-based results, this suggests that, whatever the deviations in stimulus and response timing are, they are not severe enough to affect the overall findings in the paradigm in question.
 
@@ -218,7 +220,7 @@ In the present paper, we took advantage of the above marker to examine whether o
 
 To further constrain the research questions, Experiment 2 was designed to be analogous to Experiment 1, except for replacing the 50 ms prime exposure duration with a very short prime exposure duration, namely, 16.7 ms. Similar extremely brief prime exposure durations have shown very weak masked priming lexical decision experiments in a laboratory setting: less than 5 ms for a prime duration of 14 ms (Ziegler et al., 2000) and less than 9 ms for a prime duration of 20 ms (Tzur \& Frost, 2007)---in the Tzur and Frost (2007) experiment, this difference increased to 16.7 ms when using a very high level of contrast in the computer screen. Thus, if the size of the priming effect is roughly similar to the prime exposure duration, we would expect a much larger priming effect at the 33.3 ms prime exposure duration than at the 16.7 ms prime exposure duration. If we do observe a large effect at the 16.7 ms prime exposure duration (e.g., above 20-25 ms), this would suggest, again, that there is a qualitative difference between using the masked priming technique in the laboratory and in online experiments. Keep in mind that we are using a software that has very good control over the exposure duration (Anwyl-Irvine, Dalmaijer, et al., 2020; Bridges et al., 2020). Figure \ref{fig:hyp-mod-dat-figure} displays the link between all these verbal hypotheses, the process model that corresponds to each of them, and their predictions in the RT distributions.
 
-All in all, replicating the results observed in controlled laboratory masked priming studies would be an important step in establishing the validity of online masked priming tasks, even in a scenario with no control over many variables (e.g., the devices in which the experiment is run, the level of contrast of the computer screen, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli (e.g., Parker et al., 2021). This would open the possibility for masked priming researchers to collect large samples from diverse populations via online crowdsourcing methods, as has been done previously using other paradigms (e.g., Aguasvivas et al., 2020; Brysbaert et al., 2021; Brysbaert et al., 2016; Mandera et al., 2020). So far, this has only been possible in many-labs studies depending on the collaboration of many researchers in different countries (e.g., Adelman et al., 2014). Importantly, the present experiments go beyond an online replication: they allow us to test masked priming effects not only across conditions (identity vs.~unrelated) but also within conditions (the effect of identity primes, or unrelated primes, across two prime durations) (see Jacobs et al., 1995; Ziegler et al., 2000, for advantages of within-condition comparisons). Thus, the within-subject manipulation of prime exposure duration in both experiments allows us to obtain a comprehensive picture of masked identity priming effects--also including the examination of potential inhibitory effects of unrelated primes.
+All in all, replicating the results observed in controlled laboratory masked priming studies would be an important step in establishing the validity of online masked priming tasks, even in a scenario with no control over many variables (e.g., the devices in which the experiment is run, the level of contrast of the computer screen, or the additional applications that are running in the background of said device), as has been done with other paradigms that also require a high control of the presentation timing and location of the stimuli (e.g., Parker et al., 2021). This would open the possibility for masked priming researchers to collect large samples from diverse populations via online crowdsourcing methods, as has been done previously using other paradigms Ratcliff \& Hendrickson (2021). So far, this has only been possible in many-labs studies depending on the collaboration of many researchers in different countries (e.g., Adelman et al., 2014). Importantly, the present experiments go beyond an online replication: they allow us to test masked priming effects not only across conditions (identity vs.~unrelated) but also within conditions (the effect of identity primes, or unrelated primes, across two prime durations) (see Jacobs et al., 1995; Ziegler et al., 2000, for advantages of within-condition comparisons). Thus, the within-subject manipulation of prime exposure duration in both experiments allows us to obtain a comprehensive picture of masked identity priming effects--also including the examination of potential inhibitory effects of unrelated primes.
 
 \newpage
 
@@ -238,7 +240,7 @@ We report here how we determined our sample size, all data exclusions (if any), 
 \hypertarget{method}{%
 \subsection{Method}\label{method}}
 
-The pre-registration form for Experiment 1, together with the materials, data files, and R scripts can be found at \url{https://osf.io/57rzq/}.
+The pre-registration form for Experiment 1 can be found at \url{https://osf.io/v97bp}, and the materials, data files, and R scripts can be found at \url{https://osf.io/57rzq/}.
 
 \hypertarget{participants}{%
 \subsubsection{Participants}\label{participants}}
@@ -260,7 +262,7 @@ Participants were able to sign up for the experiment on the Prolific website. Up
 \hypertarget{data-analysis}{%
 \subsubsection{Data analysis}\label{data-analysis}}
 
-We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the \emph{brms} package (Bürkner, 2017, 2018) in R (R Core Team, 2021)\footnote{The full list of software we used for our analyses is as follows: R (Version 4.1.1; R Core Team, 2021) and the R-packages \emph{bayestestR} (Version 0.10.5; Makowski et al., 2019), \emph{brms} (Version 2.16.1; Bürkner, 2017, 2018), \emph{dplyr} (Version 1.0.7; Wickham et al., 2021), \emph{forcats} (Version 0.5.1; Wickham, 2021a), \emph{ggplot2} (Version 3.3.5; Wickham, 2016), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{patchwork} (Version 1.1.1; Pedersen, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{Rcpp} (Eddelbuettel \& Balamuta, 2018; Version 1.0.7; Eddelbuettel \& François, 2011), \emph{readr} (Version 2.0.1; Wickham \& Hester, 2020), \emph{readxl} (Version 1.3.1; Wickham \& Bryan, 2019), \emph{rworldmap} (Version 1.3.6; South, 2011), \emph{see} (Version 0.6.7; Lüdecke et al., 2020), \emph{sp} (Version 1.4.5; Pebesma \& Bivand, 2005), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{tibble} (Version 3.1.3; Müller \& Wickham, 2021), \emph{tidyr} (Version 1.1.3; Wickham, 2021b), \emph{tidyverse} (Version 1.3.1; Wickham et al., 2019), \emph{tinylabels} (Version 0.2.1; Barth, 2021), and \emph{xfun} (Version 0.25; Xie, 2021).}. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms or higher than 1800 ms as well as incorrect responses (5.84 \% of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms or higher than 1800 ms (0.36 \% of trials). For both RTs and accuracy, we fitted a model with priming condition (unrelated vs.~identical) and prime duration (33.3 ms vs.~50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -0.5 and unrelated was coded as 0.5. For priming duration, 33.3 ms was coded as -0.5 and 50 ms was coded as 0.5. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times, with both the mean of the Gaussian component \(\mu\) and the scale parameter of the exponential component \(\beta\) (equaling the inverse of the rate parameter \(\lambda\)) being allowed to vary between conditions. To model response accuracy, we used the Bernoulli distribution with a logit link. We used the default priors suggested by \emph{brms} except for the coefficients for the fixed effects, for which we applied weakly informative priors of \(\beta \sim N(0,100)\) in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each with 1000 warmup iterations (10,000 iterations with 2000 warm-up iterations for the accuracy models). We consider an effect as credible if the 95\% Credible Interval (CrI) estimated from the posterior distribution does not contain zero. In addition, to better visualize the distributional features of the latency data, we computed the delta plots for both priming and prime duration effects.
+We analyzed the data by fitting Bayesian linear and generalized linear mixed models, using the \emph{brms} package (Bürkner, 2017, 2018) in R (R Core Team, 2021)\footnote{The full list of software we used for our analyses is as follows: R (Version 4.1.1; R Core Team, 2021) and the R-packages \emph{bayestestR} (Version 0.11.0; Makowski et al., 2019), \emph{brms} (Version 2.16.1; Bürkner, 2017, 2018), \emph{dplyr} (Version 1.0.7; Wickham et al., 2021), \emph{forcats} (Version 0.5.1; Wickham, 2021a), \emph{ggplot2} (Version 3.3.5; Wickham, 2016), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{patchwork} (Version 1.1.1; Pedersen, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{Rcpp} (Eddelbuettel \& Balamuta, 2018; Version 1.0.7; Eddelbuettel \& François, 2011), \emph{readr} (Version 2.0.1; Wickham \& Hester, 2020), \emph{readxl} (Version 1.3.1; Wickham \& Bryan, 2019), \emph{rworldmap} (Version 1.3.6; South, 2011), \emph{see} (Version 0.6.7; Lüdecke et al., 2020), \emph{sp} (Version 1.4.5; Pebesma \& Bivand, 2005), \emph{stringr} (Version 1.4.0; Wickham, 2019), \emph{tibble} (Version 3.1.4; Müller \& Wickham, 2021), \emph{tidyr} (Version 1.1.3; Wickham, 2021b), \emph{tidyverse} (Version 1.3.1; Wickham et al., 2019), \emph{tinylabels} (Version 0.2.1; Barth, 2021), and \emph{xfun} (Version 0.26; Xie, 2021).}. We only analyzed trials where the target stimulus was a word. For the response time (RT) analysis, we excluded trials with RTs lower than 250 ms or higher than 1800 ms as well as incorrect responses (5.84 \% of trials). For the accuracy analysis, we only excluded trials with RTs lower than 250 ms or higher than 1800 ms (0.36 \% of trials). For both RTs and accuracy, we fitted a model with priming condition (unrelated vs.~identical) and prime duration (33.3 ms vs.~50 ms) as well as their interaction as the fixed effects. For the discrete predictors, we used contrasts as follows: For priming condition, identical was coded as -0.5 and unrelated was coded as 0.5. For priming duration, 33.3 ms was coded as -0.5 and 50 ms was coded as 0.5. We used the maximal random effects structure possible, with random intercepts and slopes for condition, prime duration, and the interaction for participants and items. We used the ex-Gaussian distribution to model response times, with both the mean of the Gaussian component \(\mu\) and the scale parameter of the exponential component \(\beta\) (equaling the inverse of the rate parameter \(\lambda\)) being allowed to vary between conditions. To model response accuracy, we used the Bernoulli distribution with a logit link. We used the default priors suggested by \emph{brms} except for the coefficients for the fixed effects, for which we applied weakly informative priors of \(\beta \sim N(0,100)\) in order to rule out improbably large effect sizes. Each model was fitted using four chains with 5000 iterations each with 1000 warmup iterations (10,000 iterations with 2000 warm-up iterations for the accuracy models). We consider an effect as credible if the 95\% Credible Interval (CrI) estimated from the posterior distribution does not contain zero. In addition, to better visualize the distributional features of the latency data, we computed the delta plots for both priming and prime duration effects.
 
 \hypertarget{results}{%
 \subsection{Results}\label{results}}
@@ -549,6 +551,10 @@ Relatedness:Prime Duration & -0.710 & 0.218 & -1.157 & -0.305 & 1.000\\
 
 \end{table}
 
+\begin{verbatim}
+## Error: pandoc document conversion failed with error 99
+\end{verbatim}
+
 \hypertarget{discussion-1}{%
 \subsection{Discussion}\label{discussion-1}}
 
@@ -602,6 +608,9 @@ Aust, F., Diedenhofen, B., Ullrich, S., \& Musch, J. (2013). Seriousness checks 
 \leavevmode\hypertarget{ref-balota2007}{}%
 Balota, D. A., Yap, M. J., Hutchison, K. A., Cortese, M. J., Kessler, B., Loftis, B., Neely, J. H., Nelson, D. L., Simpson, G. B., \& Treiman, R. (2007). The English Lexicon Project. \emph{Behavior Research Methods}, \emph{39}(3), 445--459. \url{https://doi.org/10.3758/BF03193014}
 
+\leavevmode\hypertarget{ref-barnhoorn2015}{}%
+Barnhoorn, J. S., Haasnoot, E., Bocanegra, B. R., \& van Steenbergen, H. (2015). QRTEngine: An easy solution for running online reaction time experiments using Qualtrics. \emph{Behavior Research Methods}, \emph{47}(4), 918--929. \url{https://doi.org/10.3758/s13428-014-0530-7}
+
 \leavevmode\hypertarget{ref-R-tinylabels}{}%
 Barth, M. (2021). \emph{{tinylabels}: Lightweight variable labels}. \url{https://github.com/mariusbarth/tinylabels}
 
@@ -628,6 +637,9 @@ Bürkner, P.-C. (2018). Advanced {Bayesian} multilevel modeling with the {R} pac
 
 \leavevmode\hypertarget{ref-cai2017accent}{}%
 Cai, Z. G., Gilbert, R. A., Davis, M. H., Gaskell, M. G., Farrar, L., Adler, S., \& Rodd, J. M. (2017). \emph{Accent modulates access to word meaning: Evidence for a speaker-model account of spoken word recognition}. \url{https://doi.org/10.31234/osf.io/5x3tb}
+
+\leavevmode\hypertarget{ref-crump2013}{}%
+Crump, M. J. C., McDonnell, J. V., \& Gureckis, T. M. (2013). Evaluating Amazon's Mechanical Turk as a Tool for Experimental Behavioral Research. \emph{PLOS ONE}, \emph{8}(3), e57410. \url{https://doi.org/10.1371/journal.pone.0057410}
 
 \leavevmode\hypertarget{ref-de1994conditional}{}%
 De Jong, R., Liang, C.-C., \& Lauber, E. (1994). Conditional and unconditional automaticity: A dual-process model of effects of spatial stimulus-response correspondence. \emph{Journal of Experimental Psychology: Human Perception and Performance}, \emph{20}(4), 731.
@@ -731,6 +743,9 @@ R Core Team. (2021). \emph{R: A language and environment for statistical computi
 \leavevmode\hypertarget{ref-ratcliff2004}{}%
 Ratcliff, R., Gomez, P., \& McKoon, G. (2004). A diffusion model account of the lexical decision task. \emph{Psychological Review}, \emph{111}(1), 159--182. \url{https://doi.org/10.1037/0033-295X.111.1.159}
 
+\leavevmode\hypertarget{ref-ratcliff2021}{}%
+Ratcliff, R., \& Hendrickson, A. T. (2021). Do data from mechanical Turk subjects replicate accuracy, response time, and diffusion modeling results? \emph{Behavior Research Methods}. \url{https://doi.org/10.3758/s13428-021-01573-x}
+
 \leavevmode\hypertarget{ref-reimersPresentationResponseTiming2015}{}%
 Reimers, S., \& Stewart, N. (2015). Presentation and response timing accuracy in {Adobe Flash} and {HTML5}/{JavaScript Web} experiments. \emph{Behavior Research Methods}, \emph{47}(2), 309--327. \url{https://doi.org/10.3758/s13428-014-0471-1}
 
@@ -795,8 +810,26 @@ Zimmerman, R., \& Gomez, P. (2012). Drawing attention to primes increases inhibi
 
 \newpage
 
-\hypertarget{appendix-a}{%
-\section{Appendix A}\label{appendix-a}}
+\endgroup
+
+\begin{verbatim}
+## Error: pandoc document conversion failed with error 99
+\end{verbatim}
+
+\begin{verbatim}
+## Error in parse_block(g[-1], g[1], params.src, markdown_mode): Duplicate chunk label 'appendix_setup', which has been used for the chunk:
+## library(tidyverse)
+## knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+\end{verbatim}
+
+
+\clearpage
+
+
+
+\begin{appendix}
+\hypertarget{stimuli}{%
+\section{Stimuli}\label{stimuli}}
 
 \hypertarget{words}{%
 \subsection{Words:}\label{words}}
@@ -857,8 +890,210 @@ Zimmerman, R., \& Gomez, P. (2012). Drawing attention to primes increases inhibi
 ## [221] MUSTIL SYNTIC BRUATS CLUIRM FLUMNI NOUPLY SUIVER HURNIA ELOPIA TUNORY
 ## [231] ORCHIN JILUER EQUATS SERBOL HIGSTA PATHEL EAROUD SUIDLE SLOUNT GUSHOP
 \end{verbatim}
+\end{appendix}
 
-\endgroup
+\clearpage
 
+
+
+\begin{appendix}
+\hypertarget{diffusion-model-accounts-for-the-data}{%
+\section{Diffusion model accounts for the
+data}\label{diffusion-model-accounts-for-the-data}}
+
+\hypertarget{about-this-appendix}{%
+\subsection{About this Appendix}\label{about-this-appendix}}
+
+The goal of this appendix is to present a brief description of how the
+diffusion model accounts for the data presented in the main article.
+While the diffusion model fits to the grouped data was part of the
+pre-registration plan, we believe that it is best to present such fits
+in this appendix as opposed to the main text to improve the readability
+of the article. For a full description of the experimental setting and
+its goals please refer to the main text.
+
+\hypertarget{the-diffusion-model}{%
+\subsection{The diffusion model}\label{the-diffusion-model}}
+
+The diffusion model (Ratcliff, 1978) is a cognitive process model for
+perceptual decisions, and it has been quite successful at accounting for
+lexical decision data (Ratcliff et al, 2004) and more importantly for
+the present work, masked priming data (Gomez et al, 2012).
+
+The model assumes that RTs to dual choice tasks are a sum of three
+distinct processes: stimulus encoding, evidence accumulation, and
+response execution. The model makes the strong assumption that evidence
+accumulation is a processes distinct from the other two components, and
+for practical reasons, it groups response execution and encoding time in
+a single parameter.
+
+The model is agnostic about the correlation between the encoding and the
+evidence accumulation processes; and we like to think about it as a tool
+to instantiate theoretical positions that can be articulated in terms of
+encoding, decision, and strategic processes.
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+The model was fit to the grouped data (as per the pre-registration plan)
+of the two experiments. For each stimulus type the proportion of word
+and nonword responses is calculated, then for each of the two responses,
+the RTs at the .1, .3, .5, .7, and .9 quantiles is obtained. We repeat
+this process for each participants, and then all of those quantities
+(response proportions and RTs at quantiles) are averaged across
+participants. This process is also known as Vincentalizing, and the
+averaged quantiles are referred to as vintenciles
+
+The diffusion model predicts the cumulative probability of a response at
+each RT vincentile, and these model predictions are compared to the
+empirical proportions, then the sum of the
+(Observed-Predicted)2/Predicted for correct and error responses for each
+condition that is minimized with a general SIMPLEX minimization routine
+as described by Ratcliff \& Tuerlinckx (2002).
+
+\hypertarget{free-and-fixed-parameters}{%
+\subsection{Free and fixed parameters}\label{free-and-fixed-parameters}}
+
+In diffusion model fits, researchers can decide what parameters are free
+to vary across different conditions. In the present work we implemented
+3 versions of the model. These versions of the model varied in terms of
+which parameters were allowed to vary for which conditions.
+
+In our case, we decided to examine two models as described below. For
+both models, the \(a\) boundary separation, the \(z\) starting point,
+the \(\eta\) between trial variability in drift rate, and all other
+variability parameters are kept constant across all conditions.
+
+\textbf{Model 1:} Drift rates vary as a function of lexicality and prime
+duration, but not from unrelated to identity primes. \(T_{er}\) varied
+from as a function of prime duration and type and also of lexicality.
+
+\textbf{Model 2:} The drift rates vary as a function of prime duration
+and type and also of lexicality. And the drift rate varied only as a
+function of prime type/duration but not lexicality.
+
+In short, in Model 1, the priming effects are accounted by \(T_{er}\)
+only, while in Model 2 they are accounted for by both drift rate and
+\(T_{er}\).
+
+The two models have equal number of parameters so a direct comparison in
+possible. For both experiments the preferred model is Model 1 (the
+\(T_{er}\) model). This is in agreement with the Gomez et al (2012)
+study using in-person testing methods.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:model_parameters_table}$\chi^2$ values for the two models for both experiments.}
+
+\begin{tabular}{lll}
+\toprule
+Experiments & \multicolumn{1}{c}{ModelTer} & \multicolumn{1}{c}{ModelDrift}\\
+\midrule
+1 & 39.65 & 80.65\\
+2 & 10.21 & 28.65\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+Examining the parameter values for \(T_{er}\) in the tables below shows
+that the \(T_{er}\) effect follows the duration of the prime-TARGET SOA
+particularly in the word items and not so much in the nonword items.
+
+This is in general agreement with the Gomez et al.~(2013) original paper
+and Gomez and Perea's (2020) work with developmental readers. In short,
+these fits confirm that masked priming effects are consistent with the
+idea of a head start in the encoding process when there is an identity
+relationship between primes and targets.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_2}$T_{er}$ values for Experiment 1.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment1}\\
+\midrule
+$T_{er}$ values for Experiment 1.  33ms nonword ID & 0.51\\
+$T_{er}$ values for Experiment 1. 33ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  50ms nonword ID & 0.50\\
+$T_{er}$ values for Experiment 1. 50ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  33ms word ID & 0.47\\
+$T_{er}$ values for Experiment 1. 33ms word Unrel & 0.49\\
+$T_{er}$ values for Experiment 1.  50ms word ID & 0.46\\
+$T_{er}$ values for Experiment 1. 50ms word Unrel & 0.50\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_3} \$T\_\{er\}\$ values for Experiment 2.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment2}\\
+\midrule
+\$T\_\{er\}\$ 16ms nonword ID & 0.54\\
+\$T\_\{er\}\$ 16ms nonword Unrel & 0.54\\
+\$T\_\{er\}\$ 33ms nonword ID & 0.53\\
+\$T\_\{er\}\$ 33ms nonword Unrel & 0.53\\
+\$T\_\{er\}\$ 16ms word ID & 0.50\\
+\$T\_\{er\}\$ 16ms word Unrel & 0.50\\
+\$T\_\{er\}\$ 33ms word ID & 0.49\\
+\$T\_\{er\}\$ 33ms word Unrel & 0.51\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\newpage
+
+\hypertarget{references}{%
+\subsection{References}\label{references}}
+
+Gomez, P., \& Perea, M. (2020). Masked identity priming reflects an
+encoding advantage in developing readers. Journal of Experimental Child
+Psychology, 199, 104911. https://doi.org/10.1016/j.jecp.2020.104911
+
+Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account
+of masked versus unmasked priming: Are they qualitatively different?
+Journal of Experimental Psychology: Human Perception and Performance, 39
+(6), 1731--1740. https://doi.org/10.1037/a0032333
+
+Ratcliff, R. (1978). A theory of memory retrieval. Psychological Review,
+85, 59--108. https://doi.org/10.1037/0033-295X.85.2.59
+
+Ratcliff, R., Gomez, P., \& McKoon, G. (2004). A diffusion model account
+of the lexical decision task. Psychological Review, 111, 159--182.
+doi://10.1037/0033-295X.111.1.159
+
+Ratcliff, R.,\& Tuerlinckx, F. (2002). Estimating the parameters of the
+diffusion model: Approaches to dealing with contaminant reaction times
+and parameter variability. Psychonomic Bulletin and Review, 9, 438--481.
+https://doi.org/10.3758/BF03196302
+\end{appendix}
 
 \end{document}

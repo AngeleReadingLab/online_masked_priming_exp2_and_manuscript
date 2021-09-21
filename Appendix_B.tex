@@ -1,0 +1,203 @@
+\clearpage
+
+
+
+\begin{appendix}
+\hypertarget{diffusion-model-accounts-for-the-data}{%
+\section{Diffusion model accounts for the
+data}\label{diffusion-model-accounts-for-the-data}}
+
+\hypertarget{about-this-appendix}{%
+\subsection{About this Appendix}\label{about-this-appendix}}
+
+The goal of this appendix is to present a brief description of how the
+diffusion model accounts for the data presented in the main article.
+While the diffusion model fits to the grouped data was part of the
+pre-registration plan, we believe that it is best to present such fits
+in this appendix as opposed to the main text to improve the readability
+of the article. For a full description of the experimental setting and
+its goals please refer to the main text.
+
+\hypertarget{the-diffusion-model}{%
+\subsection{The diffusion model}\label{the-diffusion-model}}
+
+The diffusion model (Ratcliff, 1978) is a cognitive process model for
+perceptual decisions, and it has been quite successful at accounting for
+lexical decision data (Ratcliff et al, 2004) and more importantly for
+the present work, masked priming data (Gomez et al, 2012).
+
+The model assumes that RTs to dual choice tasks are a sum of three
+distinct processes: stimulus encoding, evidence accumulation, and
+response execution. The model makes the strong assumption that evidence
+accumulation is a processes distinct from the other two components, and
+for practical reasons, it groups response execution and encoding time in
+a single parameter.
+
+The model is agnostic about the correlation between the encoding and the
+evidence accumulation processes; and we like to think about it as a tool
+to instantiate theoretical positions that can be articulated in terms of
+encoding, decision, and strategic processes.
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+The model was fit to the grouped data (as per the pre-registration plan)
+of the two experiments. For each stimulus type the proportion of word
+and nonword responses is calculated, then for each of the two responses,
+the RTs at the .1, .3, .5, .7, and .9 quantiles is obtained. We repeat
+this process for each participants, and then all of those quantities
+(response proportions and RTs at quantiles) are averaged across
+participants. This process is also known as Vincentalizing, and the
+averaged quantiles are referred to as vintenciles
+
+The diffusion model predicts the cumulative probability of a response at
+each RT vincentile, and these model predictions are compared to the
+empirical proportions, then the sum of the
+(Observed-Predicted)2/Predicted for correct and error responses for each
+condition that is minimized with a general SIMPLEX minimization routine
+as described by Ratcliff \& Tuerlinckx (2002).
+
+\hypertarget{free-and-fixed-parameters}{%
+\subsection{Free and fixed parameters}\label{free-and-fixed-parameters}}
+
+In diffusion model fits, researchers can decide what parameters are free
+to vary across different conditions. In the present work we implemented
+3 versions of the model. These versions of the model varied in terms of
+which parameters were allowed to vary for which conditions.
+
+In our case, we decided to examine two models as described below. For
+both models, the \(a\) boundary separation, the \(z\) starting point,
+the \(\eta\) between trial variability in drift rate, and all other
+variability parameters are kept constant across all conditions.
+
+\textbf{Model 1:} Drift rates vary as a function of lexicality and prime
+duration, but not from unrelated to identity primes. \(T_{er}\) varied
+from as a function of prime duration and type and also of lexicality.
+
+\textbf{Model 2:} The drift rates vary as a function of prime duration
+and type and also of lexicality. And the drift rate varied only as a
+function of prime type/duration but not lexicality.
+
+In short, in Model 1, the priming effects are accounted by \(T_{er}\)
+only, while in Model 2 they are accounted for by both drift rate and
+\(T_{er}\).
+
+The two models have equal number of parameters so a direct comparison in
+possible. For both experiments the preferred model is Model 1 (the
+\(T_{er}\) model). This is in agreement with the Gomez et al (2012)
+study using in-person testing methods.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:model_parameters_table}$\chi^2$ values for the two models for both experiments.}
+
+\begin{tabular}{lll}
+\toprule
+Experiments & \multicolumn{1}{c}{ModelTer} & \multicolumn{1}{c}{ModelDrift}\\
+\midrule
+1 & 39.65 & 80.65\\
+2 & 10.21 & 28.65\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+Examining the parameter values for \(T_{er}\) in the tables below shows
+that the \(T_{er}\) effect follows the duration of the prime-TARGET SOA
+particularly in the word items and not so much in the nonword items.
+
+This is in general agreement with the Gomez et al.~(2013) original paper
+and Gomez and Perea's (2020) work with developmental readers. In short,
+these fits confirm that masked priming effects are consistent with the
+idea of a head start in the encoding process when there is an identity
+relationship between primes and targets.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_2}$T_{er}$ values for Experiment 1.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment1}\\
+\midrule
+$T_{er}$ values for Experiment 1.  33ms nonword ID & 0.51\\
+$T_{er}$ values for Experiment 1. 33ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  50ms nonword ID & 0.50\\
+$T_{er}$ values for Experiment 1. 50ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  33ms word ID & 0.47\\
+$T_{er}$ values for Experiment 1. 33ms word Unrel & 0.49\\
+$T_{er}$ values for Experiment 1.  50ms word ID & 0.46\\
+$T_{er}$ values for Experiment 1. 50ms word Unrel & 0.50\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_3} \$T\_\{er\}\$ values for Experiment 2.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment2}\\
+\midrule
+\$T\_\{er\}\$ 16ms nonword ID & 0.54\\
+\$T\_\{er\}\$ 16ms nonword Unrel & 0.54\\
+\$T\_\{er\}\$ 33ms nonword ID & 0.53\\
+\$T\_\{er\}\$ 33ms nonword Unrel & 0.53\\
+\$T\_\{er\}\$ 16ms word ID & 0.50\\
+\$T\_\{er\}\$ 16ms word Unrel & 0.50\\
+\$T\_\{er\}\$ 33ms word ID & 0.49\\
+\$T\_\{er\}\$ 33ms word Unrel & 0.51\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\newpage
+
+\hypertarget{references}{%
+\subsection{References}\label{references}}
+
+Gomez, P., \& Perea, M. (2020). Masked identity priming reflects an
+encoding advantage in developing readers. Journal of Experimental Child
+Psychology, 199, 104911. https://doi.org/10.1016/j.jecp.2020.104911
+
+Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account
+of masked versus unmasked priming: Are they qualitatively different?
+Journal of Experimental Psychology: Human Perception and Performance, 39
+(6), 1731--1740. https://doi.org/10.1037/a0032333
+
+Ratcliff, R. (1978). A theory of memory retrieval. Psychological Review,
+85, 59--108. https://doi.org/10.1037/0033-295X.85.2.59
+
+Ratcliff, R., Gomez, P., \& McKoon, G. (2004). A diffusion model account
+of the lexical decision task. Psychological Review, 111, 159--182.
+doi://10.1037/0033-295X.111.1.159
+
+Ratcliff, R.,\& Tuerlinckx, F. (2002). Estimating the parameters of the
+diffusion model: Approaches to dealing with contaminant reaction times
+and parameter variability. Psychonomic Bulletin and Review, 9, 438--481.
+https://doi.org/10.3758/BF03196302
+\end{appendix}
