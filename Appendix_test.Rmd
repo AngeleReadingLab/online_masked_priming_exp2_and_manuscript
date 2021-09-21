@@ -1,0 +1,37 @@
+---
+appendix: 
+  - "./Appendix_A.Rmd"
+  - "./Appendix_B.Rmd"
+output: papaja::apa6_pdf
+---
+
+This is the manuscript.
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library("see")
+library("papaja")
+library(patchwork)
+library(xfun)
+library(sp)
+library(rworldmap)
+library("brms")
+library("bayestestR")
+
+r_refs("r-references.bib")
+
+```
+
+```{r load_trial_data, message=FALSE, echo=FALSE}
+library(readxl)
+
+trials <- read_xlsx(path = "html/resources/trials_list0.xlsx")
+
+word_statistics <- read_xlsx(path = "online_MaskedPriming_materials_v1.xlsx")
+
+word_statistics$Word_upper <- word_statistics$Word %>% toupper()
+
+trials_word_stats <- left_join(trials, word_statistics, by = c("Target" = "Word_upper"))
+
+
+```

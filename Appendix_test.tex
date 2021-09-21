@@ -1,0 +1,427 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  man]{apa6}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdflang={en-EN},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\begin{center}\begin{threeparttable}}
+%   {\end{threeparttable}\end{center}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+\shorttitle{SHORTTITLE}
+\usepackage{csquotes}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\else
+  \usepackage[main=english]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{TITLE}
+\author{\phantom{0}}
+\date{}
+
+
+\affiliation{\phantom{0}}
+
+\begin{document}
+\maketitle
+
+This is the manuscript.
+
+
+\clearpage
+
+
+
+\begin{appendix}
+\hypertarget{stimuli}{%
+\section{Stimuli}\label{stimuli}}
+
+\hypertarget{words}{%
+\subsection{Words:}\label{words}}
+
+\begin{verbatim}
+##   [1] GLANCE WINTER MILDEW SLEAZY BOTHER PORTAL COURSE SOCIAL CENSOR BACKUP
+##  [11] STABLE PLAGUE OBJECT ABSENT RESIGN CREDIT STREAM WICKED INVOKE BEACON
+##  [21] ADMIRE FACTOR PHRASE BURDEN LOUNGE TAILOR WREATH HOCKEY SEARCH MONKEY
+##  [31] INFECT VERIFY SQUEAL INTAKE PHOBIA BEHALF LIQUOR SHRINK BUCKET VOYAGE
+##  [41] MASCOT HINDER KIDNEY PERIOD VULGAR CASINO SELDOM MASTER MOTHER FRINGE
+##  [51] EXPORT INJECT NATURE CLUMSY GRUMPY PIRATE POSTER FLOWER LUMBER FOREST
+##  [61] FRIGHT BRIDGE KNIGHT TRENCH PLUNGE BUNDLE ANCHOR ABRUPT HUSTLE ETHNIC
+##  [71] CRUISE ORANGE STRIVE ALMOST AMOUNT FAUCET CHARGE HUMBLE PATRON BREAST
+##  [81] SIMPLE JOCKEY WEALTH PRAISE DOMAIN SPRINT SCREAM COMEDY SKETCH ORIENT
+##  [91] WEAPON BUCKLE BUTLER JUNGLE SOCKET VANISH INSULT POWDER INSECT CONVEY
+## [101] SPRING CHAPEL TONGUE DANGER CLERGY SINGLE INCOME WALNUT SURVEY SNATCH
+## [111] HUNGRY IMPOSE POLICE RAMBLE STROKE AMBUSH CHANGE FOSTER SPLINT PENCIL
+## [121] PONDER REGION LAUNCH THRONE SYMBOL GOSPEL POLICY FUMBLE PLENTY SQUARE
+## [131] GARDEN BRIGHT SOURCE PLAQUE TROPHY EXOTIC RACKET COLUMN THEORY FAMILY
+## [141] FRIEND STIGMA RESULT MORTAL SPRAWL RODENT FILTER HUNGER PERMIT RELISH
+## [151] EXPAND STRAND PUBLIC TRAVEL THREAD IGNORE CLIENT BELONG FLUENT CARBON
+## [161] WRENCH DIRECT BOUNCE STUDIO NUMBER RANSOM SLOGAN RECKON WONDER POLITE
+## [171] INDUCE BREATH CHORUS PLACID GUITAR TUMBLE BRANCH FLIGHT SPIDER STRAIN
+## [181] THRIVE LINGER STRIKE BLOUSE NICKEL ENOUGH CASTLE SENIOR MARVEL STUPID
+## [191] QUENCH STRONG CHROME STAPLE IMPORT BLEACH FINGER MELODY DEBRIS PRINCE
+## [201] ORPHAN SPRUCE REASON SPONGE PARISH COUPLE GARLIC CUSTOM INVADE RANDOM
+## [211] MYSTIC ROCKET BEHOLD AUTHOR LIZARD CRADLE DRAGON ISLAND DETAIL VIOLET
+## [221] PASTOR CANDLE STRING MARKET INVEST STARCH DESIGN ANSWER GENIUS POUNCE
+## [231] DEPART PATROL SHOWER TURKEY FABRIC STRIFE ADVENT INFORM BASKET SILENT
+\end{verbatim}
+
+\hypertarget{non-words}{%
+\subsection{Non-Words:}\label{non-words}}
+
+\begin{verbatim}
+##   [1] KNISMA ALCOUD STRELD PRAILE FRUDGE URIVEL SCHIND TANDLY FUNTLE CAROEY
+##  [11] CHRUMS LUNKER DRANCE PITROM IMPURB FRUTAN SNAPEL BAITCH LIMPOR SARIDE
+##  [21] RASTOE ABOUNE DORSEX JAUNCE MINKEL RUNAMO GIRCUE SADENT BRUNGE PHRECT
+##  [31] CAINKY SURDEN BOLVIS SCOUGE TONDLE BROGET WANIGH BARCET BAFENT MINGAR
+##  [41] JUSTRE ABSULT KISPEL CHAITE WHIVEX HOCITE GORBIE WICTOR PADIFS CRUDIO
+##  [51] NOBEST CIGNEY CRIBLE HABLIN PEBRIC JOSTED PHOTIE ACRISE LOBUSH ROBULY
+##  [61] SMENCO UNWERT MUSIED EATRIC ANOUGS PIATON BLARGE STROLE BATROL MILTED
+##  [71] LUPICT STAPOD RESAIT VAROSH APIGHT INLORS VENIOD POLUTH SOUDAL UNJECT
+##  [81] STUNCH QUILEW DOLICA VACKEL DISTAR VARMIT PASINK PACKES ORCHET WRIMSY
+##  [91] AUBRID DAMILT SORTEL FUMBLO SLEIRT YARMON PETAIN UNIGHS CELOND CURBOL
+## [101] MELATY PORLEX VERALF SHAPLE PRUDGE RELDON NYMBEL YACEUP STARBY SPLINO
+## [111] PRETCH ABLINT SWANCE INHORT GLEATH BEINCH FERTIC PIERGY STURCH YARION
+## [121] FAINCH MILUER FIREAM CLUDIE FORGLE SOUNGE KIRAFE PSETCH AMILOY DANIET
+## [131] SPROLY NERAWL PAURSE SPRINE LASTON SCREGM WORBAL REAGLY ZOMBER JOCKAL
+## [141] MIATOR SLANCH ROSAIL STEIKH THRUSE IGUADE PLENAC BROAKE YARIKE KENSOM
+## [151] GILFEW VANGUE CATRIE WATMEG DESION GHODUS REJOLS WREASH FACHOW FIATCH
+## [161] MYRTIE RANDOW AIMOSY SCRILY ABSEND SAUDIC KERIFT DUMPLE ASYLEN NAGURS
+## [171] TIESCH TRINGE CLUREY VIRLEX ZINGLY OTHNIS DERAIN FLEACK FONVER DESORY
+## [181] PAUCHE TIREAU BREALI IMPOTE GUAIRT TOSHEL SLIQUE HORNAL WRONCH SLEACT
+## [191] GEILOY RAMILY BIGENT SLIANT YORQUE IGUARE INJORE SHRILE AUTING CAVORY
+## [201] HUNIEK SARLEY AUNGRE GUESCO VEIGMA ANCUST GRONCE CRAGIN WITMER HATRUS
+## [211] THELDY ROUNCY GANOUS SPAQUX COLURY FLENGY CAMBLE BLUNDE FOURET WEAROX
+## [221] MUSTIL SYNTIC BRUATS CLUIRM FLUMNI NOUPLY SUIVER HURNIA ELOPIA TUNORY
+## [231] ORCHIN JILUER EQUATS SERBOL HIGSTA PATHEL EAROUD SUIDLE SLOUNT GUSHOP
+\end{verbatim}
+\end{appendix}
+
+\clearpage
+
+
+
+\begin{appendix}
+\hypertarget{diffusion-model-accounts-for-the-data}{%
+\section{Diffusion model accounts for the
+data}\label{diffusion-model-accounts-for-the-data}}
+
+\hypertarget{about-this-appendix}{%
+\subsection{About this Appendix}\label{about-this-appendix}}
+
+The goal of this appendix is to present a brief description of how the
+diffusion model accounts for the data presented in the main article.
+While the diffusion model fits to the grouped data was part of the
+pre-registration plan, we believe that it is best to present such fits
+in this appendix as opposed to the main text to improve the readability
+of the article. For a full description of the experimental setting and
+its goals please refer to the main text.
+
+\hypertarget{the-diffusion-model}{%
+\subsection{The diffusion model}\label{the-diffusion-model}}
+
+The diffusion model (Ratcliff, 1978) is a cognitive process model for
+perceptual decisions, and it has been quite successful at accounting for
+lexical decision data (Ratcliff et al, 2004) and more importantly for
+the present work, masked priming data (Gomez et al, 2012).
+
+The model assumes that RTs to dual choice tasks are a sum of three
+distinct processes: stimulus encoding, evidence accumulation, and
+response execution. The model makes the strong assumption that evidence
+accumulation is a processes distinct from the other two components, and
+for practical reasons, it groups response execution and encoding time in
+a single parameter.
+
+The model is agnostic about the correlation between the encoding and the
+evidence accumulation processes; and we like to think about it as a tool
+to instantiate theoretical positions that can be articulated in terms of
+encoding, decision, and strategic processes.
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+The model was fit to the grouped data (as per the pre-registration plan)
+of the two experiments. For each stimulus type the proportion of word
+and nonword responses is calculated, then for each of the two responses,
+the RTs at the .1, .3, .5, .7, and .9 quantiles is obtained. We repeat
+this process for each participants, and then all of those quantities
+(response proportions and RTs at quantiles) are averaged across
+participants. This process is also known as Vincentalizing, and the
+averaged quantiles are referred to as vintenciles
+
+The diffusion model predicts the cumulative probability of a response at
+each RT vincentile, and these model predictions are compared to the
+empirical proportions, then the sum of the
+(Observed-Predicted)2/Predicted for correct and error responses for each
+condition that is minimized with a general SIMPLEX minimization routine
+as described by Ratcliff \& Tuerlinckx (2002).
+
+\hypertarget{free-and-fixed-parameters}{%
+\subsection{Free and fixed parameters}\label{free-and-fixed-parameters}}
+
+In diffusion model fits, researchers can decide what parameters are free
+to vary across different conditions. In the present work we implemented
+3 versions of the model. These versions of the model varied in terms of
+which parameters were allowed to vary for which conditions.
+
+In our case, we decided to examine two models as described below. For
+both models, the \(a\) boundary separation, the \(z\) starting point,
+the \(\eta\) between trial variability in drift rate, and all other
+variability parameters are kept constant across all conditions.
+
+\textbf{Model 1:} Drift rates vary as a function of lexicality and prime
+duration, but not from unrelated to identity primes. \(T_{er}\) varied
+from as a function of prime duration and type and also of lexicality.
+
+\textbf{Model 2:} The drift rates vary as a function of prime duration
+and type and also of lexicality. And the drift rate varied only as a
+function of prime type/duration but not lexicality.
+
+In short, in Model 1, the priming effects are accounted by \(T_{er}\)
+only, while in Model 2 they are accounted for by both drift rate and
+\(T_{er}\).
+
+The two models have equal number of parameters so a direct comparison in
+possible. For both experiments the preferred model is Model 1 (the
+\(T_{er}\) model). This is in agreement with the Gomez et al (2012)
+study using in-person testing methods.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:model_parameters_table}$\chi^2$ values for the two models for both experiments.}
+
+\begin{tabular}{lll}
+\toprule
+Experiments & \multicolumn{1}{c}{ModelTer} & \multicolumn{1}{c}{ModelDrift}\\
+\midrule
+1 & 39.65 & 80.65\\
+2 & 10.21 & 28.65\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\hypertarget{summary}{%
+\subsection{Summary}\label{summary}}
+
+Examining the parameter values for \(T_{er}\) in the tables below shows
+that the \(T_{er}\) effect follows the duration of the prime-TARGET SOA
+particularly in the word items and not so much in the nonword items.
+
+This is in general agreement with the Gomez et al.~(2013) original paper
+and Gomez and Perea's (2020) work with developmental readers. In short,
+these fits confirm that masked priming effects are consistent with the
+idea of a head start in the encoding process when there is an identity
+relationship between primes and targets.
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_2}$T_{er}$ values for Experiment 1.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment1}\\
+\midrule
+$T_{er}$ values for Experiment 1.  33ms nonword ID & 0.51\\
+$T_{er}$ values for Experiment 1. 33ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  50ms nonword ID & 0.50\\
+$T_{er}$ values for Experiment 1. 50ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  33ms word ID & 0.47\\
+$T_{er}$ values for Experiment 1. 33ms word Unrel & 0.49\\
+$T_{er}$ values for Experiment 1.  50ms word ID & 0.46\\
+$T_{er}$ values for Experiment 1. 50ms word Unrel & 0.50\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_3} \$T\_\{er\}\$ values for Experiment 2.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment2}\\
+\midrule
+\$T\_\{er\}\$ 16ms nonword ID & 0.54\\
+\$T\_\{er\}\$ 16ms nonword Unrel & 0.54\\
+\$T\_\{er\}\$ 33ms nonword ID & 0.53\\
+\$T\_\{er\}\$ 33ms nonword Unrel & 0.53\\
+\$T\_\{er\}\$ 16ms word ID & 0.50\\
+\$T\_\{er\}\$ 16ms word Unrel & 0.50\\
+\$T\_\{er\}\$ 33ms word ID & 0.49\\
+\$T\_\{er\}\$ 33ms word Unrel & 0.51\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\newpage
+
+\hypertarget{references}{%
+\subsection{References}\label{references}}
+
+Gomez, P., \& Perea, M. (2020). Masked identity priming reflects an
+encoding advantage in developing readers. Journal of Experimental Child
+Psychology, 199, 104911. https://doi.org/10.1016/j.jecp.2020.104911
+
+Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account
+of masked versus unmasked priming: Are they qualitatively different?
+Journal of Experimental Psychology: Human Perception and Performance, 39
+(6), 1731--1740. https://doi.org/10.1037/a0032333
+
+Ratcliff, R. (1978). A theory of memory retrieval. Psychological Review,
+85, 59--108. https://doi.org/10.1037/0033-295X.85.2.59
+
+Ratcliff, R., Gomez, P., \& McKoon, G. (2004). A diffusion model account
+of the lexical decision task. Psychological Review, 111, 159--182.
+doi://10.1037/0033-295X.111.1.159
+
+Ratcliff, R.,\& Tuerlinckx, F. (2002). Estimating the parameters of the
+diffusion model: Approaches to dealing with contaminant reaction times
+and parameter variability. Psychonomic Bulletin and Review, 9, 438--481.
+https://doi.org/10.3758/BF03196302
+\end{appendix}
+
+\end{document}

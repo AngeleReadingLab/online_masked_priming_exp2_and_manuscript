@@ -10,66 +10,42 @@ Prof Witzel recommended the manuscript for publication, but raised one concern:
 
 Given that the experiments replicated previous lab-based findings, and there was enough power (in terms of number of participants and items), any variation introduced by different refresh rates probably did not affect the results reported in this study. However, one of the benefits of collecting data online is to “reach participants that are difficult to test in a laboratory.” (from the abstract). Sometimes it is difficult to access these participants even online, and so some studies might not be able to have as much power as this one. Furthermore, masked identity priming is a robust effect, but other priming (such as form priming and semantic priming) are not as reliable, and part of this might depend on the prime duration. It would be good to know what the capabilities/limitations are of PsychoPy/PsychoJS in terms of finding out the hardware used by the participants."
 
-Response: This is a very important issue which relates to one of the inherent problems with online research we addressed in the introduction: As we do not have full access to or control over the devices used by the participants, we will never be able to know exactly what the display properties of the devices are. When we conducted the experiments presented in the manuscript, PsychoJS did not have any capabilities of finding the refresh rate and just returned 60 regardless of the true frame rate (see https://discourse.psychopy.org/t/incorrect-frame-rate-logs-on-pavlovia/15255). This has only very receintly been changed (https://psychopy.github.io/psychojs/core_Window.js.html). That being said, 
+Response: This is a very important issue which relates to one of the inherent problems with online research we addressed in the introduction: As we do not have full access to or control over the devices used by the participants, we will never be able to know exactly what the display properties of the devices are. The vast majority of devices would have had a 60 Hz refresh rate, but there are some monitors and mobile device screens with higher refresh rates. When we conducted the experiments presented in the manuscript, PsychoJS did not have any capabilities of finding the refresh rate and just returned "60" regardless of the true frame rate (see https://discourse.psychopy.org/t/incorrect-frame-rate-logs-on-pavlovia/15255). This has only very receintly been changed (https://psychopy.github.io/psychojs/core_Window.js.html). That being said, our approach in this study is that we evaluate the quality of the data collected. As our findings are very close to findings from laboratory studies, we feel quite confident that either there was not much variability in terms of refresh rate or it did not matter for the results.
 
 
+Reviewer 2
 
-Reviewer: 2
-
-Comments to the Author
-On the whole I think this paper is excellent and well-suited for BRM. The empirical work is strong and I appreciate the transparency of the work. The writing is especially clear, both in style and substance. I have one theoretical issue to raise, a few questions about the pre-registration, and one minor suggestion.
+Reviever 2 thought "this paper is excellent and well-suited for BRM. The empirical work is strong and I appreciate the transparency of the work. The writing is especially clear, both in style and substance." He or she raised one theoretical issue, a number of issues with the pre-registration, and a minor suggestion.
 
 Theoretical issue
 
-Is an alternative explanation for the lack of priming effects in the 16.7 ms condition that browsers skipped the frame too often? How could we tell the difference between a lack of priming effects for theoretical reasons and a lack of priming because the prime wasn’t shown correctly in this particular paradigm? I think there are a priori reasons for thinking that the 16.7ms prime will be displayed reliably enough, such as data from studies that use a photodiode. If there are data-driven ways that these two explanations could be distinguished I think it would significantly strengthen the second experiment to include them.
+"Is an alternative explanation for the lack of priming effects in the 16.7 ms condition that browsers skipped the frame too often? How could we tell the difference between a lack of priming effects for theoretical reasons and a lack of priming because the prime wasn’t shown correctly in this particular paradigm? I think there are a priori reasons for thinking that the 16.7ms prime will be displayed reliably enough, such as data from studies that use a photodiode. If there are data-driven ways that these two explanations could be distinguished I think it would significantly strengthen the second experiment to include them."
+
+Response: This issue is closely related to the issue raised by Reviewer 1. Again, we have no way of knowing whether the prime was displayed correctly on all of the participants' devices, other than the fact that the data resemble data from the lab very closely. Furthermore, Bridges et al. (2020) already used a photodiode to show that the presentation times for PsychoJS on various different devices are reasonably precise. Given this, we feel confident that our results are not due to a pervasive problem with stimulus presentation.
+
 
 Pre-registration
 
-1: The analysis plan for experiment 2 says: “For the model fit analysis, we will use the same procedure as detailed in Gomez et al. (2013): we will calculate means for accuracy and latency by quantiles (vincentizing) and use them to fit the diffusion model. In a second analysis, we will fit the model to each subject's data and compare the estimated parameters for the identical and the control conditions using Bayesian paired t-tests. We will use the latter analysis to test the hypotheses that there is an effect of priming condition on drift rate and T_er.” As far as I can tell this is not reported in the manuscript.
+"1: The analysis plan for experiment 2 says: “For the model fit analysis, we will use the same procedure as detailed in Gomez et al. (2013): we will calculate means for accuracy and latency by quantiles (vincentizing) and use them to fit the diffusion model. In a second analysis, we will fit the model to each subject's data and compare the estimated parameters for the identical and the control conditions using Bayesian paired t-tests. We will use the latter analysis to test the hypotheses that there is an effect of priming condition on drift rate and T_er.” As far as I can tell this is not reported in the manuscript."
 
-2: The pre-registration describes an RT cutoff of 1800ms, but the paper doesn’t report such a cutoff, and instead refers to the maximum length of the trial as 2000ms. And in fact we can tell that the 1800ms cutoff was not used because all of the maximum values in table 4 are above this value.
+Response: This was indeed omitted as we felt that the analyses presented were more informative. However, we have now added this analysis as Appendix B.
 
-3. The hypotheses from the pre-registration are framed in terms of model comparison, e.g., “In terms of the Diffusion model, allowing
+"2: The pre-registration describes an RT cutoff of 1800ms, but the paper doesn’t report such a cutoff, and instead refers to the maximum length of the trial as 2000ms. And in fact we can tell that the 1800ms cutoff was not used because all of the maximum values in table 4 are above this value."
+
+Response: This was an oversight which we have now corrected by implementing the cutoff at 1800 ms as specified in the pre-registration.
+
+"3. The hypotheses from the pre-registration are framed in terms of model comparison, e.g., “In terms of the Diffusion model, allowing
 a) the drift rate parameter for words to vary as a function of the priming condition should not improve the model (compared to a model that has a single drift rate parameter for all word stimuli regardless of priming condition) , while
-b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition).” However the analysis plan doesn’t describe an approach based on fitting models of varying complexity and performing model comparison. I’m not sure what the best move is in terms of transparency is, since the pre-registration seems to suggest two different paths to be taken. I think a minimal remedy would be some kind of footnote detailing the decisions that needed to be made after pre-registration due to some of the ambiguity in the pre-registration.
+b) allowing the non-decision parameter T_er to vary as a function of the priming conditions for word stimuli should improve the model (compared to a model that has only one T_er parameter for all word stimuli regardless of priming condition).” However the analysis plan doesn’t describe an approach based on fitting models of varying complexity and performing model comparison. I’m not sure what the best move is in terms of transparency is, since the pre-registration seems to suggest two different paths to be taken. I think a minimal remedy would be some kind of footnote detailing the decisions that needed to be made after pre-registration due to some of the ambiguity in the pre-registration.""
 
-4. I cannot access the pre-registration for experiment 1 (it may be private on the OSF), so I’m not sure if there are similar mismatches there. I would encourage the authors to carefully check the fidelity of the analysis to the pre-registration for experiment 1 during a revision of the work.
+Response:  ?
+
+"4. I cannot access the pre-registration for experiment 1 (it may be private on the OSF), so I’m not sure if there are similar mismatches there. I would encourage the authors to carefully check the fidelity of the analysis to the pre-registration for experiment 1 during a revision of the work."
+
+Response: We accidentally omitted the direct link to the pre-registration for Experiment 1 (https://osf.io/v97bp). It has now been added to the manuscript. As far as we can tell, this pre-registration is public.
 
 Minor suggestion
 
-Barnhoorn et al. 2015 (https://dx.doi.org/10.3758%2Fs13428-014-0530-7) reported the results of a masked-priming experiment in JavaScript. I believe this was the first reported successful masked priming experiment reported using JavaScript. Crump et al. 2013 (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410) reported a failure to replicate masked priming online. The major difference between the two of them was that Barnhoorn et al. implemented a better set of timing mechanisms. I think the introduction missed this bit of history, which may require some reframing about the degree to which the current study is novel. But I feel strongly that novelty is not necessary here, and that there are many ways in which the current experiment is novel (e.g., showing specifically that PsychoJS can handle masked priming and showing that masked priming with lexical decision is feasible).
+"Barnhoorn et al. 2015 (https://dx.doi.org/10.3758%2Fs13428-014-0530-7) reported the results of a masked-priming experiment in JavaScript. I believe this was the first reported successful masked priming experiment reported using JavaScript. Crump et al. 2013 (https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0057410) reported a failure to replicate masked priming online. The major difference between the two of them was that Barnhoorn et al. implemented a better set of timing mechanisms. I think the introduction missed this bit of history, which may require some reframing about the degree to which the current study is novel. But I feel strongly that novelty is not necessary here, and that there are many ways in which the current experiment is novel (e.g., showing specifically that PsychoJS can handle masked priming and showing that masked priming with lexical decision is feasible)."
 
-
-06-Jul-2021
-
-Dear Dr. Angele:
-Dear Bernhard:
-
-Manuscript ID BR-Org-21-268 entitled "Does online masked priming pass the test? The effects of prime exposure duration on masked identity priming", that you submitted to Behavior Research Methods, has been reviewed.
-
-Thank you for submitting your research to Behavior Research Methods.
-
-Our referees have now considered your paper (see their comments at the bottom of this letter). In addition, I have read the ms myself. As you can see, the reviewers find your submission worthwhile but would like to see major revisions made to your manuscript before it can be published. This agrees with my own reading. Therefore, I invite you to revise your manuscript. Please note that my invitation is no guarantee of eventual acceptance. The revisions asked are major and the quality of your revision will need to be assessed again, if possible by the same reviewers. If the quality of the revision is not good enough, the ms is likely to be rejected at that stage. If you find the required revisions too onerous, you are, of course, free to submit the ms to another journal.
-
-To revise your manuscript, log into https://mc.manuscriptcentral.com/brmic and enter your Author Center. You will find your manuscript title listed under "Manuscripts with Decisions."  Under "Actions" click on "Create a Revision." The manuscript number will be appended to denote a revision.
-
-You will not be able to make your revisions on the documents previously submitted.  Instead, revise your manuscript using a word processing program and upload it again through your Author Center. Highlight the changes you made in the manuscript by using bold or colored text, preferably in blue rather than red. Do not use track changes or colored background that make your ms difficult to read.
-
-Also include a response to the editor and the reviewers. Do this in the author's response field, not as a separate cover letter or attached file. In this way, your response is available in the reviewer center making it easy for reviewers to find it. Detail the changes you made or why you object to the proposed modifications.
-
-Delete any redundant files (such as the earlier cover letter, manuscript, or figures no longer the same) before completing the submission of your revision.
-
-IMPORTANT: Please note that if you choose to re-submit your article this must be done within 8 months of the date of this e:mail. Submission after this date will be considered to be a new submission, unless you have a good reason why you cannot meet the deadline. Then contact me before the deadline and I will try to give you an extension.
-
-Once again, thank you for submitting your manuscript to Behavior Research Methods and I look forward to receiving your revision.
-
-Sincerely,
-Marc Brysbaert
-Action Editor, Behavior Research Methods
-
-
-Editor:
-Marc Brysbaert
-
-Associate Editors:
-Zsuzsa Bakk, Erin Buchanan, Denis Drieghe, Andreas Frey, Keisuke Fukuda, Brendan Johns, Eunsook Kim, Victor Kuperman, Christopher Madan, Marco Marelli, Sebastiaan Mathôt, Dubravka Svetina Valdivia, Claudia von Bastian, Melvin Yap
+Response: We thank the reviewer for making us aware of these two very relevant studies, which we now cite in the Introduction section, which we have rewritten to reflect their contribution.
