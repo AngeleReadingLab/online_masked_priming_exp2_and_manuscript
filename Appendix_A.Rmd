@@ -2,7 +2,7 @@
 
 ## Words:
 
-```{r word_targets}
+```{r appendix_word_targets}
 trials%>%
   filter(StimulusType=="WORD")%>%
   pull(Target)%>%
@@ -16,7 +16,7 @@ Word_targets
 
 ## Non-Words:
 
-```{r nonword_targets}
+```{r appendix_nonword_targets}
 
 trials%>%
   filter(StimulusType=="NW")%>%
