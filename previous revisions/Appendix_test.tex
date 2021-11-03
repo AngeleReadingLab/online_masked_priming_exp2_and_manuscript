@@ -5,14 +5,10 @@
 \documentclass[
   english,
   man]{apa6}
-\title{TITLE}
-\author{\phantom{0}}
-\date{}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -128,7 +124,7 @@
 \makeatother
 \shorttitle{SHORTTITLE}
 \usepackage{csquotes}
-\ifXeTeX
+\ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[]{english}
@@ -138,9 +134,13 @@
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
 \fi
-\ifLuaTeX
+\ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+
+\title{TITLE}
+\author{\phantom{0}}
+\date{}
 
 
 \affiliation{\phantom{0}}
@@ -245,8 +245,8 @@ its goals please refer to the main text.
 
 The diffusion model (Ratcliff, 1978) is a cognitive process model for
 perceptual decisions, and it has been quite successful at accounting for
-lexical decision data (Ratcliff et al., 2004) and more importantly for
-the present work, masked priming data (Gomez et al., 2012).
+lexical decision data (Ratcliff et al, 2004) and more importantly for
+the present work, masked priming data (Gomez et al, 2012).
 
 The model assumes that RTs to dual choice tasks are a sum of three
 distinct processes: stimulus encoding, evidence accumulation, and
@@ -269,7 +269,7 @@ and nonword responses is calculated, then for each of the two responses,
 the RTs at the .1, .3, .5, .7, and .9 quantiles is obtained. We repeat
 this process for each participants, and then all of those quantities
 (response proportions and RTs at quantiles) are averaged across
-participants. This process is also known as Vincentizing, and the
+participants. This process is also known as Vincentalizing, and the
 averaged quantiles are referred to as vintenciles
 
 The diffusion model predicts the cumulative probability of a response at
@@ -314,7 +314,7 @@ study using in-person testing methods.
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:appendix_model_parameters_table}$\chi^2$ values for the two models for both experiments.}
+\caption{\label{tab:model_parameters_table}$\chi^2$ values for the two models for both experiments.}
 
 \begin{tabular}{lll}
 \toprule
@@ -337,33 +337,6 @@ Examining the parameter values for \(T_{er}\) in the tables below shows
 that the \(T_{er}\) effect follows the duration of the prime-TARGET SOA
 particularly in the word items and not so much in the nonword items.
 
-\begin{table}[tbp]
-
-\begin{center}
-\begin{threeparttable}
-
-\caption{\label{tab:appendix_table_2}$T_{er}$ values for Experiment 1.}
-
-\begin{tabular}{ll}
-\toprule
-Parameters & \multicolumn{1}{c}{Experiment1}\\
-\midrule
-$T_{er}$  33ms nonword ID & 0.51\\
-$T_{er}$ 33ms nonword Unrel & 0.51\\
-$T_{er}$  50ms nonword ID & 0.50\\
-$T_{er}$ 50ms nonword Unrel & 0.51\\
-$T_{er}$  33ms word ID & 0.47\\
-$T_{er}$ 33ms word Unrel & 0.49\\
-$T_{er}$  50ms word ID & 0.46\\
-$T_{er}$ 50ms word Unrel & 0.50\\
-\bottomrule
-\end{tabular}
-
-\end{threeparttable}
-\end{center}
-
-\end{table}
-
 This is in general agreement with the Gomez et al.~(2013) original paper
 and Gomez and Perea's (2020) work with developmental readers. In short,
 these fits confirm that masked priming effects are consistent with the
@@ -375,20 +348,20 @@ relationship between primes and targets.
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:appendix_table_3} $T_{er}$ values for Experiment 2.}
+\caption{\label{tab:appendix_table_2}$T_{er}$ values for Experiment 1.}
 
 \begin{tabular}{ll}
 \toprule
-Parameters & \multicolumn{1}{c}{Experiment2}\\
+Parameters & \multicolumn{1}{c}{Experiment1}\\
 \midrule
-$T_{er}$ 16ms nonword ID & 0.54\\
-$T_{er}$ 16ms nonword Unrel & 0.54\\
-$T_{er}$ 33ms nonword ID & 0.53\\
-$T_{er}$ 33ms nonword Unrel & 0.53\\
-$T_{er}$ 16ms word ID & 0.50\\
-$T_{er}$ 16ms word Unrel & 0.50\\
-$T_{er}$ 33ms word ID & 0.49\\
-$T_{er}$ 33ms word Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  33ms nonword ID & 0.51\\
+$T_{er}$ values for Experiment 1. 33ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  50ms nonword ID & 0.50\\
+$T_{er}$ values for Experiment 1. 50ms nonword Unrel & 0.51\\
+$T_{er}$ values for Experiment 1.  33ms word ID & 0.47\\
+$T_{er}$ values for Experiment 1. 33ms word Unrel & 0.49\\
+$T_{er}$ values for Experiment 1.  50ms word ID & 0.46\\
+$T_{er}$ values for Experiment 1. 50ms word Unrel & 0.50\\
 \bottomrule
 \end{tabular}
 
@@ -396,6 +369,59 @@ $T_{er}$ 33ms word Unrel & 0.51\\
 \end{center}
 
 \end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:appendix_table_3} \$T\_\{er\}\$ values for Experiment 2.}
+
+\begin{tabular}{ll}
+\toprule
+Parameters & \multicolumn{1}{c}{Experiment2}\\
+\midrule
+\$T\_\{er\}\$ 16ms nonword ID & 0.54\\
+\$T\_\{er\}\$ 16ms nonword Unrel & 0.54\\
+\$T\_\{er\}\$ 33ms nonword ID & 0.53\\
+\$T\_\{er\}\$ 33ms nonword Unrel & 0.53\\
+\$T\_\{er\}\$ 16ms word ID & 0.50\\
+\$T\_\{er\}\$ 16ms word Unrel & 0.50\\
+\$T\_\{er\}\$ 33ms word ID & 0.49\\
+\$T\_\{er\}\$ 33ms word Unrel & 0.51\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\newpage
+
+\hypertarget{references}{%
+\subsection{References}\label{references}}
+
+Gomez, P., \& Perea, M. (2020). Masked identity priming reflects an
+encoding advantage in developing readers. Journal of Experimental Child
+Psychology, 199, 104911. https://doi.org/10.1016/j.jecp.2020.104911
+
+Gomez, P., Perea, M., \& Ratcliff, R. (2013). A diffusion model account
+of masked versus unmasked priming: Are they qualitatively different?
+Journal of Experimental Psychology: Human Perception and Performance, 39
+(6), 1731--1740. https://doi.org/10.1037/a0032333
+
+Ratcliff, R. (1978). A theory of memory retrieval. Psychological Review,
+85, 59--108. https://doi.org/10.1037/0033-295X.85.2.59
+
+Ratcliff, R., Gomez, P., \& McKoon, G. (2004). A diffusion model account
+of the lexical decision task. Psychological Review, 111, 159--182.
+doi://10.1037/0033-295X.111.1.159
+
+Ratcliff, R.,\& Tuerlinckx, F. (2002). Estimating the parameters of the
+diffusion model: Approaches to dealing with contaminant reaction times
+and parameter variability. Psychonomic Bulletin and Review, 9, 438--481.
+https://doi.org/10.3758/BF03196302
 \end{appendix}
 
 \end{document}

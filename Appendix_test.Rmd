@@ -7,7 +7,7 @@ output: papaja::apa6_pdf
 
 This is the manuscript.
 
-```{r setup, include = FALSE}
+```{r app_test_setup, include = FALSE}
 library(tidyverse)
 library("see")
 library("papaja")
