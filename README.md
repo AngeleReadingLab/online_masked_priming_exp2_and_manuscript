@@ -1,3 +1,7 @@
-# Online_MP_LDT_Exp2
+# Online Masked Priming (Angele, Baciero, Gomez, & Perea, in press, Behavior Research Methods)
 
-Experiment 2 of the online masked priming lexical decision task study
+## Does online masked priming pass the test? The effects of prime exposure duration on masked identity priming
+
+This repository contains data, analyses, and the manuscript for this publication which is currently in press.
+
+Due to the file size of the model fits, these are provided as a release rather than part of the main repository.
