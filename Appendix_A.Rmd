@@ -1,0 +1,28 @@
+# Stimuli
+
+## Words:
+
+```{r appendix_word_targets}
+trials%>%
+  filter(StimulusType=="WORD")%>%
+  pull(Target)%>%
+  noquote()->Word_targets
+
+Word_targets
+
+
+
+```
+
+## Non-Words:
+
+```{r appendix_nonword_targets}
+
+trials%>%
+  filter(StimulusType=="NW")%>%
+  pull(Target)%>%
+  noquote()->NonWord_targets
+
+NonWord_targets
+
+```

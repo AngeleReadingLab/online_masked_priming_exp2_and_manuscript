@@ -80,15 +80,15 @@ exp2_data_to_include <- exp2 %>% filter(source %in% exp2_participants_to_include
 
 contrasts(exp1_data_to_include$Condition) <- c(-.5,.5)
 contrasts(exp1_data_to_include$PrimeDuration) <- c(-.5,.5)
-lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), rt ~ Condition * PrimeDuration + (1|source) + (1|Target))
+lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), rt ~ Condition * PrimeDuration + (1|source) + (1|Target))
 
-#lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), rt ~ Condition * PrimeDuration + (Condition*PrimeDuration|source) + (Condition*PrimeDuration|Target))
+#lmm_exp1 <- lmer(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), rt ~ Condition * PrimeDuration + (Condition*PrimeDuration|source) + (Condition*PrimeDuration|Target))
 
 summary(lmm_exp1)
 
 #### Accuracy
 
-lmm_acc_exp1 <- glmer(data = exp1_data_to_include %>% filter(rt > 250 & corr != -1 & StimulusType == "Word" & rt < 2000), corr ~ Condition * PrimeDuration + (1|Target), family = binomial(link = "logit"))
+lmm_acc_exp1 <- glmer(data = exp1_data_to_include %>% filter(rt > 250 & corr != -1 & StimulusType == "Word" & rt < 1800), corr ~ Condition * PrimeDuration + (1|Target), family = binomial(link = "logit"))
 
 summary(lmm_acc_exp1)
 
@@ -99,13 +99,13 @@ summary(lmm_acc_exp1)
 contrasts(exp2_data_to_include$Condition) <- c(-.5,.5)
 contrasts(exp2_data_to_include$PrimeDuration) <- c(-.5,.5)
 
-lmm_exp2 <- lmer(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), rt ~ Condition * PrimeDuration + (1|source) + (1|Target))
+lmm_exp2 <- lmer(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), rt ~ Condition * PrimeDuration + (1|source) + (1|Target))
 
 summary(lmm_exp2)
 
 #### Accuracy
 
-lmm_acc_exp2 <- glmer(data = exp2_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt < 2000), corr ~ Condition * PrimeDuration + (1|Target), family = binomial(link = "logit"))
+lmm_acc_exp2 <- glmer(data = exp2_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt < 1800), corr ~ Condition * PrimeDuration + (1|Target), family = binomial(link = "logit"))
 
 summary(lmm_acc_exp2)
 
@@ -123,14 +123,14 @@ prior_exp1 <- c(set_prior("normal(0,2500)", class = "b", coef = "", dpar = ""),
                 set_prior("normal(0,100)", class = "b", coef = "Condition1:PrimeDuration1"),
                 set_prior("normal(0,100)", class = "b", coef = "PrimeDuration1"))
 
-prior_exp1 <- c(set_prior("normal(0,1000)", class = "b"),
-                set_prior("normal(0,2500)", class = "Intercept"),
-                set_prior("normal(0,1000)", class = "b", dpar = "beta"),
-                set_prior("normal(0,2500)", class = "Intercept", dpar = "beta"))
+# prior_exp1 <- c(set_prior("normal(0,1000)", class = "b"),
+#                 set_prior("normal(0,2500)", class = "Intercept"),
+#                 set_prior("normal(0,1000)", class = "b", dpar = "beta"),
+#                 set_prior("normal(0,2500)", class = "Intercept", dpar = "beta"))
 
 #formula_exp1 <- bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target))
 
-blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                     bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
                     warmup = 1000,
                     iter = 5000,
@@ -141,23 +141,23 @@ blmm_exp1_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & Stim
                     control = list(adapt_delta = 0.8),
                     cores = 4, backend = "cmdstanr", threads = threading(4))
 
-save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist_full_ranef_5000.RData")
+save(blmm_exp1_rt_dist, file = "blmm_exp1_rt_dist_full_ranef_5000_2.RData")
 
 
-blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp1_rt <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                     rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                    warmup = 2000,
-                    iter = 10000,
+                    warmup = 1000,
+                    iter = 5000,
                     chains = 4,
                     prior = prior_exp1,
                     family = exgaussian(),
                     inits = "random",
                     control = list(adapt_delta = 0.95),
-                    cores = 4, backend = "cmdstanr", threads = threading(2))
+                    cores = 4, backend = "cmdstanr", threads = threading(4))
 
-save(blmm_exp1_rt, file = "blmm_exp1_rt_new_10000.RData")
+save(blmm_exp1_rt, file = "blmm_exp1_rt_new2_5000.RData")
 
-blmm_exp1_rt_string <- make_stancode(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp1_rt_string <- make_stancode(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                                      rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
                                      warmup = 1000,
                                      iter = 5000,
@@ -166,7 +166,7 @@ blmm_exp1_rt_string <- make_stancode(data = exp1_data_to_include %>% filter(corr
                                      family = exgaussian(),
                                      inits = "random",
                                      control = list(adapt_delta = 0.95),
-                                     cores = 4, backend = "cmdstanr", threads = threading(2))
+                                     cores = 4, backend = "cmdstanr", threads = threading(4))
 
 
 
@@ -174,21 +174,21 @@ blmm_exp1_rt_string <- make_stancode(data = exp1_data_to_include %>% filter(corr
 
 
 
-blmm_exp1_acc <- brm(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp1_acc <- brm(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                      formula = corr ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                     warmup = 2000,
-                     iter = 10000,
+                     warmup = 1000,
+                     iter = 5000,
                      chains = 4,
                      prior = prior_exp1,
                      family = bernoulli(link = "logit"),
                      inits = "random",
                      control = list(adapt_delta = 0.95),
-                     cores = 4, backend = "cmdstanr", threads = threading(2))
+                     cores = 4, backend = "cmdstanr", threads = threading(4))
 
-save(blmm_exp1_acc, file = "blmm_exp1_acc_new_10000.RData")
+save(blmm_exp1_acc, file = "blmm_exp1_acc_new2_5000.RData")
 
 
-blmm_exp1_acc_string <- make_stancode(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp1_acc_string <- make_stancode(data = exp1_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                                       formula = corr ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
                                       warmup = 1000,
                                       iter = 5000,
@@ -197,37 +197,37 @@ blmm_exp1_acc_string <- make_stancode(data = exp1_data_to_include %>% filter(cor
                                       family = bernoulli(link = "logit"),
                                       inits = "random",
                                       control = list(adapt_delta = 0.95),
-                                      cores = 4, backend = "cmdstanr", threads = threading(2))
+                                      cores = 4, backend = "cmdstanr", threads = threading(4))
 
 ### Experiment 2 
 
-blmm_exp2_rt <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 2000), 
+blmm_exp2_rt <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "WORD" & rt > 250 & rt < 1800), 
                     rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target),
-                    warmup = 2000,
-                    iter = 10000,
+                    warmup = 1000,
+                    iter = 5000,
                     chains = 4,
                     prior = prior_exp1,
                     family = exgaussian(),
                     inits = "random",
                     control = list(adapt_delta = 0.95),
-                    cores = 4, backend = "cmdstanr", threads = threading(2))
+                    cores = 4, backend = "cmdstanr", threads = threading(4))
 
-save(blmm_exp2_rt, file = "blmm_exp2_rt_new.RData")
+save(blmm_exp2_rt, file = "blmm_exp2_rt_new2.RData")
 
-blmm_exp2_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
-                         bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
-                         warmup = 200,
-                         iter = 1000,
-                         chains = 4,
-                         prior = prior_exp1,
-                         family = exgaussian(),
-                         inits = "random",
-                         control = list(adapt_delta = 0.8),
-                         cores = 4, backend = "cmdstanr", threads = threading(2))
+# blmm_exp2_rt_dist <- brm(data = exp1_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
+#                          bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
+#                          warmup = 200,
+#                          iter = 1000,
+#                          chains = 4,
+#                          prior = prior_exp1,
+#                          family = exgaussian(),
+#                          inits = "random",
+#                          control = list(adapt_delta = 0.8),
+#                          cores = 4, backend = "cmdstanr", threads = threading(4))
+# 
+# save(blmm_exp2_rt_dist, file = "blmm_exp2_rt_dist_full_ranef.RData")
 
-save(blmm_exp2_rt_dist, file = "blmm_exp2_rt_dist_full_ranef.RData")
-
-blmm_exp2_rt_dist <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp2_rt_dist <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                          bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
                          warmup = 1000,
                          iter = 5000,
@@ -236,21 +236,21 @@ blmm_exp2_rt_dist <- brm(data = exp2_data_to_include %>% filter(corr == 1 & Stim
                          family = exgaussian(),
                          inits = "random",
                          control = list(adapt_delta = 0.8),
-                         cores = 4, backend = "cmdstanr", threads = threading(2))
+                         cores = 4, backend = "cmdstanr", threads = threading(4))
 
-save(blmm_exp2_rt_dist, file = "blmm_exp2_rt_dist_full_ranef_5000_2.RData")
+save(blmm_exp2_rt_dist, file = "blmm_exp2_rt_dist_full_ranef_5000_3.RData")
 
 
 
-blmm_exp2_acc <- brm(data = exp2_data_to_include %>% filter(corr != -1 & Stblmm_exp2_rt_dist <- brm(data = exp2_data_to_include %>% filter(corr == 1 & StimulusType == "Word" & rt > 250 & rt < 2000), 
+blmm_exp2_acc <- brm(data = exp2_data_to_include %>% filter(corr != -1 & StimulusType == "Word" & rt > 250 & rt < 1800), 
                          bf(rt ~ Condition * PrimeDuration + (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target), beta ~ Condition * PrimeDuration+ (1 + Condition * PrimeDuration|source) + (1 + Condition * PrimeDuration|Target)),
-                         warmup = 2000,
-                         iter = 10000,
+                         warmup = 1000,
+                         iter = 5000,
                          chains = 4,
                          #prior = prior_exp1,
                          family = exgaussian(),
                          inits = "random",
                          control = list(adapt_delta = 0.95),
-                         cores = 4, backend = "cmdstanr", threads = threading(2))
+                         cores = 4, backend = "cmdstanr", threads = threading(4))
 
-save(blmm_exp2_acc, file = "blmm_exp2_acc_new_10000.RData")
+save(blmm_exp2_acc, file = "blmm_exp2_acc_new2_5000.RData")

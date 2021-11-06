@@ -1,0 +1,109 @@
+# Diffusion model accounts for the data
+
+```{r appendix_setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+```
+
+## About this Appendix
+
+The goal of this appendix is to present a brief description of how the diffusion model accounts for the data presented in the main article. While the diffusion model fits to the grouped data was part of the pre-registration plan, we believe that it is best to present such fits in this appendix as opposed to the main text to improve the readability of the article.  For a full description of the experimental setting and its goals please refer to the main text. 
+
+
+## The diffusion model
+
+The diffusion model (Ratcliff, 1978) is a cognitive process model for perceptual decisions, and it has been quite successful at accounting for lexical decision data (Ratcliff et al., 2004) and more importantly for the present work, masked priming data (Gomez et al., 2012).
+
+The model assumes that RTs to dual choice tasks are a sum of three distinct processes: stimulus encoding, evidence accumulation, and response execution.  The model makes the strong assumption that evidence accumulation is a processes distinct from the other two components, and for practical reasons, it groups response execution and encoding time in a single parameter.  
+
+The model is agnostic about the correlation between the encoding and the evidence accumulation processes; and we like to think about it as a tool to instantiate theoretical positions that can be articulated in terms of encoding, decision, and strategic processes. 
+
+
+## Data
+
+The model was fit to the grouped data (as per the pre-registration plan) of the two experiments. For each stimulus type the proportion of word and nonword responses is calculated, then for each of the two responses, the RTs at the .1, .3, .5, .7, and .9 quantiles is obtained. We repeat this process for each participants, and then all of those quantities (response proportions and RTs at quantiles) are averaged across participants.  This process is also known as Vincentizing, and the averaged quantiles are referred to as vintenciles
+
+The diffusion model predicts the cumulative probability of a response at each RT vincentile, and these model predictions are compared to the empirical proportions, then the sum of the (Observed-Predicted)2/Predicted for correct and error responses for each condition that is minimized with a general
+SIMPLEX minimization routine as described by Ratcliff \& Tuerlinckx (2002).
+
+## Free and fixed parameters
+
+In diffusion model fits, researchers can decide what parameters are free to vary across different conditions. In the present work we implemented 3 versions of the model.  These versions of the model varied in terms of which parameters were allowed to vary for which conditions.  
+
+In our case, we decided to examine two models as described below. For both models, the $a$ boundary separation, the $z$ starting point, the $\eta$ between trial variability in drift rate, and all other variability parameters are kept constant across all conditions.  
+
+**Model 1:** Drift rates vary as a function of lexicality and prime duration, but not from unrelated to identity primes. $T_{er}$ varied from as a function of prime duration and type and also of lexicality.
+
+**Model 2:** The drift rates vary as a function of prime duration and type and also of lexicality. And the drift rate varied only as a function of prime type/duration but not lexicality.
+
+In short, in Model 1, the priming effects are accounted by $T_{er}$ only, while in Model 2 they are accounted for by both drift rate and $T_{er}$. 
+
+
+The two models have equal number of parameters so a direct comparison in possible.   For both experiments the preferred model is Model 1 (the $T_{er}$ model).  This is in agreement with the Gomez et al (2012) study using in-person testing methods. 
+
+```{r appendix_model_parameters_table, warning=FALSE, echo=FALSE, message=FALSE}
+Experiments <-c("1","2")
+ModelTer <-  c(39.6512, 10.2111)
+ModelDrift <-c(80.6537, 28.6464)
+
+tibble(Experiments,ModelTer,ModelDrift) %>% apa_table(
+  caption = "$\\chi^2$ values for the two models for both experiments."
+  , escape = FALSE
+)  
+```
+
+```{r appendix_experiment_data}
+exp1.8ter <-c(0.1055,0.0562,0.0395,-0.2522,0.0000,-0.2503,0.0000,0.2909,0.0000,0.3119,0.0000,0.0128,0.5071,0.1275,0.0058,0.5090,0.5048,0.5074,0.4737,0.4920
+              ,0.4589,0.4959,39.6512)
+
+
+exp2.8ter <- c(0.1074,0.0543,0.0384,-0.2723,0.0000,-0.2536,0.0000,0.3219,0.0000,0.3232,0.0000,0.0137,0.5404,0.1225,0.0045,0.5408,0.5295,0.5293,0.5025,0.5026
+               ,0.4945,0.5098,10.2111)
+
+
+exp1.8drift.8 <- c(0.1085, 0.0655, 0.0262,-0.2746,-0.2878,-0.2547,-0.3166, 0.2927, 0.2549, 0.3139, 0.2818, 0.0113, 0.4867, 0.1378, 0.0058, 0.4966, 0.4742, 0.5031,80.6537)
+
+exp2.8drift.8 <- c(0.1103, 0.0653, 0.0337,-0.2995,-0.2941,-0.2820,-0.3180, 0.3108, 0.3068, 0.3083, 0.2989, 0.0109, 0.5186, 0.1301, 0.0054, 0.5184, 0.5091, 0.5225,28.6464)
+```
+
+
+## Summary
+
+Examining the parameter values for $T_{er}$ in the tables below shows that the $T_{er}$  effect follows the duration of the prime-TARGET SOA particularly in the word items and not so much in the nonword items.
+
+```{r appendix_table_2}
+library(tidyverse)
+Experiment1 <-c(0.5071,0.5090,0.5048,0.5074,0.4737,0.4920,0.4589,0.4959)
+
+
+Experiment2 <-c(0.5404,0.5408,0.5295,0.5293,0.5025,0.5026,0.4945,0.5098)
+
+Parameters <-c( "$T_{er}$  33ms nonword ID", "$T_{er}$ 33ms nonword Unrel",
+                "$T_{er}$  50ms nonword ID", "$T_{er}$ 50ms nonword Unrel",
+                "$T_{er}$  33ms word ID", "$T_{er}$ 33ms word Unrel",
+                "$T_{er}$  50ms word ID", "$T_{er}$ 50ms word Unrel")
+
+tibble(Parameters,Experiment1) %>%
+  apa_table(
+    caption = "$T_{er}$ values for Experiment 1."
+    , escape = FALSE
+  )  
+
+```
+
+This is in general agreement with the Gomez et al. (2013) original paper and Gomez and Perea's (2020) work with developmental readers. In short, these fits confirm that masked priming effects are consistent with the idea of a head start in the encoding process when there is an identity relationship between primes and targets.
+
+
+```{r appendix_table_3}
+
+Parameters <-c( "$T_{er}$ 16ms nonword ID", "$T_{er}$ 16ms nonword Unrel",
+                "$T_{er}$ 33ms nonword ID", "$T_{er}$ 33ms nonword Unrel",
+                "$T_{er}$ 16ms word ID", "$T_{er}$ 16ms word Unrel",
+                "$T_{er}$ 33ms word ID", "$T_{er}$ 33ms word Unrel")
+tibble(Parameters,Experiment2) %>%
+  apa_table(
+    caption = " $T_{er}$ values for Experiment 2."
+    , escape = FALSE
+  )  
+
+```
